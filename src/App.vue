@@ -1,12 +1,19 @@
 <template>
-  <div ref="sceneContainer" class="webGL"></div>
+  <main>
+    <div ref="sceneContainer" class="webGL"></div>
+    <div class="title">{{ Config.title }}</div>
+
+  </main>
+
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import * as THREE from 'three';
 
-import imgBack from '/img/sky1.jpg'
+import Config from '@/Config.ts'
+
+import imgBack from '/img/sky1.jpg' 
 import imgStar from '/img/star1.png'
 
 const sceneContainer = ref<HTMLDivElement | null>(null);
@@ -279,11 +286,24 @@ onMounted(() => {
 </script>
 
 <style scoped>
+main {
+  width:100%;
+  height:auto;
+}
 .webGL {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
+}
+
+.title {
+  position:relative;
+  margin-top:3%;
+  margin-left:3%;
+  font-family: "Marvel-Bold";
+  font-size:3vw;
+  color:#D5E0F1;
 }
 </style>
