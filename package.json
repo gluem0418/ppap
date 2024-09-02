@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tresjs/core": "^4.2.9",
     "@types/three": "^0.167.1",
     "three": "^0.167.1",
     "vue": "^3.4.35"
