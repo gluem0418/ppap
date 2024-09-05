@@ -1,11 +1,19 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import glsl from 'vite-plugin-glsl';
+
+import { templateCompilerOptions } from '@tresjs/core'
 
 import * as path from 'path';
 
 export default defineConfig({
   base: '/ppap/', //追加
-  plugins: [vue()],
+  plugins: [
+    vue({
+      ...templateCompilerOptions
+    }),
+    glsl(),
+  ],
   define: { 'process.env': {} },
   build: {
     sourcemap: true,
