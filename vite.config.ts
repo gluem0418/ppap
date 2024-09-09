@@ -9,12 +9,15 @@ export default defineConfig({
   base: '/ppap/', //追加
   plugins: [
     vue({
-      // Other config
-      ...templateCompilerOptions
+      script: {
+        propsDestructure: true,
+      },
+      ...templateCompilerOptions,
     }),
   ],
   define: { 'process.env': {} },
   build: {
+    outDir: './docs', 
     sourcemap: true,
   },
   resolve: {
