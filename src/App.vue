@@ -2,17 +2,18 @@
   <main>
     <div class="tresBg">
 
+      <!-- <div class="title">{{ Config.title }}</div> -->
+
       <Suspense>
 
         <Stars />
 
       </Suspense>
 
-      <div class="title">{{ Config.title }}</div>
-
     </div>
 
   </main>
+
 </template>
 
 <script setup lang="ts">
@@ -43,25 +44,4 @@ main {
   background-position: center;
 }
 
-.top {
-  position: relative;
-  margin: 0;
-  width: 100%;
-  height: 93vh;
-}
-
-.title {
-  margin-top: 1%;
-  margin-left: 3%;
-  font-size: 4vw;
-}
-
-.enter {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2vw;
-  color: #041A25;
-}
 </style>
