@@ -15,7 +15,8 @@
 
     <Suspense>
       <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Bold.json" :size="1" :position="[0, 3, -3]">
-        <MeshWobbleMaterial :color="0xA8B8DC" :speed="0.5" :factor="1" />
+        <MeshWobbleMaterial :color="0xA8B8DC" :speed="0.5" :factor="0.5" />
+        <!-- <MeshWobbleMaterial :color="0x41408F" :speed="0.5" :factor="0.5" /> -->
       </Text3D>
     </Suspense>
 
@@ -37,7 +38,7 @@ import { TresCanvas, useRenderLoop } from '@tresjs/core'
 
 import { OrbitControls, useGLTF, Text3D, MeshWobbleMaterial } from '@tresjs/cientos'
 
-import { PerspectiveCamera, SpotLight, BackSide, Group, Intersection, MeshPhongMaterial, MeshToonMaterial, Mesh, Vector3 } from 'three'
+import { PerspectiveCamera, SpotLight, BackSide, Group, Intersection, MeshPhongMaterial, Mesh } from 'three'
 
 import Config from '@/Config.ts'
 
@@ -150,10 +151,15 @@ onLoop(({ }) => {
   //タイトルのアニメーション
   const position = cameraRef.value.position.z
 
-  titleRef.value.instance.position.x = (position / 25) - 0.5
-  titleRef.value.instance.position.y = 5 - (position / 10)
-  titleRef.value.instance.position.z =  (position * 1.1) - 15
+  //位置の更新
+  titleRef.value.instance.position.x = (position / 20) - 0.5
+  titleRef.value.instance.position.y = 6 - (position / 8.8)
+  titleRef.value.instance.position.z = (position * 1.1) - 15
 
+  //回転の更新
+  titleRef.value.instance.rotation.x = (position / 12) - 1;
+  // titleRef.value.instance.rotation.y = (position / 10.3) - 1;
+  // titleRef.value.instance.rotation.z = (position / 10) - 1;
 
 });
 
@@ -195,7 +201,7 @@ function clickStar(ray: Intersection) {
 
     const index = count % (starShapeVertices.length / 3);
 
-    //移動
+    //各星の位置を更新
     star.position.x = randomNum(ray.point.x - starRandom, ray.point.x + starRandom) + starShapeVertices[index * 3];
     star.position.y = randomNum(ray.point.y - starRandom, ray.point.y + starRandom) + starShapeVertices[index * 3 + 1];
     star.position.z = randomNum(ray.point.z - starRandom, ray.point.z + starRandom) + starShapeVertices[index * 3 + 2];
