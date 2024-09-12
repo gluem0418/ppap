@@ -14,8 +14,8 @@
     </TresMesh>
 
     <Suspense>
-      <Text3D :text="Config.title" font="font/Marvel_Bold.json" :size="1" :position="[0, 3.5, 0]">
-        <MeshGlassMaterial :color="0xFFB51A" />
+      <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Bold.json" :size="1" :position="[0, 3, -3]">
+        <MeshWobbleMaterial :color="0xA8B8DC" :speed="0.5" :factor="1" />
       </Text3D>
     </Suspense>
 
@@ -31,11 +31,11 @@
 
 <script setup lang="ts">
 
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
-import { TresCanvas, useRenderLoop, vLightHelper } from '@tresjs/core'
+import { TresCanvas, useRenderLoop } from '@tresjs/core'
 
-import { OrbitControls, useGLTF, Text3D, MeshGlassMaterial } from '@tresjs/cientos'
+import { OrbitControls, useGLTF, Text3D, MeshWobbleMaterial } from '@tresjs/cientos'
 
 import { PerspectiveCamera, SpotLight, BackSide, Group, Intersection, MeshPhongMaterial, MeshToonMaterial, Mesh, Vector3 } from 'three'
 
@@ -47,13 +47,12 @@ const { nodes } = await useGLTF('model/star.glb', { draco: true })
 // シーンの初期設定
 /////////////////////////////////////////////
 const cameraRef = ref<PerspectiveCamera | null>(null);
-const spotLightRef = ref<SpotLight | null>(null);
 const starsRef = ref<Group | null>(null);
+const titleRef = ref<InstanceType<typeof Text3D> | null>(null);
 
 const cameraDistance = 10
-// const cameraFov = 50
 
-const starCount = 2000;
+const starCount = 1000;
 const boxWidth = 150;
 
 const startAnimation = ref<boolean>(true);
@@ -104,8 +103,6 @@ const stars = Array.from({ length: starCount }, () => ({
 
 }));
 
-// const model = nodes['star'];
-
 const createColoredModel = (material: MeshPhongMaterial): Mesh => {
   const model = nodes['star'].clone() as Mesh;
   model.material = material;
@@ -121,18 +118,16 @@ for (let i = 0; i < starPoints * 2; i++) {
   starShapeVertices.push(Math.cos(angle) * radius, Math.sin(angle) * radius, 0);
 }
 
-// onMounted(() => {
-
-//   if (!cameraRef.value) return
-//   if (!spotLightRef.value) return
-
-// });
-
+//アニメーションレンタリング
 const { onLoop } = useRenderLoop()
-// let loopCount = 0
 onLoop(({ }) => {
+
   if (!starsRef.value) return
+  if (!cameraRef.value) return
+  if (!titleRef.value) return
+
   let count = 0
+  //各星のアニメーション
   for (const star of starsRef.value.children) {
     //各星の設定取得
     const starA = stars[count]
@@ -151,6 +146,14 @@ onLoop(({ }) => {
     count++
 
   }
+
+  //タイトルのアニメーション
+  const position = cameraRef.value.position.z
+
+  titleRef.value.instance.position.x = (position / 25) - 0.5
+  titleRef.value.instance.position.y = 5 - (position / 10)
+  titleRef.value.instance.position.z =  (position * 1.1) - 15
+
 
 });
 
@@ -176,8 +179,11 @@ function clickStar(ray: Intersection) {
   console.log('clickScreen ray.point', ray.point)
   console.log('clickScreen_starsRef', starsRef.value)
 
-  console.log('clickScreen_cameraRef', cameraRef.value)
-  console.log('clickScreen_spotLightRef', spotLightRef.value)
+  console.log('clickScreen_cameraRef', cameraRef.value!.position)
+  console.log('clickScreen_title', titleRef.value!)
+
+  // console.log('clickScreen_cameraRef', cameraRef.value)
+  // console.log('clickScreen_spotLightRef', spotLightRef.value)
 
   console.log('3D空間のクリック位置', ray.point);
 
@@ -208,7 +214,7 @@ function clickStar(ray: Intersection) {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 2vw;
-  /* color: #041A25; */
+  font-size: 3vh;
+  white-space: nowrap;
 }
 </style>

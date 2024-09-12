@@ -27,9 +27,11 @@ import Config from '@/Config.ts'
 main {
   position: relative;
   width: 100%;
-  height: auto;
+  /* height: auto; */
+  height: 200vh;
   font-family: "Marvel-Bold";
   color: #D5E0F1;
+  overflow-y: scroll; /* 縦方向のスクロールを有効にする */
 }
 
 .tresBg {
