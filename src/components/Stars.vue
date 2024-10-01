@@ -32,13 +32,13 @@
 
 <script setup lang="ts">
 
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref } from 'vue';
 
 import { TresCanvas, useRenderLoop } from '@tresjs/core'
 
 import { OrbitControls, useGLTF, Text3D, MeshWobbleMaterial } from '@tresjs/cientos'
 
-import { PerspectiveCamera, SpotLight, BackSide, Group, Intersection, MeshPhongMaterial, Mesh } from 'three'
+import { PerspectiveCamera, BackSide, Group, Intersection, MeshPhongMaterial, Mesh } from 'three'
 
 import Config from '@/Config.ts'
 
