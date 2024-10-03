@@ -2,7 +2,7 @@
   <TresCanvas>
 
     <TresPerspectiveCamera ref="cameraRef" :position="[0, 0, cameraDistance]" />
-    <OrbitControls :max-distance="boxWidth / 2" />
+    <OrbitControls :max-distance="boxWidth / 2" :enableZoom="false" :enableDamping="true" :dampingFactor="0.2" />
 
     <TresAmbientLight :intensity="3" />
 
@@ -14,9 +14,8 @@
     </TresMesh>
 
     <Suspense>
-      <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Bold.json" :size="1" :position="[0, 3, -3]">
+      <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Bold.json" :size="1" :position="titlePosition">
         <MeshWobbleMaterial :color="0xA8B8DC" :speed="0.5" :factor="0.5" />
-        <!-- <MeshWobbleMaterial :color="0x41408F" :speed="0.5" :factor="0.5" /> -->
       </Text3D>
     </Suspense>
 
@@ -26,6 +25,8 @@
     </TresGroup>
 
   </TresCanvas>
+
+  <div v-if="starsVisible" class="message">{{ Config.txtMsg1 }}</div>
 
   <div v-if="startAnimation" class="enter">{{ Config.txtEnter }}</div>
 </template>
@@ -38,7 +39,7 @@ import { TresCanvas, useRenderLoop } from '@tresjs/core'
 
 import { OrbitControls, useGLTF, Text3D, MeshWobbleMaterial } from '@tresjs/cientos'
 
-import { PerspectiveCamera, BackSide, Group, Intersection, MeshPhongMaterial, Mesh } from 'three'
+import { PerspectiveCamera, BackSide, Group, Intersection, MeshPhongMaterial, Mesh, Vector3 } from 'three'
 
 import Config from '@/Config.ts'
 
@@ -50,6 +51,7 @@ const { nodes } = await useGLTF('model/star.glb', { draco: true })
 const cameraRef = ref<PerspectiveCamera | null>(null);
 const starsRef = ref<Group | null>(null);
 const titleRef = ref<InstanceType<typeof Text3D> | null>(null);
+const titlePosition = ref([0, 4, -3]);
 
 const cameraDistance = 10
 
@@ -148,18 +150,27 @@ onLoop(({ }) => {
 
   }
 
-  //タイトルのアニメーション
-  const position = cameraRef.value.position.z
+  // //タイトルのアニメーション(カメラ位置基準)
+  // const position = cameraRef.value.position.z
 
-  //位置の更新
-  titleRef.value.instance.position.x = (position / 20) - 0.5
-  titleRef.value.instance.position.y = 6 - (position / 8.8)
-  titleRef.value.instance.position.z = (position * 1.1) - 15
+  // //位置の更新
+  // titleRef.value.instance.position.x = (position / 20) - 0.5
+  // titleRef.value.instance.position.y = 6 - (position / 8.8)
+  // titleRef.value.instance.position.z = (position * 1.1) - 15
 
-  //回転の更新
-  titleRef.value.instance.rotation.x = (position / 12) - 1;
-  // titleRef.value.instance.rotation.y = (position / 10.3) - 1;
-  // titleRef.value.instance.rotation.z = (position / 10) - 1;
+  // //回転の更新
+  // titleRef.value.instance.rotation.x = (position / 12) - 1;
+
+  //タイトルのアニメーション(スクロール基準)
+  const scroll = window.scrollY
+  console.log('scroll', scroll)
+  // // //位置の更新
+  titleRef.value.instance.position.x = (scroll / 100)
+  titleRef.value.instance.position.y = 4 - (scroll / 70)
+  titleRef.value.instance.position.z = (scroll / 70) - 3
+
+  // // //回転の更新
+  titleRef.value.instance.rotation.x = (scroll / 200) - 0.005;
 
 });
 
@@ -215,12 +226,19 @@ function clickStar(ray: Intersection) {
 </script>
 
 <style scoped>
+.message {
+  position: absolute;
+  top: 1%;
+  right: 1%;
+  font-size: 2vh;
+}
+
 .enter {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 3vh;
   white-space: nowrap;
+  font-size: 3vh;
 }
 </style>

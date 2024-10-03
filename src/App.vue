@@ -1,32 +1,30 @@
 <template>
+  <div class="tresBg">
+
+    <Suspense>
+
+      <Stars />
+
+    </Suspense>
+
+  </div>
+
   <main>
 
-    <div class="tresBg">
+    <!-- <div class="mainSec"> -->
 
-      <Suspense>
+    <div class="menu">
 
-        <Stars />
-
-      </Suspense>
-
-    </div>
-
-    <div class="mainSec">
-
-      <div class="menu">
-
-        <BlueFlame1 class="menu1" :inside="Config.txtMenu1"></BlueFlame1>
-        <BlueFlame1 class="menu2" :inside="Config.txtMenu2"></BlueFlame1>
-
-      </div>
-
-      <div class="application">
-
-        <BlueFlame2 class="titleApp" :inside="Config.txtMenu1"></BlueFlame2>
-
-      </div>
+      <BlueFlame1 class="menu1" :inside="Config.txtMenu1" />
+      <BlueFlame1 class="menu2" :inside="Config.txtMenu2" />
 
     </div>
+
+
+    <BlueFlame2 class="titleApp" :inside="Config.txtMenu1" />
+
+
+    <!-- </div> -->
 
   </main>
 </template>
@@ -44,11 +42,10 @@ import BlueFlame2 from '@/components/flame/blueFlame2.vue';
 <style scoped>
 main {
   position: relative;
+  margin: 0;
   width: 100%;
   height: auto;
-  font-family: "Marvel-Bold";
-  color: #F5F5F5;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 .tresBg {
@@ -65,31 +62,34 @@ main {
 
 
 .mainSec {
-  position: fixed;
-  /* position: relative; */
-  top: 0;
-  left: 0;
+  position: relative;
+  margin: 0;
   width: 100%;
   height: auto;
+  border: solid;
 }
 
 .menu {
   position: absolute;
-  top: 45px;
-  right: 45px;
+  top: 4vh;
+  right: 3vw;
+  width: 150px;
+  height: auto;
+  /* float: right;
+  margin-top: 45px;
+  margin-right: 45px; */
+  /* border: solid; */
 }
 
 .menu2 {
   margin-top: 20px;
 }
 
-.application {
-  margin-top: 1000px;
-  position: relative;
-  width: 100%;
-  height: auto;
-  /* text-align:center; */
+.titleApp {
+  position: absolute;
+  /* top: 1000px; */
+  top: 150vh;
+  left: 50%;
+  transform: translateX(-50%);
 }
-
-.titleApp {}
 </style>
