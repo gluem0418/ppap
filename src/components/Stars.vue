@@ -26,9 +26,9 @@
 
   </TresCanvas>
 
-  <div v-if="starsVisible" class="message">{{ Config.txtMsg1 }}</div>
+  <div v-if="starsVisible" class="message">{{ Config.msgMain1 }}</div>
 
-  <div v-if="startAnimation" class="enter">{{ Config.txtEnter }}</div>
+  <div v-if="startAnimation" class="enter">{{ Config.msgEnter }}</div>
 </template>
 
 <script setup lang="ts">
@@ -163,7 +163,6 @@ onLoop(({ }) => {
 
   //タイトルのアニメーション(スクロール基準)
   const scroll = window.scrollY
-  console.log('scroll', scroll)
   // // //位置の更新
   titleRef.value.instance.position.x = (scroll / 100)
   titleRef.value.instance.position.y = 4 - (scroll / 70)
@@ -230,7 +229,7 @@ function clickStar(ray: Intersection) {
   position: absolute;
   top: 1%;
   right: 1%;
-  font-size: 2vh;
+  font-size: 20px;
 }
 
 .enter {
@@ -239,6 +238,6 @@ function clickStar(ray: Intersection) {
   left: 50%;
   transform: translate(-50%, -50%);
   white-space: nowrap;
-  font-size: 3vh;
+  font-size: 24px;
 }
 </style>

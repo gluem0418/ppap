@@ -8,7 +8,16 @@
     src: url('@/assets/font/Marvel-Bold.ttf') format('truetype');
 }
 
-body {
+@font-face {
+    font-family: "MPLUS1p";
+    src: url('@/assets/font/MPLUS1p-Regular.ttf') format('truetype');
+}
+
+:root {
     font-family: "Marvel-Bold";
     color: #F5F5F5;
+}
+
+body {
+    font-size: 16px;
 }

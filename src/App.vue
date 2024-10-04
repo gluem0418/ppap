@@ -11,20 +11,14 @@
 
   <main>
 
-    <!-- <div class="mainSec"> -->
-
     <div class="menu">
 
-      <BlueFlame1 class="menu1" :inside="Config.txtMenu1" />
-      <BlueFlame1 class="menu2" :inside="Config.txtMenu2" />
+      <BlueFlame1 class="menu1" :inside="Config.mainMenu1" />
+      <BlueFlame1 class="menu2" :inside="Config.mainMenu2" />
 
     </div>
 
-
-    <BlueFlame2 class="titleApp" :inside="Config.txtMenu1" />
-
-
-    <!-- </div> -->
+    <AppList class="appList" />
 
   </main>
 </template>
@@ -35,7 +29,7 @@ import Stars from '@/components/Stars.vue';
 import Config from '@/Config.ts'
 
 import BlueFlame1 from '@/components/flame/blueFlame1.vue';
-import BlueFlame2 from '@/components/flame/blueFlame2.vue';
+import AppList from '@/components/AppList.vue';
 
 </script>
 
@@ -45,7 +39,6 @@ main {
   margin: 0;
   width: 100%;
   height: auto;
-  /* overflow-y: scroll; */
 }
 
 .tresBg {
@@ -58,38 +51,26 @@ main {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-}
-
-
-.mainSec {
-  position: relative;
-  margin: 0;
-  width: 100%;
-  height: auto;
-  border: solid;
+  z-index: 1;
 }
 
 .menu {
-  position: absolute;
-  top: 4vh;
-  right: 3vw;
+  /* position: absolute;
+  top: 45px;
+  left: 45px; */
+  position:relative;
+  margin: 45px 45px 0 auto;
   width: 150px;
   height: auto;
-  /* float: right;
-  margin-top: 45px;
-  margin-right: 45px; */
-  /* border: solid; */
+  z-index: 2;
 }
 
 .menu2 {
   margin-top: 20px;
 }
 
-.titleApp {
-  position: absolute;
-  /* top: 1000px; */
-  top: 150vh;
-  left: 50%;
-  transform: translateX(-50%);
+.appList {
+  margin-top: 840px;
+  z-index: 2;
 }
 </style>
