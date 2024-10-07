@@ -39,7 +39,7 @@ import { TresCanvas, useRenderLoop } from '@tresjs/core'
 
 import { OrbitControls, useGLTF, Text3D, MeshWobbleMaterial } from '@tresjs/cientos'
 
-import { PerspectiveCamera, BackSide, Group, Intersection, MeshPhongMaterial, Mesh, Vector3 } from 'three'
+import { PerspectiveCamera, BackSide, Group, Intersection, MeshPhongMaterial, Mesh } from 'three'
 
 import Config from '@/Config.ts'
 

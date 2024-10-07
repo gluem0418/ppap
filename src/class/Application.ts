@@ -2,7 +2,7 @@ import Application_json from '@/assets/json/Application.json';
 
 export interface Point {
   title: string;
-  text: string;
+  texts: string[];
 }
 
 export default class Application {

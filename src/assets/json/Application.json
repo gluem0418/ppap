@@ -5,16 +5,29 @@
         "thumbnail": "img/application/PortfolioThum.png",
         "points": [
             {
-                "title": "pointTitle1",
-                "text": "pointText1"
+                "title": "3D空間の描画による、立体感のあるWEBサイト",
+                "texts": [
+                    "TresJSでの3D空間の描画とOrbitControlsによるカメラの制御により、ドラッグ操作にて3D空間の視点を変更できます。",
+                    "これにより通常のWebサイトとは異なる体験が可能です。",
+                    "☞ TresJS",
+                    "　Three.jsの各機能をVue.jsのコンポーネントとして扱えるライブラリ",
+                    "☞ Three.js",
+                    "　HTML5上で3Dコンテンツを制作するためのJavaScriptライブラリ",
+                    "☞ OrbitControls",
+                    "　Three.js の機能の一つで、3D空間上のカメラの動きをマウスの操作と同期させる機能",
+                    "テスト文字列１２３４５６７８９０２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０－１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０３４５６７８９"
+                ]
             },
             {
-                "title": "pointTitle2",
-                "text": "pointText2"
+                "title": "3Dオブジェクトのアニメーション",
+                "texts": [
+                    "3D空間上に様々な色・形の星が降ってくる様子を描画し、幻想的な雰囲気にしています。",
+                    "Webサイトのタイトルを3Dオブジェクトとし、画面スクロールと同期させる事で、オリジナルのアニメーションを描画しています。"
+                ]
             },
             {
-                "title": "pointTitle3",
-                "text": "pointText3"
+                "title": "画面内の星をクリックすると！？",
+                "texts": []
             }
         ],
         "screenShot": [

@@ -13,16 +13,17 @@
 </script>
 <style scoped>
   .flame {
-    width:300px;
-    background: linear-gradient(to bottom, rgba(84, 168, 214, 0.8), rgba(65, 64, 143, 0.8));
+    width:auto;
+    background: #f5f5f5;
     border-radius: 10px;
     text-align:center;
-    padding:6px;
+    padding:6px 24px;
+    color:#121F30;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
   }
 
   .text {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    font-size: 48px;
+    font-size: 28px;
   }
 
 </style>

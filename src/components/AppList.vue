@@ -16,10 +16,11 @@
       </div>
 
     </div>
+
+
   </div>
 
-  <AppDetail :app="selectedApp" :index="selectedIndex" v-show="showApp" />
-
+  <AppDetail :app="selectedApp" :index="selectedIndex" v-show="showApp" @close="closeAppDetail" @change="changeApp" />
 </template>
   
 <script setup lang="ts">
@@ -34,17 +35,35 @@ import Config from '@/Config.ts';
 
 
 //サムネイル画像クリック時の処理
-
 const selectedIndex = ref<number | undefined>(undefined);
 const selectedApp = ref<Application | undefined>(undefined);
 const showApp = ref<Boolean>(false);
 
 function clickApp(app: Application, index: number) {
-
+  console.log('clickApp', app.id)
   selectedIndex.value = index;
   selectedApp.value = app;
   showApp.value = true;
+  document.body.style.overflow = 'hidden'; // スクロールを無効にする
+}
 
+function closeAppDetail() {
+  showApp.value = false;
+  document.body.style.overflow = ''; // スクロールを有効に戻す
+}
+
+const changeApp = (selectType: string) => {
+  console.log('changeApp_selectType', selectType)
+    console.log('changeApp_index', selectedIndex.value)
+    console.log('changeApp_applications.length', applications.length)
+
+  if (selectType == 'next') {
+    selectedIndex.value = selectedIndex.value == applications.length - 1 ? 0 : selectedIndex.value! + 1
+    selectedApp.value = applications[selectedIndex.value]
+  } else {
+    selectedIndex.value = selectedIndex.value == 0 ? applications.length - 1 : selectedIndex.value! - 1
+    selectedApp.value = applications[selectedIndex.value]
+  }
 }
 
 </script>
@@ -52,14 +71,15 @@ function clickApp(app: Application, index: number) {
 <style scoped>
 .appList {
   position: relative;
-  margin: 0 auto;
-  width: 1350px;
-  height: 600px;
+  margin: 840px auto 0;
+  width: 94%;
+  height: auto;
   background: radial-gradient(rgba(168, 184, 220, 0.95), rgba(245, 245, 245, 0.95));
   border-radius: 30px;
   text-align: center;
   color: #07315D;
   font-size: 20px;
+  z-index: 2;
 }
 
 .title {
@@ -75,16 +95,18 @@ function clickApp(app: Application, index: number) {
 
 .listFlame {
   margin-top: 60px;
+  padding-bottom: 110px;
 }
 
 .appCard {
   display: inline-block;
   margin-left: 10px;
+  width: 18%;
 }
 
 .thumbnail {
-  width: 240px;
   height: auto;
+  width: 100%;
 }
 
 .appTitle {

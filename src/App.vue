@@ -13,12 +13,15 @@
 
     <div class="menu">
 
-      <BlueFlame1 class="menu1" :inside="Config.mainMenu1" />
-      <BlueFlame1 class="menu2" :inside="Config.mainMenu2" />
+      <BtnMenu class="menu1" :inside="Config.mainMenu1" />
+      <BtnMenu class="menu2" :inside="Config.mainMenu2" />
 
     </div>
 
-    <AppList class="appList" />
+    <AppList />
+
+    <div class="experience">
+    </div>
 
   </main>
 </template>
@@ -28,7 +31,7 @@
 import Stars from '@/components/Stars.vue';
 import Config from '@/Config.ts'
 
-import BlueFlame1 from '@/components/flame/blueFlame1.vue';
+import BtnMenu from '@/components/flame/BtnMenu.vue';
 import AppList from '@/components/AppList.vue';
 
 </script>
@@ -68,9 +71,17 @@ main {
 .menu2 {
   margin-top: 20px;
 }
-
-.appList {
-  margin-top: 840px;
+.experience {
+  position: relative;
+  margin: 840px auto 0;
+  width: 94%;
+  height: 800px;
+  background: radial-gradient(rgba(168, 184, 220, 0.95), rgba(245, 245, 245, 0.95));
+  border-radius: 30px;
+  text-align: center;
+  color: #07315D;
+  font-size: 20px;
   z-index: 2;
 }
+
 </style>

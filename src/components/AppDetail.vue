@@ -1,121 +1,127 @@
 <template>
-  <div v-if="selectedCharacter" class="CharacterUI"
-    :style="{ backgroundImage: 'url(' + selectedCharacter.backgroundUrl + ')' }">
-    <div class="imageFlame" @click="addMember">
-      <img class="charaimage" :src="selectedCharacter.poseGraphicUrl" alt="" />
+  <div v-if="selectedApp" class="appDetail">
+
+    <div class="appFlame">
+
+      <BtnClose class="btnClose" @click="closeDetail" />
+
+      <div class="titleFlame">
+
+        <div class="title"> {{ selectedApp.id }} </div>
+
+        <div class="intro"> {{ selectedApp.introduction }} </div>
+
+        <BtnLink class="btnLink1" :inside="'Visit Site'" />
+
+      </div>
+
+      <hr size="1" color="#A8B8DC" class="titleLine">
+
+      <div class="secDetail">
+        <!-- Point -->
+        <FlmItem1 class="midTitle" :inside="'Points'" />
+
+        <!-- <div v-if="selectedApp.id == Config.app1" > -->
+        <div class="secPoint">
+
+          <div class="flameScreen">
+            <img class="imgScreen" :src="selectedApp.screenShot[0]" alt="Screen Shot" />
+          </div>
+
+          <div class="flamePoint">
+
+            <AppPoint :point="selectedApp.points[0]" />
+
+          </div>
+
+        </div>
+
+        <div class="secPoint">
+
+          <div class="flamePoint">
+
+            <AppPoint :point="selectedApp.points[1]" />
+            <br>
+            <AppPoint :point="selectedApp.points[2]" />
+
+          </div>
+
+          <div class="flameScreen">
+            <img class="imgScreen" :src="selectedApp.screenShot[1]" alt="Screen Shot" />
+          </div>
+
+        </div>
+
+        <!-- Environment -->
+
+        <div class="envTitle">
+
+          <FlmItem1 class="midTitle" :inside="'Environment'" />
+          <BtnLink class="btnLink2" :inside="'github'" />
+
+        </div>
+
+        <div class="secEnv">
+
+          <div v-for="(text, index) in selectedApp.environment" :key="index" class="text">
+            {{ text }}
+          </div>
+
+        </div>
+
+        <div class="secDetailEnd">
+          <BtnChange class="btnPrev" :inside="'Prev'" @click="prevApp" />
+
+          <BtnChange class="btnNext" :inside="'Next'" @click="nextApp"/>
+        </div>
+
+      </div>
+
     </div>
-    <CharaCardUI class="CharaCardUI" :character="selectedCharacter" />
-
-    <CharaStatusUI v-if="showStatus" class="CharaStatusUI" :character="selectedCharacter" />
-    <CharaSubStatusUI v-else class="CharaSubStatusUI" :character="selectedCharacter" />
-    <switchBtn class="ChangeStatus" @click="changeStatus" :switchWord='switchStatus' />
-
-    <EquipmentUI v-if="showEuip" class="EquipmentUI" :character="selectedCharacter" />
-    <SkillUI v-else class="SkillUI" :character="selectedCharacter" />
-    <switchBtn class="ChangeSkill" @click="changeSkill" :switchWord='switchEquip' />
-
-    <IconLeft class="IconCharaBack" @click="backCharacter" />
-    <IconRight class="IconCharaNext" @click="nextCharacter" />
-    <Confirmation v-show="showUIStore.message" :message="confirmationMessage" @confirmationResponse="confirmationResponse" />
-    <Information v-show="showUIStore.errorMessage" :message="errorMessage" @hideError="hideErrorMessage" />
 
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import CharaCardUI from '@/ui/CharaCard.vue';
-import CharaStatusUI from '@/ui/CharaStatus.vue';
-import CharaSubStatusUI from '@/ui/CharaSubStatus.vue';
-import EquipmentUI from '@/ui/Equipment.vue';
-import SkillUI from '@/ui/Skill.vue';
 
-import Character from '@/class/Character.ts';
-import config from '@/config/commonConfig.ts';
+import AppPoint from '@/components/AppPoint.vue';
 
-import switchBtn from '@/components/flame/SwitchBtn.vue';
-import IconLeft from '@/components/icon/IconLeft.vue';
-import IconRight from '@/components/icon/IconRight.vue';
-import Confirmation from '@/components/information/Confirmation.vue';
-import Information from '@/components/information/Information.vue';
+import BtnLink from '@/components/flame/BtnLink.vue';
+import BtnChange from '@/components/flame/BtnChange.vue';
 
-//状態管理
-import { useStatusStore } from '@/stores/Status.ts';
-const statusStore = useStatusStore()
-//パーティ情報
-import { usePartyStore } from '@/stores/Party.ts';
-const partyStore = usePartyStore()
-//UI表示
-import { useShowUI } from '@/stores/ShowUI.ts';
-const showUIStore = useShowUI()
+import FlmItem1 from '@/components/flame/FlmItem1.vue';
+
+import BtnClose from '@/components/icon/BtnClose.vue';
+
+import Application from '@/class/Application.ts';
 
 const props = defineProps({
   index: { type: Number },
-  character: { type: Character },
+  app: { type: Application },
 });
+
 const selectedIndex = ref<number>(0);
-const selectedCharacter = ref<Character | undefined>(undefined);
+const selectedApp = ref<Application | undefined>(undefined);
 
-//ステータスの切り替え
-const showStatus = ref(true);
-const switchStatus = ['MAIN', 'SUB']
-const changeStatus = () => {
-  showStatus.value = !showStatus.value;
-};
+const emit = defineEmits(["close", "change"]);
 
-//装備とスキルの切り替え
-const showEuip = ref(true);
-const switchEquip = ['EQUIP', 'SKILL']
-const changeSkill = () => {
-  showEuip.value = !showEuip.value;
-};
+function closeDetail() {
+  emit('close');
+}
 
 // 対象キャラクター指定
-const emit = defineEmits(["changeCharacter"])
-const changeCharacter = (selectType: string) => {
-  emit('changeCharacter', selectType)
+const changeApp = (selectType: string) => {
+  emit('change', selectType)
 };
 
-function nextCharacter() {
-  changeCharacter('next')
-
-  // selectedIndex.value = selectedIndex.value == partyStore.characters.length - 1 ? 0 : selectedIndex.value + 1
-  // selectedCharacter.value = partyStore.characters[selectedIndex.value]
+function nextApp() {
+  changeApp('next')
 }
 
-function backCharacter() {
-  changeCharacter('back')
-
-  // selectedIndex.value = selectedIndex.value == 0 ? partyStore.characters.length - 1 : selectedIndex.value - 1
-  // selectedCharacter.value = partyStore.characters[selectedIndex.value]
+function prevApp() {
+  changeApp('prev')
 }
-
-// 対象キャラクターをパーティに追加（ギルド機能）
-let confirmationMessage: string
-let errorMessage : string
-// 確認メッセージを表示
-function addMember() {
-  if (statusStore.guildMenu != config.menuAddMember) return;
-  if (partyStore.characters.length == 4) {
-    errorMessage = config.msgAddPartyError
-    showUIStore.errorMessage = true;
-    return;
-  }
-  confirmationMessage = config.msgAddParty1 + selectedCharacter.value!.name + config.msgAddParty2
-  showUIStore.message = true;
-}
-// YESの場合、該当キャラクターをパーティに追加
-const confirmationResponse = (response: string) => {
-  showUIStore.message = false;
-  if (response == config.textYes) {
-    partyStore.characters.push(selectedCharacter.value!);
-    showUIStore.character = false;
-  }
-};
-
-const hideErrorMessage = () => {
-  showUIStore.errorMessage = false;
-};
 
 watch(() => props.index, () => {
   if (props.index) {
@@ -123,85 +129,126 @@ watch(() => props.index, () => {
   }
 })
 
-watch(() => props.character, () => {
-  if (props.character) {
-    selectedCharacter.value = props.character;
+watch(() => props.app, () => {
+  if (props.app) {
+    selectedApp.value = props.app;
   }
 })
 
 </script>
   
 <style scoped>
-.CharacterUI {
-  background-size: 100% 100%;
+.appDetail {
+  position: fixed;
+  /* position: sticky; */
+  top: 0;
   width: 100%;
   height: 100%;
-  position: absolute;
-  animation: show 1s;
+  overflow: auto;
+  z-index: 3;
 }
 
-.CharaCardUI {
-  position: absolute;
-  margin: 1.5vh 2.6vw;
-  animation: slideTop 0.5s ease-in-out;
+.appFlame {
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+  height: auto;
+  padding: 30px;
+  background: linear-gradient(-45deg, rgba(65, 64, 143, 0.95), rgba(84, 168, 214, 0.95));
+  border-radius: 30px;
+  /* text-align: center; */
+  /* font-size: 20px; */
 }
 
-.CharaStatusUI {
+.btnClose {
   position: absolute;
-  top: 18vh;
-  left: 4vw;
-  animation: slideTop 0.3s ease-in-out;
+  top: 30px;
+  right: 30px;
 }
 
-.imageFlame {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* height: 100vh; */
+.titleFlame {
+  margin-top: 10px;
+  margin-left: 4%;
+  display: flex;
+  align-items: center;
 }
 
-.charaimage {
-  /* width: 50vw; */
-  animation: slideBottom 0.5s ease-in-out;
-  height: 95vh;
+.title {
+  font-size: 60px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.IconCharaBack {
-  position: absolute;
-  top: 45%;
-  left: 27%;
+.intro {
+  margin-left: 5%;
+  width: 45%;
 }
 
-.IconCharaNext {
-  position: absolute;
-  top: 45%;
-  right: 29%;
+.btnLink1 {
+  margin-left: auto;
+  margin-right: 10%;
 }
 
-.EquipmentUI {
-  position: absolute;
-  margin-top: 3vh;
-  right: 4vw;
-  animation: slideTop 0.3s ease-in-out;
+.titleLine {
+  margin: 30px auto;
+  width: 92%;
 }
 
-.SkillUI {
-  position: absolute;
-  margin-top: 3vh;
-  right: 4vw;
-  animation: slideTop 0.3s ease-in-out;
+.secDetail {
+  width: 90%;
+  margin: 0 auto;
 }
 
-.ChangeStatus {
-  position: absolute;
-  bottom: 2vh;
-  left: 17%;
+.midTitle {
+  position: relative;
 }
 
-.ChangeSkill {
-  position: absolute;
-  bottom: 2vh;
-  right: 19%;
+
+.secPoint {
+  display: flex;
+  gap: 4%;
+  font-family: "MPLUS1p";
+  margin: 20px 0;
 }
+
+.flameScreen {
+  align-content: center;
+  width: 45%;
+}
+
+.imgScreen {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.flamePoint {
+  width: 55%;
+}
+
+.envTitle {
+  display: flex;
+  align-items: center;
+}
+
+.btnLink2 {
+  margin-left: 7%;
+}
+
+.secEnv {
+  font-family: "MPLUS1p";
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.text {
+  margin-left: 16px;
+  margin-bottom: 6px;
+}
+
+.secDetailEnd {
+  /* margin-top:20px; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.btnPrev {}
 </style>
