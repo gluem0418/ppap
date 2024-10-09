@@ -20,6 +20,7 @@
     padding:7px 30px;
     color:#F5F5F5;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
   }
 
   .text {

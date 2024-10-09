@@ -8,4 +8,8 @@ import img from "/img/icon/Close.png"
 
 </script>
 <style scoped>
+.Icon {
+  cursor: pointer;
+}
+
 </style>

@@ -52,18 +52,23 @@ function closeAppDetail() {
   document.body.style.overflow = ''; // スクロールを有効に戻す
 }
 
-const changeApp = (selectType: string) => {
+const changeApp = (selectType: string, index: number) => {
   console.log('changeApp_selectType', selectType)
-    console.log('changeApp_index', selectedIndex.value)
-    console.log('changeApp_applications.length', applications.length)
+  console.log('changeApp_beforeindex', selectedIndex.value)
+  console.log('changeApp_applications.length', applications.length)
 
   if (selectType == 'next') {
     selectedIndex.value = selectedIndex.value == applications.length - 1 ? 0 : selectedIndex.value! + 1
     selectedApp.value = applications[selectedIndex.value]
-  } else {
+  } else if (selectType == 'prev') {
     selectedIndex.value = selectedIndex.value == 0 ? applications.length - 1 : selectedIndex.value! - 1
     selectedApp.value = applications[selectedIndex.value]
+  } else if (selectType == 'select') {
+    selectedIndex.value = index
+    selectedApp.value = applications[index]
   }
+  console.log('changeApp_afterindex', selectedIndex.value)
+
 }
 
 </script>
@@ -102,6 +107,7 @@ const changeApp = (selectType: string) => {
   display: inline-block;
   margin-left: 10px;
   width: 18%;
+  cursor: pointer;
 }
 
 .thumbnail {

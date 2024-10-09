@@ -14,9 +14,7 @@
                     "☞ Three.js",
                     "　HTML5上で3Dコンテンツを制作するためのJavaScriptライブラリ",
                     "☞ OrbitControls",
-                    "　Three.js の機能の一つで、3D空間上のカメラの動きをマウスの操作と同期させる機能",
-                    "テスト文字列１２３４５６７８９０２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０－１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０３４５６７８９"
-                ]
+                    "　Three.js の機能の一つで、3D空間上のカメラの動きをマウスの操作と同期させる機能"               ]
             },
             {
                 "title": "3Dオブジェクトのアニメーション",
@@ -27,7 +25,10 @@
             },
             {
                 "title": "画面内の星をクリックすると！？",
-                "texts": []
+                "texts": [
+                    "１２３４５６７８９０２３４５６７８９０１２３４５６７８９０２３４５６７８９０１２３４５６７８９１２３４５６７８９０２３４５６７８９０１２３４５６７８９０２３４５６７８１２３４５６７８９",
+                    "１２３４５６７８９０２３４５６７８９０１２３４５６７８９０２３４５６７８９０１２３４５６７８９１２３４５６７８９０２３４５６７８９０１２３４５６７８９０２３４５６７８１２３４５６７８９"
+                ]
             }
         ],
         "screenShot": [
@@ -42,9 +43,9 @@
         ]
     },
     {
-        "id": "Starry Island",
+        "id": "Seventh Dawn",
         "introduction": "このWebサイトです。「星の降る島」をイメージした背景の上に、各コンテンツを配置しています。",
-        "thumbnail": "img/application/starThum.png",
+        "thumbnail": "img/application/SeventhThum.png",
         "points": [
             {
                 "title": "pointTitle1",
@@ -71,9 +72,9 @@
         ]
     },
     {
-        "id": "Seventh Dawn",
+        "id": "Starry Island",
         "introduction": "このWebサイトです。「星の降る島」をイメージした背景の上に、各コンテンツを配置しています。",
-        "thumbnail": "img/application/SeventhThum.png",
+        "thumbnail": "img/application/starThum.png",
         "points": [
             {
                 "title": "pointTitle1",

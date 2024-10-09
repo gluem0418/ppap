@@ -20,10 +20,9 @@
 
     <AppList />
 
-    <div class="experience">
-    </div>
+    <Experience />
 
-  </main>
+</main>
 </template>
 
 <script setup lang="ts">
@@ -31,8 +30,10 @@
 import Stars from '@/components/Stars.vue';
 import Config from '@/Config.ts'
 
-import BtnMenu from '@/components/flame/BtnMenu.vue';
 import AppList from '@/components/AppList.vue';
+import Experience from '@/components/Experience.vue';
+
+import BtnMenu from '@/components/flame/BtnMenu.vue';
 
 </script>
 
@@ -70,18 +71,6 @@ main {
 
 .menu2 {
   margin-top: 20px;
-}
-.experience {
-  position: relative;
-  margin: 840px auto 0;
-  width: 94%;
-  height: 800px;
-  background: radial-gradient(rgba(168, 184, 220, 0.95), rgba(245, 245, 245, 0.95));
-  border-radius: 30px;
-  text-align: center;
-  color: #07315D;
-  font-size: 20px;
-  z-index: 2;
 }
 
 </style>

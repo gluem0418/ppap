@@ -1,7 +1,7 @@
 <template>
   <div v-if="selectedApp" class="appDetail">
 
-    <div class="appFlame">
+    <div class="appFlame" id="appFlame">
 
       <BtnClose class="btnClose" @click="closeDetail" />
 
@@ -70,9 +70,15 @@
         </div>
 
         <div class="secDetailEnd">
-          <BtnChange class="btnPrev" :inside="'Prev'" @click="prevApp" />
+          <BtnChange :inside="'Prev'" @click="changeApp('prev')" />
 
-          <BtnChange class="btnNext" :inside="'Next'" @click="nextApp"/>
+          <div class="indexList">
+            <div v-for="(cnt, index) in Config.appCount" class="appIndex" @click="changeApp('select', index)"
+              :class="{ 'selectedApp': selectedIndex == index }">
+            </div>
+          </div>
+
+          <BtnChange :inside="'Next'" @click="changeApp('next')" />
         </div>
 
       </div>
@@ -96,6 +102,8 @@ import BtnClose from '@/components/icon/BtnClose.vue';
 
 import Application from '@/class/Application.ts';
 
+import Config from '@/Config.ts';
+
 const props = defineProps({
   index: { type: Number },
   app: { type: Application },
@@ -110,21 +118,20 @@ function closeDetail() {
   emit('close');
 }
 
-// 対象キャラクター指定
-const changeApp = (selectType: string) => {
-  emit('change', selectType)
+// 対象アプリケーション指定
+const changeApp = (selectType: string, index?: number) => {
+  // ページのトップにスクロール
+  const appDetailElement = document.querySelector('.appDetail');
+  if (appDetailElement) {
+    appDetailElement.scrollTop = 0;
+  }
+
+  emit('change', selectType, index)
+
 };
 
-function nextApp() {
-  changeApp('next')
-}
-
-function prevApp() {
-  changeApp('prev')
-}
-
 watch(() => props.index, () => {
-  if (props.index) {
+  if (props.index !== undefined) {
     selectedIndex.value = props.index;
   }
 })
@@ -140,34 +147,33 @@ watch(() => props.app, () => {
 <style scoped>
 .appDetail {
   position: fixed;
-  /* position: sticky; */
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
+  inset: 0;
+  margin: auto;
+  width: 97%;
+  height: 97%;
+  background: linear-gradient(-45deg, rgba(65, 64, 143, 0.95), rgba(84, 168, 214, 1));
+  border-radius: 15px;
+  border: 4px ridge #F5F5F5;  
   z-index: 3;
+  overflow: auto;
+  /* scrollbar-width: none; */
 }
 
 .appFlame {
   position: relative;
-  width: 90%;
-  margin: 0 auto;
   height: auto;
   padding: 30px;
-  background: linear-gradient(-45deg, rgba(65, 64, 143, 0.95), rgba(84, 168, 214, 0.95));
-  border-radius: 30px;
-  /* text-align: center; */
-  /* font-size: 20px; */
 }
 
 .btnClose {
-  position: absolute;
+  position: sticky;
   top: 30px;
-  right: 30px;
+  display: grid;
+  margin-left: auto;
+  right: 0;
 }
 
 .titleFlame {
-  margin-top: 10px;
   margin-left: 4%;
   display: flex;
   align-items: center;
@@ -180,7 +186,7 @@ watch(() => props.app, () => {
 
 .intro {
   margin-left: 5%;
-  width: 45%;
+  width: 46%;
 }
 
 .btnLink1 {
@@ -190,11 +196,11 @@ watch(() => props.app, () => {
 
 .titleLine {
   margin: 30px auto;
-  width: 92%;
+  width: 95%;
 }
 
 .secDetail {
-  width: 90%;
+  width: 92%;
   margin: 0 auto;
 }
 
@@ -207,12 +213,13 @@ watch(() => props.app, () => {
   display: flex;
   gap: 4%;
   font-family: "MPLUS1p";
-  margin: 20px 0;
+  margin: 40px 0;
+  /* border:solid; */
 }
 
 .flameScreen {
   align-content: center;
-  width: 45%;
+  width: 43%;
 }
 
 .imgScreen {
@@ -221,7 +228,7 @@ watch(() => props.app, () => {
 }
 
 .flamePoint {
-  width: 55%;
+  width: 53%;
 }
 
 .envTitle {
@@ -236,7 +243,8 @@ watch(() => props.app, () => {
 .secEnv {
   font-family: "MPLUS1p";
   margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  /* border:solid; */
 }
 
 .text {
@@ -245,10 +253,27 @@ watch(() => props.app, () => {
 }
 
 .secDetailEnd {
-  /* margin-top:20px; */
+  display: flex;
+  justify-content: space-between;
+  margin-bottom:30px;
+}
+
+.indexList {
+  width: 130px;
+  margin-top: auto;
+  margin-bottom: 0;
   display: flex;
   justify-content: space-between;
 }
 
-.btnPrev {}
+.appIndex {
+  width: 20px;
+  height: 8px;
+  background: #F5F5F5;
+  cursor: pointer;
+}
+
+.selectedApp {
+  background: #121F30;
+}
 </style>

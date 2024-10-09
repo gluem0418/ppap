@@ -18,6 +18,7 @@
     border-radius: 10px;
     text-align:center;
     padding:6px;
+    cursor: pointer;
   }
 
   .text {
