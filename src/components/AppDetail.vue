@@ -3,15 +3,18 @@
 
     <div class="appFlame" id="appFlame">
 
-      <BtnClose class="btnClose" @click="closeDetail" />
+      <div class="appTop">
+
+        <BtnLink class="btnLink1" :inside="'Visit Site'" />
+        <BtnClose class="btnClose" @click="closeDetail" />
+
+      </div>
 
       <div class="titleFlame">
 
         <div class="title"> {{ selectedApp.id }} </div>
 
         <div class="intro"> {{ selectedApp.introduction }} </div>
-
-        <BtnLink class="btnLink1" :inside="'Visit Site'" />
 
       </div>
 
@@ -30,7 +33,7 @@
 
           <div class="flamePoint">
 
-            <AppPoint :point="selectedApp.points[0]" />
+            <AppPoint class="appPoint" :point="selectedApp.points[0]" />
 
           </div>
 
@@ -41,8 +44,7 @@
           <div class="flamePoint">
 
             <AppPoint :point="selectedApp.points[1]" />
-            <br>
-            <AppPoint :point="selectedApp.points[2]" />
+            <AppPoint class="appPoint2" :point="selectedApp.points[2]" />
 
           </div>
 
@@ -57,6 +59,7 @@
         <div class="envTitle">
 
           <FlmItem1 class="midTitle" :inside="'Environment'" />
+          <!-- <br> -->
           <BtnLink class="btnLink2" :inside="'github'" />
 
         </div>
@@ -73,8 +76,11 @@
           <BtnChange :inside="'Prev'" @click="changeApp('prev')" />
 
           <div class="indexList">
-            <div v-for="(cnt, index) in Config.appCount" class="appIndex" @click="changeApp('select', index)"
+            <!-- <div v-for="(cnt, index) in Config.appCount" class="appIndex" @click="changeApp('select', index)"
               :class="{ 'selectedApp': selectedIndex == index }">
+            </div> -->
+            <div v-for="cnt in Config.appCount" class="appIndex" @click="changeApp('select', cnt - 1)"
+              :class="{ 'selectedApp': selectedIndex == cnt - 1 }">
             </div>
           </div>
 
@@ -143,7 +149,7 @@ watch(() => props.app, () => {
 })
 
 </script>
-  
+
 <style scoped>
 .appDetail {
   position: fixed;
@@ -153,7 +159,7 @@ watch(() => props.app, () => {
   height: 97%;
   background: linear-gradient(-45deg, rgba(65, 64, 143, 0.95), rgba(84, 168, 214, 1));
   border-radius: 15px;
-  border: 4px ridge #F5F5F5;  
+  border: 4px ridge #F5F5F5;
   z-index: 3;
   overflow: auto;
   /* scrollbar-width: none; */
@@ -165,16 +171,22 @@ watch(() => props.app, () => {
   padding: 30px;
 }
 
-.btnClose {
+.appTop {
   position: sticky;
   top: 30px;
-  display: grid;
+  display: flex;
+  justify-content: flex-end;
   margin-left: auto;
   right: 0;
 }
 
+.btnClose {
+  margin-left: 3%;
+}
+
 .titleFlame {
   margin-left: 4%;
+  margin-top: -30px;
   display: flex;
   align-items: center;
 }
@@ -186,13 +198,11 @@ watch(() => props.app, () => {
 
 .intro {
   margin-left: 5%;
-  width: 46%;
+  font-family: "BIZUDPGothic";
+  line-height: 30px;
+  width: 50%;
 }
 
-.btnLink1 {
-  margin-left: auto;
-  margin-right: 10%;
-}
 
 .titleLine {
   margin: 30px auto;
@@ -200,7 +210,7 @@ watch(() => props.app, () => {
 }
 
 .secDetail {
-  width: 92%;
+  width: 94%;
   margin: 0 auto;
 }
 
@@ -211,15 +221,21 @@ watch(() => props.app, () => {
 
 .secPoint {
   display: flex;
-  gap: 4%;
-  font-family: "MPLUS1p";
-  margin: 40px 0;
-  /* border:solid; */
+  align-items: center;
+  gap: 2%;
+  font-family: "BIZUDPGothic";
+  margin: 50px 0;
+}
+
+@media screen and (max-width: 800px) {
+  .secPoint {
+    flex-direction:column-reverse;
+  }
 }
 
 .flameScreen {
   align-content: center;
-  width: 43%;
+  flex: 1;
 }
 
 .imgScreen {
@@ -228,7 +244,13 @@ watch(() => props.app, () => {
 }
 
 .flamePoint {
-  width: 53%;
+  padding: 10px 1%;
+  border-radius: 10px;
+  flex: 1;
+}
+
+.appPoint2 {
+  margin-top: 30px;
 }
 
 .envTitle {
@@ -242,9 +264,8 @@ watch(() => props.app, () => {
 
 .secEnv {
   font-family: "MPLUS1p";
-  margin-top: 20px;
-  margin-bottom: 40px;
-  /* border:solid; */
+  margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 .text {
@@ -252,10 +273,17 @@ watch(() => props.app, () => {
   margin-bottom: 6px;
 }
 
-.secDetailEnd {
+/* .secDetailEnd {
   display: flex;
   justify-content: space-between;
-  margin-bottom:30px;
+  margin-bottom: 30px;
+} */
+
+.secDetailEnd {
+  position: sticky;
+  bottom: 30px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .indexList {

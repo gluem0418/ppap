@@ -7,11 +7,10 @@
                 {{ point.title }}
             </span>
         </div>
-
         <div v-for="(text, index) in point.texts" :key="index" class="text">
             {{ text }}
         </div>
-    
+
     </div>
 </template>
 
@@ -31,10 +30,9 @@ const props = defineProps({
 <style scoped>
 .subTitle {
     font-size: 18px;
-    margin-bottom: 16px;
-    /* border:solid; */
     display: flex;
     align-items: center;
+    margin-bottom:20px;
 }
 
 .iconArrow {
@@ -46,7 +44,7 @@ const props = defineProps({
 }
 
 .text {
+    line-height:30px;
     margin-left: 10px;
-    margin-bottom: 6px;
 }
 </style>

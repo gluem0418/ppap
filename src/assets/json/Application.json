@@ -1,33 +1,84 @@
 [
     {
         "id": "Gluem Portfolio",
-        "introduction": "このWebサイトです。「星の降る島」をイメージした背景の上に、各コンテンツを配置しています。",
+        "introduction": "このWEBサイトです。「星の降る島」をイメージした背景の上に、各コンテンツを配置しています。",
         "thumbnail": "img/application/PortfolioThum.png",
         "points": [
             {
                 "title": "3D空間の描画による、立体感のあるWEBサイト",
                 "texts": [
                     "TresJSでの3D空間の描画とOrbitControlsによるカメラの制御により、ドラッグ操作にて3D空間の視点を変更できます。",
-                    "これにより通常のWebサイトとは異なる体験が可能です。",
                     "☞ TresJS",
                     "　Three.jsの各機能をVue.jsのコンポーネントとして扱えるライブラリ",
                     "☞ Three.js",
                     "　HTML5上で3Dコンテンツを制作するためのJavaScriptライブラリ",
                     "☞ OrbitControls",
-                    "　Three.js の機能の一つで、3D空間上のカメラの動きをマウスの操作と同期させる機能"               ]
+                    "　Three.js の機能の一つで、3D空間上のカメラの動きをマウスの操作と同期させる機能"
+                ]
             },
             {
                 "title": "3Dオブジェクトのアニメーション",
                 "texts": [
                     "3D空間上に様々な色・形の星が降ってくる様子を描画し、幻想的な雰囲気にしています。",
-                    "Webサイトのタイトルを3Dオブジェクトとし、画面スクロールと同期させる事で、オリジナルのアニメーションを描画しています。"
+                    "サイトのタイトルを3Dオブジェクトにして画面スクロールと同期させる事で、アニメーションを描画しています。"
                 ]
             },
             {
                 "title": "画面内の星をクリックすると！？",
+                "texts": []
+            }
+        ],
+        "screenShot": [
+            "img/application/Portfolio1.png",
+            "img/application/Portfolio2.png"
+        ],
+        "environment": [
+            "Vue.js",
+            "TypeScript",
+            "TresJS",
+            "Three.js"
+        ],
+        "tool": [
+            "Visual Studio Code",
+            "GitHub",
+            "Figma"
+        ]
+    },
+    {
+        "id": "Seventh Dawn",
+        "introduction": "ダンジョンを探索するRPGのSPAです。Vue.jsで作成したSPAにブラウザ上に3Dコンテンツを描画できるThree.jsを組み合わせて作成しています。（永遠のα版）",
+        "thumbnail": "img/application/SeventhThum.png",
+        "points": [
+            {
+                "title": "入るたびにランダムに構成される3Dダンジョン",
                 "texts": [
-                    "１２３４５６７８９０２３４５６７８９０１２３４５６７８９０２３４５６７８９０１２３４５６７８９１２３４５６７８９０２３４５６７８９０１２３４５６７８９０２３４５６７８１２３４５６７８９",
-                    "１２３４５６７８９０２３４５６７８９０１２３４５６７８９０２３４５６７８９０１２３４５６７８９１２３４５６７８９０２３４５６７８９０１２３４５６７８９０２３４５６７８１２３４５６７８９"
+                    "ダンジョンは自動生成アルゴリズムにより、ダンジョン情報（大きさ、部屋の大きさ、部屋の数、通路の集合地点など）から、毎回ランダムな構造のダンジョンを生成します。"
+                ]
+            },
+            {
+                "title": "Three.jsで構築した3Dダンジョンの探索",
+                "texts": [
+                    "ダンジョンはThree.jsにて3D空間上に描画し、各ダンジョンはダンジョン名に沿って異なるテクスチャーや音楽を設定しています。",
+                    "また、ダンジョン内はカメラ（プレイヤー）の動きに合わせて探索する事が可能で、扉や宝箱などのオブジェクトも操作可能です。"
+                ]
+            },
+            {
+                "title": "非同期処理による戦闘中のスムーズなアニメーション",
+                "texts": [
+                    "戦闘中のコマンド入力やアニメーションに関して、非同期処理やタイマー処理を組み合わせる事で、出来るだけストレスなくスムーズに動くようにしています。"
+                ]
+            },
+            {
+                "title": "シンプルかつ拡張性のあるデータの持ち方",
+                "texts": [
+                    "キャラクターや装備等の殆どのデータはjson形式で保持しており、各クラスに格納する事で、データに関する処理をシンプルにしています。"
+                ]
+            },
+            {
+                "title": "ストア機能によるアプリ全体のデータ管理",
+                "texts": [
+                    "アプリ内で共有するデータはpiniaによるストア機能で管理しています。",
+                    "これにより、アプリ内のどこからでも共有データの参照・更新をシンプルに行っています。"
                 ]
             }
         ],
@@ -36,39 +87,19 @@
             "img/application/Portfolio1.png"
         ],
         "environment": [
-            "Vue.js(version3 Composition API)",
+            "Vue.js",
             "TypeScript",
             "TresJS",
-            "Three.js"
-        ]
-    },
-    {
-        "id": "Seventh Dawn",
-        "introduction": "このWebサイトです。「星の降る島」をイメージした背景の上に、各コンテンツを配置しています。",
-        "thumbnail": "img/application/SeventhThum.png",
-        "points": [
-            {
-                "title": "pointTitle1",
-                "text": "pointText1"
-            },
-            {
-                "title": "pointTitle2",
-                "text": "pointText2"
-            },
-            {
-                "title": "pointTitle3",
-                "text": "pointText3"
-            }
+            "Three.js",
+            "animejs",
+            "pinia"
         ],
-        "screenShot": [
-            "img/application/Portfolio1.png",
-            "img/application/Portfolio1.png"
-        ],
-        "environment": [
-            "Vue.js(version3 Composition API)",
-            "TypeScript",
-            "TresJS",
-            "Three.js"
+        "tool": [
+            "Visual Studio Code",
+            "GitHub",
+            "Figma",
+            "MediBang Paint(ペイントソフト)",
+            "Blender"
         ]
     },
     {
@@ -78,15 +109,21 @@
         "points": [
             {
                 "title": "pointTitle1",
-                "text": "pointText1"
+                "texts": [
+                    "pointText1"
+                ]
             },
             {
                 "title": "pointTitle2",
-                "text": "pointText2"
+                "texts": [
+                    "pointText1"
+                ]
             },
             {
                 "title": "pointTitle3",
-                "text": "pointText3"
+                "texts": [
+                    "pointText1"
+                ]
             }
         ],
         "screenShot": [
@@ -94,10 +131,14 @@
             "img/application/Portfolio1.png"
         ],
         "environment": [
-            "Vue.js(version3 Composition API)",
+            "Vue.js",
             "TypeScript",
             "TresJS",
             "Three.js"
+        ],
+        "tool": [
+            "Visual Studio Code",
+            "GitHub"
         ]
     },
     {
@@ -107,15 +148,21 @@
         "points": [
             {
                 "title": "pointTitle1",
-                "text": "pointText1"
+                "texts": [
+                    "pointText1"
+                ]
             },
             {
                 "title": "pointTitle2",
-                "text": "pointText2"
+                "texts": [
+                    "pointText1"
+                ]
             },
             {
                 "title": "pointTitle3",
-                "text": "pointText3"
+                "texts": [
+                    "pointText1"
+                ]
             }
         ],
         "screenShot": [
@@ -123,10 +170,13 @@
             "img/application/Portfolio1.png"
         ],
         "environment": [
-            "Vue.js(version3 Composition API)",
+            "Vue.js",
             "TypeScript",
-            "TresJS",
-            "Three.js"
+            "animejs"
+        ],
+        "tool": [
+            "Visual Studio Code",
+            "GitHub"
         ]
     },
     {
@@ -136,15 +186,21 @@
         "points": [
             {
                 "title": "pointTitle1",
-                "text": "pointText1"
+                "texts": [
+                    "pointText1"
+                ]
             },
             {
                 "title": "pointTitle2",
-                "text": "pointText2"
+                "texts": [
+                    "pointText1"
+                ]
             },
             {
                 "title": "pointTitle3",
-                "text": "pointText3"
+                "texts": [
+                    "pointText1"
+                ]
             }
         ],
         "screenShot": [
@@ -152,10 +208,13 @@
             "img/application/Portfolio1.png"
         ],
         "environment": [
-            "Vue.js(version3 Composition API)",
-            "TypeScript",
-            "TresJS",
-            "Three.js"
+            "Vue.js",
+            "JavaScript",
+            "animejs"
+        ],
+        "tool": [
+            "Visual Studio Code",
+            "GitHub"
         ]
     }
 ]

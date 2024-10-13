@@ -20,8 +20,8 @@
     </Suspense>
 
     <TresGroup :visible='starsVisible' ref="starsRef">
-      <primitive v-for="star in stars" :key="star" :position="star.position" :rotation="star.rotation" :scale="star.scale"
-        :object="createColoredModel(star.material)" @click="clickStar" />
+      <primitive v-for="star in stars" :key="star" :position="star.position" :rotation="star.rotation"
+        :scale="star.scale" :object="createColoredModel(star.material)" @click="clickStar" />
     </TresGroup>
 
   </TresCanvas>
@@ -164,9 +164,9 @@ onLoop(({ }) => {
   //タイトルのアニメーション(スクロール基準)
   const scroll = window.scrollY
   // // //位置の更新
-  titleRef.value.instance.position.x = (scroll / 100)
-  titleRef.value.instance.position.y = 4 - (scroll / 70)
-  titleRef.value.instance.position.z = (scroll / 70) - 3
+  titleRef.value.instance.position.x = (scroll / 600)
+  titleRef.value.instance.position.y = 4 - (scroll / 400)
+  titleRef.value.instance.position.z = (scroll / 300) - 3
 
   // // //回転の更新
   titleRef.value.instance.rotation.x = (scroll / 200) - 0.005;

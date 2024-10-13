@@ -10,6 +10,7 @@ import img from "/img/icon/Close.png"
 <style scoped>
 .Icon {
   cursor: pointer;
+  height:30px;
 }
 
 </style>

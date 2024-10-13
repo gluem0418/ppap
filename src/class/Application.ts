@@ -12,6 +12,7 @@ export default class Application {
   points: Point[];
   screenShot: string[];
   environment: string[];
+  tool: string[];
   
   constructor(data: Application) {
     this.id = data.id;
@@ -20,6 +21,7 @@ export default class Application {
     this.points = data.points;
     this.screenShot = data.screenShot;
     this.environment = data.environment;
+    this.tool = data.tool;
   }
 }
 
