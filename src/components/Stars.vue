@@ -1,36 +1,3 @@
-<template>
-  <TresCanvas>
-
-    <TresPerspectiveCamera ref="cameraRef" :position="[0, 0, cameraDistance]" />
-    <OrbitControls :max-distance="boxWidth / 2" :enableZoom="false" :enableDamping="true" :dampingFactor="0.2" />
-
-    <TresAmbientLight :intensity="3" />
-
-    <TresDirectionalLight :position="[boxWidth / 2, boxWidth, 0]" :intensity="5" />
-
-    <TresMesh @click="clickScreen">
-      <TresBoxGeometry :args="[boxWidth, boxWidth, boxWidth]" />
-      <TresMeshBasicMaterial :transparent="true" :opacity="0" :side="BackSide" />
-    </TresMesh>
-
-    <Suspense>
-      <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Bold.json" :size="1" :position="titlePosition">
-        <MeshWobbleMaterial :color="0xA8B8DC" :speed="0.5" :factor="0.5" />
-      </Text3D>
-    </Suspense>
-
-    <TresGroup :visible='starsVisible' ref="starsRef">
-      <primitive v-for="star in stars" :key="star" :position="star.position" :rotation="star.rotation"
-        :scale="star.scale" :object="createColoredModel(star.material)" @click="clickStar" />
-    </TresGroup>
-
-  </TresCanvas>
-
-  <div v-if="starsVisible" class="message">{{ Config.msgMain1 }}</div>
-
-  <div v-if="startAnimation" class="enter">{{ Config.msgEnter }}</div>
-</template>
-
 <script setup lang="ts">
 
 import { ref } from 'vue';
@@ -223,6 +190,39 @@ function clickStar(ray: Intersection) {
 }
 
 </script>
+
+<template>
+  <TresCanvas>
+
+    <TresPerspectiveCamera ref="cameraRef" :position="[0, 0, cameraDistance]" />
+    <OrbitControls :max-distance="boxWidth / 2" :enableZoom="false" :enableDamping="true" :dampingFactor="0.2" />
+
+    <TresAmbientLight :intensity="3" />
+
+    <TresDirectionalLight :position="[boxWidth / 2, boxWidth, 0]" :intensity="5" />
+
+    <TresMesh @click="clickScreen">
+      <TresBoxGeometry :args="[boxWidth, boxWidth, boxWidth]" />
+      <TresMeshBasicMaterial :transparent="true" :opacity="0" :side="BackSide" />
+    </TresMesh>
+
+    <Suspense>
+      <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Bold.json" :size="1" :position="titlePosition">
+        <MeshWobbleMaterial :color="0xA8B8DC" :speed="0.5" :factor="0.5" />
+      </Text3D>
+    </Suspense>
+
+    <TresGroup :visible='starsVisible' ref="starsRef">
+      <primitive v-for="star in stars" :key="star" :position="star.position" :rotation="star.rotation"
+        :scale="star.scale" :object="createColoredModel(star.material)" @click="clickStar" />
+    </TresGroup>
+
+  </TresCanvas>
+
+  <div v-if="starsVisible" class="message">{{ Config.msgMain1 }}</div>
+
+  <div v-if="startAnimation" class="enter">{{ Config.msgEnter }}</div>
+</template>
 
 <style scoped>
 .message {

@@ -5,7 +5,7 @@ export default {
     msgEnter: 'Touch anywhere on the screen',
 
     mainMenu1: 'Application',
-    mainMenu2: 'Experience',
+    mainMenu2: 'About',
 
     msgMain1: 'Rotate the world by dragging the screen',
 

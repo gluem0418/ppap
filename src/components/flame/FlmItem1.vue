@@ -17,7 +17,7 @@
     background: #D6A254;
     border-radius: 4px;
     text-align:center;
-    padding:7px 30px;
+    padding:6px 30px;
   }
 
   .text {

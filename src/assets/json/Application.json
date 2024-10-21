@@ -8,11 +8,11 @@
                 "title": "3D空間の描画による、立体感のあるWEBサイト",
                 "texts": [
                     "TresJSでの3D空間の描画とOrbitControlsによるカメラの制御により、ドラッグ操作にて3D空間の視点を変更できます。",
-                    "☞ TresJS",
-                    "　Three.jsの各機能をVue.jsのコンポーネントとして扱えるライブラリ",
-                    "☞ Three.js",
+                    "👉TresJS",
+                    "　Three.jsの各機能をVue.jsのコンポーネントと同様に扱えるライブラリ",
+                    "👉Three.js",
                     "　HTML5上で3Dコンテンツを制作するためのJavaScriptライブラリ",
-                    "☞ OrbitControls",
+                    "👉OrbitControls",
                     "　Three.js の機能の一つで、3D空間上のカメラの動きをマウスの操作と同期させる機能"
                 ]
             },
@@ -46,7 +46,7 @@
     },
     {
         "id": "Seventh Dawn",
-        "introduction": "ダンジョンを探索するRPGのSPAです。Vue.jsで作成したSPAにブラウザ上に3Dコンテンツを描画できるThree.jsを組み合わせて作成しています。（永遠のα版）",
+        "introduction": "ダンジョンを探索するRPGのSPAです。Vue.jsとThree.jsを組み合わせて作成しています。（永遠のα版）",
         "thumbnail": "img/application/SeventhThum.png",
         "points": [
             {
@@ -83,13 +83,14 @@
             }
         ],
         "screenShot": [
-            "img/application/Portfolio1.png",
-            "img/application/Portfolio1.png"
+            "img/application/SeventhDawn1.png",
+            "img/application/SeventhDawn2.png",
+            "img/application/SeventhDawn3.gif",
+            "img/application/SeventhDawn4.png"
         ],
         "environment": [
             "Vue.js",
             "TypeScript",
-            "TresJS",
             "Three.js",
             "animejs",
             "pinia"
@@ -104,31 +105,36 @@
     },
     {
         "id": "Starry Island",
-        "introduction": "このWebサイトです。「星の降る島」をイメージした背景の上に、各コンテンツを配置しています。",
+        "introduction": "このWEBサイトの初期段階にて背景用に作成したコンテンツです。",
         "thumbnail": "img/application/starThum.png",
         "points": [
             {
-                "title": "pointTitle1",
+                "title": "大量のオブジェクト（星）の一括操作",
                 "texts": [
-                    "pointText1"
+                    "すべての星をBufferGeometryで定義することで、8600個の星のアニメーションを効率良く処理出来るようにしています。",
+                    "👉BufferGeometry",
+                    "　オブジェクトの情報（頂点の位置、色など）をバッファ（型指定された配列）に格納しているので、GPUの負荷が軽減する"
                 ]
             },
             {
-                "title": "pointTitle2",
+                "title": "星の形のテクスチャーの反映",
                 "texts": [
-                    "pointText1"
+                    "ShaderMaterialとglslを使用することで、各星に星型のテクスチャーを反映しています。",
+                    "👉ShaderMaterial",
+                    "　任意のシェーダー（CGレンダリングをするプログラム）を組み込めるマテリアル",
+                    "👉glsl",
+                    "　3Dグラフィックスを作成するためのシェーディング言語"
                 ]
             },
             {
-                "title": "pointTitle3",
+                "title": "画面内のどこかをクリックすると！？",
                 "texts": [
-                    "pointText1"
                 ]
             }
         ],
         "screenShot": [
-            "img/application/Portfolio1.png",
-            "img/application/Portfolio1.png"
+            "img/application/Star1.png",
+            "img/application/Star2.png"
         ],
         "environment": [
             "Vue.js",
@@ -143,31 +149,26 @@
     },
     {
         "id": "Whack-a-mole",
-        "introduction": "このWebサイトです。「星の降る島」をイメージした背景の上に、各コンテンツを配置しています。",
+        "introduction": "シンプルなもぐら叩きです。昔バニラJSで作成したアプリをVue.js+TypeScriptに移行したものです。",
         "thumbnail": "img/application/WhackThum.png",
         "points": [
             {
-                "title": "pointTitle1",
+                "title": "ステージを進む毎に難易度があがる構成",
                 "texts": [
-                    "pointText1"
+                    "モンスターを叩いてスコアが一定に達すると、ステージが変わって難易度が上がっていきます。"
                 ]
             },
             {
-                "title": "pointTitle2",
+                "title": "各アニメーション",
                 "texts": [
-                    "pointText1"
-                ]
-            },
-            {
-                "title": "pointTitle3",
-                "texts": [
-                    "pointText1"
+                    "モンスターやハンマーの動きはanime.jsを使用して滑らかなアニメーションにしています。",
+                    "また、モンスターを叩いた際には吹っ飛んでいく動きで爽快感を出すようにしています。"
                 ]
             }
         ],
         "screenShot": [
-            "img/application/Portfolio1.png",
-            "img/application/Portfolio1.png"
+            "img/application/Whack1.png",
+            "img/application/Whack2.png"
         ],
         "environment": [
             "Vue.js",
@@ -181,31 +182,25 @@
     },
     {
         "id": "The End Of Fear",
-        "introduction": "このWebサイトです。「星の降る島」をイメージした背景の上に、各コンテンツを配置しています。",
-        "thumbnail": "img/application/EndThum.png",
+        "introduction": "Vue.jsにて最初に作成したSPA、ホラー風味のノベルゲームです。突然見知らぬ場所に迷い込んだあなた、待ち受ける衝撃の結末とは。。。",
+        "thumbnail": "img/application/FearThum.png",
         "points": [
             {
-                "title": "pointTitle1",
+                "title": "シーン毎のストーリーの描写",
                 "texts": [
-                    "pointText1"
+                    "各シーンでのストーリーテキストの表示と音声・効果音をスムーズに出力する事で、よりリアルに物語に入れるようにしています。"
                 ]
             },
             {
-                "title": "pointTitle2",
+                "title": "ホラーシーンの描写",
                 "texts": [
-                    "pointText1"
-                ]
-            },
-            {
-                "title": "pointTitle3",
-                "texts": [
-                    "pointText1"
+                    "モンスターの動きにランダム性を持たせ、anime.jsにて動きをつける事で、より不気味な印象を与えるようにしています。"
                 ]
             }
         ],
         "screenShot": [
-            "img/application/Portfolio1.png",
-            "img/application/Portfolio1.png"
+            "img/application/Fear1.png",
+            "img/application/Fear2.png"
         ],
         "environment": [
             "Vue.js",

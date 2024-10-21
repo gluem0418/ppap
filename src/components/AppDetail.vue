@@ -1,103 +1,7 @@
-<template>
-  <div v-if="selectedApp" class="appDetail">
-
-    <div class="appFlame" id="appFlame">
-
-      <div class="appTop">
-
-        <BtnLink class="btnLink1" :inside="'Visit Site'" />
-        <BtnClose class="btnClose" @click="closeDetail" />
-
-      </div>
-
-      <div class="titleFlame">
-
-        <div class="title"> {{ selectedApp.id }} </div>
-
-        <div class="intro"> {{ selectedApp.introduction }} </div>
-
-      </div>
-
-      <hr size="1" color="#A8B8DC" class="titleLine">
-
-      <div class="secDetail">
-        <!-- Point -->
-        <FlmItem1 class="midTitle" :inside="'Points'" />
-
-        <!-- <div v-if="selectedApp.id == Config.app1" > -->
-        <div class="secPoint">
-
-          <div class="flameScreen">
-            <img class="imgScreen" :src="selectedApp.screenShot[0]" alt="Screen Shot" />
-          </div>
-
-          <div class="flamePoint">
-
-            <AppPoint class="appPoint" :point="selectedApp.points[0]" />
-
-          </div>
-
-        </div>
-
-        <div class="secPoint">
-
-          <div class="flamePoint">
-
-            <AppPoint :point="selectedApp.points[1]" />
-            <AppPoint class="appPoint2" :point="selectedApp.points[2]" />
-
-          </div>
-
-          <div class="flameScreen">
-            <img class="imgScreen" :src="selectedApp.screenShot[1]" alt="Screen Shot" />
-          </div>
-
-        </div>
-
-        <!-- Environment -->
-
-        <div class="envTitle">
-
-          <FlmItem1 class="midTitle" :inside="'Environment'" />
-          <!-- <br> -->
-          <BtnLink class="btnLink2" :inside="'github'" />
-
-        </div>
-
-        <div class="secEnv">
-
-          <div v-for="(text, index) in selectedApp.environment" :key="index" class="text">
-            {{ text }}
-          </div>
-
-        </div>
-
-        <div class="secDetailEnd">
-          <BtnChange :inside="'Prev'" @click="changeApp('prev')" />
-
-          <div class="indexList">
-            <!-- <div v-for="(cnt, index) in Config.appCount" class="appIndex" @click="changeApp('select', index)"
-              :class="{ 'selectedApp': selectedIndex == index }">
-            </div> -->
-            <div v-for="cnt in Config.appCount" class="appIndex" @click="changeApp('select', cnt - 1)"
-              :class="{ 'selectedApp': selectedIndex == cnt - 1 }">
-            </div>
-          </div>
-
-          <BtnChange :inside="'Next'" @click="changeApp('next')" />
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-</template>
-
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-import AppPoint from '@/components/AppPoint.vue';
+import FlexPoint from '@/components/FlexPoint.vue';
 
 import BtnLink from '@/components/flame/BtnLink.vue';
 import BtnChange from '@/components/flame/BtnChange.vue';
@@ -150,12 +54,104 @@ watch(() => props.app, () => {
 
 </script>
 
+<template>
+  <div v-if="selectedApp" class="appDetail">
+
+    <div class="appFlame" id="appFlame">
+  
+      <div class="appTop">
+        <BtnLink class="btnLink1" :inside="'Visit Site'" />
+        <BtnClose class="btnClose" @click="closeDetail" />
+      </div>
+  
+      <div class="titleFlame">
+        <div class="title"> {{ selectedApp.id }} </div>
+        <div class="intro"> {{ selectedApp.introduction }} </div>
+      </div>
+  
+      <hr size="1" color="#A8B8DC" class="titleLine">
+  
+      <div class="secDetail">
+
+        <!-- Point -->
+        <div class="secPoint">
+          <FlmItem1 class="midTitle" :inside="'Points'" />
+
+          <!-- Point1 -->
+          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]"
+            :screen="selectedApp.screenShot[0]" />
+          <!-- Point2 -->
+          <div v-if="selectedApp.id == Config.app1 || selectedApp.id == Config.app3">
+            <FlexPoint class="flexPoint" :point1="selectedApp.points[1]" :point2="selectedApp.points[2]"
+              :screen="selectedApp.screenShot[1]" />
+          </div>
+          <div v-else>
+            <FlexPoint class="flexPoint" :point1="selectedApp.points[1]" :screen="selectedApp.screenShot[1]" />
+          </div>
+
+          <!-- Point3 -->
+          <div v-if="selectedApp.id == Config.app2">
+            <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[2]"
+              :screen="selectedApp.screenShot[2]" />
+          </div>
+          <!-- Point4 -->
+          <div v-if="selectedApp.id == Config.app2">
+            <FlexPoint class="flexPoint" :point1="selectedApp.points[3]" :point2="selectedApp.points[4]" :screen="selectedApp.screenShot[3]" />
+          </div>
+
+        </div>
+
+        <div class="secEnvTool">
+
+          <!-- Environment -->
+          <div class="flmEnvTool">
+            <div class="envToolTitle">
+              <FlmItem1 class="midTitle" :inside="'Environment'" />
+              <BtnLink class="btnLink2" :inside="'github'" />
+            </div>
+            <div class="envToolList">
+              <div v-for="(text, index) in selectedApp.environment" :key="index" class="text">
+                {{ text }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Tool -->
+          <div class="flmEnvTool">
+            <div class="envToolTitle">
+              <FlmItem1 class="midTitle" :inside="'Tool'" />
+            </div>
+            <div class="envToolList">
+              <div v-for="(text, index) in selectedApp.tool" :key="index" class="text">
+                {{ text }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="secDetailEnd">
+          <BtnChange :inside="'Prev'" @click="changeApp('prev')" />
+          <div class="indexList">
+            <div v-for="cnt in Config.appCount" class="appIndex" @click="changeApp('select', cnt - 1)"
+              :class="{ 'selectedApp': selectedIndex == cnt - 1 }">
+            </div>
+          </div>
+          <BtnChange :inside="'Next'" @click="changeApp('next')" />
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</template>
+
 <style scoped>
 .appDetail {
   position: fixed;
   inset: 0;
   margin: auto;
-  width: 97%;
+  width: 98%;
   height: 97%;
   background: linear-gradient(-45deg, rgba(65, 64, 143, 0.95), rgba(84, 168, 214, 1));
   border-radius: 15px;
@@ -168,7 +164,8 @@ watch(() => props.app, () => {
 .appFlame {
   position: relative;
   height: auto;
-  padding: 30px;
+  /* padding: 30px 3%; */
+  padding: 30px 0;
 }
 
 .appTop {
@@ -181,12 +178,13 @@ watch(() => props.app, () => {
 }
 
 .btnClose {
+  margin-right: 3%;
   margin-left: 3%;
 }
 
 .titleFlame {
   margin-left: 4%;
-  margin-top: -30px;
+  margin-top: -24px;
   display: flex;
   align-items: center;
 }
@@ -194,66 +192,39 @@ watch(() => props.app, () => {
 .title {
   font-size: 60px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  -webkit-text-stroke: 1px #121F30;
 }
 
 .intro {
-  margin-left: 5%;
-  font-family: "BIZUDPGothic";
+  margin-left: 4%;
   line-height: 30px;
   width: 50%;
+  font-family: "BIZUDPGothic";
 }
 
 
 .titleLine {
-  margin: 30px auto;
-  width: 95%;
+  margin: 50px auto;
+  width: 93%;
 }
 
 .secDetail {
-  width: 94%;
+  width: 90%;
   margin: 0 auto;
 }
+.secPoint {
 
+}
 .midTitle {
   position: relative;
 }
 
-
-.secPoint {
+.secEnvTool {
+  margin-top: 80px;
   display: flex;
-  align-items: center;
-  gap: 2%;
-  font-family: "BIZUDPGothic";
-  margin: 50px 0;
 }
 
-@media screen and (max-width: 800px) {
-  .secPoint {
-    flex-direction:column-reverse;
-  }
-}
-
-.flameScreen {
-  align-content: center;
-  flex: 1;
-}
-
-.imgScreen {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.flamePoint {
-  padding: 10px 1%;
-  border-radius: 10px;
-  flex: 1;
-}
-
-.appPoint2 {
-  margin-top: 30px;
-}
-
-.envTitle {
+.envToolTitle {
   display: flex;
   align-items: center;
 }
@@ -262,10 +233,16 @@ watch(() => props.app, () => {
   margin-left: 7%;
 }
 
-.secEnv {
-  font-family: "MPLUS1p";
+.flmEnvTool {
+  flex: 1;
+}
+
+.envToolList {
   margin-top: 30px;
   margin-bottom: 50px;
+  /* font-family: "MPLUS1p"; */
+  font-family: "BIZUDPGothic";
+  line-height: 1.5;
 }
 
 .text {
@@ -273,11 +250,6 @@ watch(() => props.app, () => {
   margin-bottom: 6px;
 }
 
-/* .secDetailEnd {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
-} */
 
 .secDetailEnd {
   position: sticky;

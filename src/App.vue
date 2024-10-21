@@ -1,3 +1,15 @@
+<script setup lang="ts">
+
+import Stars from '@/components/Stars.vue';
+import Config from '@/Config.ts'
+
+import AppList from '@/components/AppList.vue';
+import About from '@/components/About.vue';
+
+import BtnMenu from '@/components/flame/BtnMenu.vue';
+
+</script>
+
 <template>
   <div class="tresBg">
 
@@ -20,22 +32,10 @@
 
     <AppList />
 
-    <Experience />
+    <About />
 
-</main>
+  </main>
 </template>
-
-<script setup lang="ts">
-
-import Stars from '@/components/Stars.vue';
-import Config from '@/Config.ts'
-
-import AppList from '@/components/AppList.vue';
-import Experience from '@/components/Experience.vue';
-
-import BtnMenu from '@/components/flame/BtnMenu.vue';
-
-</script>
 
 <style scoped>
 main {
@@ -62,7 +62,7 @@ main {
   /* position: absolute;
   top: 45px;
   left: 45px; */
-  position:relative;
+  position: relative;
   margin: 45px 45px 0 auto;
   width: 150px;
   height: auto;
@@ -72,5 +72,4 @@ main {
 .menu2 {
   margin-top: 20px;
 }
-
 </style>
