@@ -98,14 +98,14 @@ const changeApp = (selectType: string, index: number) => {
 }
 
 .listFlame {
-  margin-top: 60px;
+  display: flex;
+  margin:60px 20px;
   padding-bottom: 110px;
 }
 
 .appCard {
-  display: inline-block;
+  flex: 1;
   margin-left: 10px;
-  width: 18%;
   cursor: pointer;
 }
 

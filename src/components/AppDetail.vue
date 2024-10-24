@@ -58,19 +58,20 @@ watch(() => props.app, () => {
   <div v-if="selectedApp" class="appDetail">
 
     <div class="appFlame" id="appFlame">
-  
+
       <div class="appTop">
         <BtnLink class="btnLink1" :inside="'Visit Site'" />
         <BtnClose class="btnClose" @click="closeDetail" />
       </div>
-  
+
       <div class="titleFlame">
         <div class="title"> {{ selectedApp.id }} </div>
         <div class="intro"> {{ selectedApp.introduction }} </div>
       </div>
-  
-      <hr size="1" color="#A8B8DC" class="titleLine">
-  
+
+      <!-- <hr size="1" color="#A8B8DC" class="titleLine"> -->
+      <hr class="titleLine">
+
       <div class="secDetail">
 
         <!-- Point -->
@@ -78,10 +79,9 @@ watch(() => props.app, () => {
           <FlmItem1 class="midTitle" :inside="'Points'" />
 
           <!-- Point1 -->
-          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]"
-            :screen="selectedApp.screenShot[0]" />
+          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]" :screen="selectedApp.screenShot[0]" />
           <!-- Point2 -->
-          <div v-if="selectedApp.id == Config.app1 || selectedApp.id == Config.app3">
+          <div v-if="selectedApp.id == Config.appPortfolio || selectedApp.id == Config.appStarry">
             <FlexPoint class="flexPoint" :point1="selectedApp.points[1]" :point2="selectedApp.points[2]"
               :screen="selectedApp.screenShot[1]" />
           </div>
@@ -90,13 +90,14 @@ watch(() => props.app, () => {
           </div>
 
           <!-- Point3 -->
-          <div v-if="selectedApp.id == Config.app2">
+          <div v-if="selectedApp.id == Config.appSeventh">
             <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[2]"
               :screen="selectedApp.screenShot[2]" />
           </div>
           <!-- Point4 -->
-          <div v-if="selectedApp.id == Config.app2">
-            <FlexPoint class="flexPoint" :point1="selectedApp.points[3]" :point2="selectedApp.points[4]" :screen="selectedApp.screenShot[3]" />
+          <div v-if="selectedApp.id == Config.appSeventh">
+            <FlexPoint class="flexPoint" :point1="selectedApp.points[3]" :point2="selectedApp.points[4]"
+              :screen="selectedApp.screenShot[3]" />
           </div>
 
         </div>
@@ -182,11 +183,16 @@ watch(() => props.app, () => {
   margin-left: 3%;
 }
 
-.titleFlame {
+/* .titleFlame {
   margin-left: 4%;
   margin-top: -24px;
   display: flex;
   align-items: center;
+} */
+
+.titleFlame {
+  margin: 0 auto;
+  text-align:center;
 }
 
 .title {
@@ -196,12 +202,17 @@ watch(() => props.app, () => {
 }
 
 .intro {
-  margin-left: 4%;
+  margin-top: 30px;
   line-height: 30px;
-  width: 50%;
+  /* width: 50%; */
   font-family: "BIZUDPGothic";
 }
 
+hr {
+  height: 2px;
+  background: linear-gradient(to right, #F5F5F5, #32DBDB);
+  border: none;
+}
 
 .titleLine {
   margin: 50px auto;
@@ -212,9 +223,7 @@ watch(() => props.app, () => {
   width: 90%;
   margin: 0 auto;
 }
-.secPoint {
 
-}
 .midTitle {
   position: relative;
 }

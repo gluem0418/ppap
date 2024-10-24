@@ -104,6 +104,43 @@
         ]
     },
     {
+        "id": "Web Detection",
+        "introduction": "AIによるObject Detection（物体検出）の学習済みモデルを使用し、任意の画像内に存在するモノを判別するアプリケーションです。",
+        "thumbnail": "img/application/DectThum.png",
+        "points": [
+            {
+                "title": "Object Detectionの学習済みモデルによる物体検出",
+                "texts": [
+                    "選択した画像を解析用のフォーマットに変換し、Object Detectionの学習済みモデルで解析する事で画像内に存在するモノを検出してます。",
+                    "解析後の画像は通常のフォーマットに戻し、検出結果と併せて画面に表示しています。",
+                    "また、解析後の画像の検出結果をクリックすると、検出結果を音声で再生します。"
+                ]
+            },
+            {
+                "title": "Ajaxによる処理毎のデータ更新",
+                "texts": [
+                    "モデルのロード処理と画像の検索処理はそれぞれ個別のAjaxにてデータを取得しています。",
+                    "これによって、各処理を並行で進めながら、取得したデータの部分を随時更新しています。"
+                ]
+            }
+        ],
+        "screenShot": [
+            "img/application/Dect1.png",
+            "img/application/Dect2.png"
+        ],
+        "environment": [
+            "Python",
+            "Flask",
+            "JavaScript",
+            "Ajax"
+        ],
+        "tool": [
+            "Visual Studio Code",
+            "PythonAnywhere",
+            "Figma"
+        ]
+    },
+    {
         "id": "Starry Island",
         "introduction": "このWEBサイトの初期段階にて背景用に作成したコンテンツです。",
         "thumbnail": "img/application/starThum.png",

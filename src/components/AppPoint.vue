@@ -15,10 +15,11 @@ const props = defineProps({
     <div v-if="point" class="appPoint">
 
         <div class="subTitle">
-            <IconArrow class="iconArrow" />
-            <span class="subTitleText">
+            <!-- <IconArrow class="iconArrow" /> -->
+            <div class="subTitleText">
                 {{ point.title }}
-            </span>
+            </div>
+            <hr class="pointLine1">
         </div>
         <div v-for="(text, index) in point.texts" :key="index" class="text">
             {{ text }}
@@ -30,17 +31,28 @@ const props = defineProps({
 <style scoped>
 .subTitle {
     font-size: 18px;
-    display: flex;
-    align-items: center;
+    /* display: flex;
+    align-items: center; */
     margin-bottom: 20px;
 }
 
+hr {
+    height: 2px;
+    background: linear-gradient(to right, #32DBDB, #F5F5F5);
+    border: none;
+}
+
+.pointLine1 {
+    /* margin: 50px auto; */
+    /* width: 93%; */
+}
+
 .subTitleText {
-    margin-left: 4px;
+    line-height: 30px;
 }
 
 .text {
     line-height: 1.8;
-    margin-left: 10px;
+    /* margin-left: 10px; */
 }
 </style>

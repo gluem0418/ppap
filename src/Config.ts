@@ -11,11 +11,12 @@ export default {
 
     msgAppList: 'Click on the image for details',
 
-    appCount: 5,
-    app1: "Gluem Portfolio",
-    app2: "Seventh Dawn",
-    app3: "Starry Island",
-    app4: "Whack-a-mole",
-    app5: "The End Of Fear",
+    appCount: 6,
+    appPortfolio: "Gluem Portfolio",
+    appSeventh: "Seventh Dawn",
+    appDetection: "Web Detection",
+    appStarry: "Starry Island",
+    appWhack: "Whack-a-mole",
+    appFear: "The End Of Fear",
 
 }
