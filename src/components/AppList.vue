@@ -78,7 +78,9 @@ const changeApp = (selectType: string, index: number) => {
   margin: 840px auto;
   width: 94%;
   height: auto;
-  background: radial-gradient(rgba(168, 184, 220, 0.95), rgba(245, 245, 245, 0.95));
+  /* background: radial-gradient(rgba(168, 184, 220, 0.97), rgba(228, 232, 242, 0.97)); */
+  /* background: radial-gradient(rgb(168, 184, 220), rgb(228, 232, 242)); */
+  background: rgba(168, 184, 220, 0.95);
   border-radius: 30px;
   text-align: center;
   color: #07315D;
@@ -112,6 +114,7 @@ const changeApp = (selectType: string, index: number) => {
 .thumbnail {
   height: auto;
   width: 100%;
+  border-radius: 5px 5px 0 0;
 }
 
 .appTitle {
@@ -120,5 +123,6 @@ const changeApp = (selectType: string, index: number) => {
   background: #121F30;
   color: #f5f5f5;
   align-content: center;
+  border-radius: 0 0 5px 5px;
 }
 </style>

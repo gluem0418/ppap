@@ -154,7 +154,8 @@ watch(() => props.app, () => {
   margin: auto;
   width: 98%;
   height: 97%;
-  background: linear-gradient(-45deg, rgba(65, 64, 143, 0.95), rgba(84, 168, 214, 1));
+  /* background: linear-gradient(-45deg, rgba(65, 64, 143, 0.95), rgba(84, 168, 214, 1)); */
+  background: linear-gradient(-45deg, rgb(65, 64, 143), rgb(84, 168, 214));
   border-radius: 15px;
   border: 4px ridge #F5F5F5;
   z-index: 3;
@@ -183,13 +184,6 @@ watch(() => props.app, () => {
   margin-left: 3%;
 }
 
-/* .titleFlame {
-  margin-left: 4%;
-  margin-top: -24px;
-  display: flex;
-  align-items: center;
-} */
-
 .titleFlame {
   margin: 0 auto;
   text-align:center;
@@ -215,7 +209,9 @@ hr {
 }
 
 .titleLine {
-  margin: 50px auto;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  /* margin: 40px auto; */
   width: 93%;
 }
 

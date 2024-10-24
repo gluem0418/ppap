@@ -63,7 +63,8 @@ import imgExp2 from "/img/exp2.jpg"
   margin: auto;
   width: 94%;
   height: auto;
-  background: radial-gradient(rgba(168, 184, 220, 0.95), rgba(245, 245, 245, 0.95));
+  /* background: radial-gradient(rgba(168, 184, 220, 0.97), rgba(228, 232, 242, 0.97)); */
+  background: radial-gradient(rgb(168, 184, 220), rgb(228, 232, 242));
   border-radius: 30px;
   color: #121F30;
   font-size: 20px;

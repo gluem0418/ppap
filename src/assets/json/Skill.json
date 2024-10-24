@@ -1,0 +1,116 @@
+[
+    {
+        "category": "フロントエンド",
+        "techs": [
+            {
+                "name": "HTML&CSS",
+                "rank": 4
+            },
+            {
+                "name": "JavaScript",
+                "rank": 4
+            },
+            {
+                "name": "TypeScript",
+                "rank": 4
+            },
+            {
+                "name": "Three.js",
+                "rank": 3
+            },
+            {
+                "name": "TresJS",
+                "rank": 2
+            }
+        ]
+    },
+    {
+        "category": "フレームワーク",
+        "techs": [
+            {
+                "name": "Vue.js",
+                "rank": 4
+            },
+            {
+                "name": "Flask",
+                "rank": 1
+            }
+        ]
+    },
+    {
+        "category": "デザイン",
+        "techs": [
+            {
+                "name": "Figma",
+                "rank": 3
+            },
+            {
+                "name": "MediBang Paint Pro",
+                "rank": 2
+            },
+            {
+                "name": "Blender",
+                "rank": 1
+            }
+        ]
+    },
+    {
+        "category": "バックエンド",
+        "techs": [
+            {
+                "name": "Python",
+                "rank": 1
+            },
+            {
+                "name": "Java",
+                "rank": 1
+            }
+        ]
+    },
+    {
+        "category": "DB",
+        "techs": [
+            {
+                "name": "Oracle",
+                "rank": 3
+            },
+            {
+                "name": "PL/SQL",
+                "rank": 3
+            },
+            {
+                "name": "SQL Server",
+                "rank": 2
+            },
+            {
+                "name": "Access",
+                "rank": 3
+            }
+        ]
+    },
+    {
+        "category": "その他",
+        "techs": [
+            {
+                "name": "COBOL",
+                "rank": 4
+            },
+            {
+                "name": "PL/I",
+                "rank": 4
+            },
+            {
+                "name": "VB.NET",
+                "rank": 4
+            },
+            {
+                "name": "VBA",
+                "rank": 4
+            },
+            {
+                "name": "JP1",
+                "rank": 2
+            }
+        ]
+    }
+]
