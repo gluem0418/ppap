@@ -24,6 +24,7 @@
   }
 
   .text {
+    font-family: "Marvel-Bold";
     font-size: 28px;
   }
 

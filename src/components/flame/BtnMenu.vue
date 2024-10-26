@@ -22,6 +22,7 @@
   }
 
   .text {
+    font-family: "Marvel-Bold";
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     font-size: 28px;
   }

@@ -15,8 +15,8 @@
   .flame {
     width: fit-content;
     background: #C7AC70;
-    border-radius: 4px;
-    padding:12px 6%;
+    border-radius: 5px;
+    padding:6px 30px;
     text-align:center;
     color:#F5F5F5;
   }

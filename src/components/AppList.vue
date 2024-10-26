@@ -76,7 +76,7 @@ const changeApp = (selectType: string, index: number) => {
 .appList {
   position: relative;
   margin: 840px auto;
-  width: 94%;
+  width: 98%;
   height: auto;
   /* background: radial-gradient(rgba(168, 184, 220, 0.97), rgba(228, 232, 242, 0.97)); */
   /* background: radial-gradient(rgb(168, 184, 220), rgb(228, 232, 242)); */
@@ -85,6 +85,7 @@ const changeApp = (selectType: string, index: number) => {
   text-align: center;
   color: #07315D;
   font-size: 20px;
+  font-family: "Marvel-Bold";
   z-index: 2;
 }
 

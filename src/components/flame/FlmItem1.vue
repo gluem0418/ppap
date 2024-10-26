@@ -15,12 +15,13 @@
   .flame {
     width: fit-content;
     background: #D6A254;
-    border-radius: 4px;
+    border-radius: 5px;
     text-align:center;
-    padding:6px 30px;
+    padding:6px 40px;
   }
 
   .text {
+    font-family: "Marvel-Bold";
     font-size: 40px;
   }
 

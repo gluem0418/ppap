@@ -1,8 +1,6 @@
 <script setup lang="ts">
+
 import { PropType } from 'vue';
-
-import IconArrow from '@/components/icon/IconArrow.vue';
-
 import { Point } from '@/class/Application.ts';
 
 const props = defineProps({
@@ -15,7 +13,6 @@ const props = defineProps({
     <div v-if="point" class="appPoint">
 
         <div class="subTitle">
-            <!-- <IconArrow class="iconArrow" /> -->
             <div class="subTitleText">
                 {{ point.title }}
             </div>
@@ -30,10 +27,12 @@ const props = defineProps({
 
 <style scoped>
 .subTitle {
-    font-size: 18px;
-    /* display: flex;
-    align-items: center; */
     margin-bottom: 20px;
+}
+
+
+.subTitleText {
+    font-size: 18px;
 }
 
 hr {
@@ -43,16 +42,9 @@ hr {
 }
 
 .pointLine1 {
-    /* margin: 50px auto; */
-    /* width: 93%; */
+    margin-top:2px;
 }
-
-.subTitleText {
-    line-height: 30px;
-}
-
 .text {
-    line-height: 1.8;
-    /* margin-left: 10px; */
+    line-height: 1.7;
 }
 </style>

@@ -13,19 +13,17 @@
 </script>
 <style scoped>
   .flame {
-    width:auto;
-    background: #f5f5f5;
-    border-radius: 10px;
+    width: fit-content;
+    background: #C7AC70;
+    border-radius: 5px;
+    padding:6px 40px;
     text-align:center;
-    padding:6px 24px;
-    color:#121F30;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
+    color:#F5F5F5;
   }
 
   .text {
     font-family: "Marvel-Bold";
-    font-size: 28px;
+    font-size: 40px;
   }
 
 </style>

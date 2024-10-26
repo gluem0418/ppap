@@ -230,6 +230,7 @@ function clickStar(ray: Intersection) {
   top: 1%;
   right: 1%;
   font-size: 20px;
+  font-family: "Marvel-Bold";
 }
 
 .enter {
@@ -239,5 +240,6 @@ function clickStar(ray: Intersection) {
   transform: translate(-50%, -50%);
   white-space: nowrap;
   font-size: 24px;
+  font-family: "Marvel-Bold";
 }
 </style>

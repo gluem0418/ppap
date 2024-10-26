@@ -35,9 +35,8 @@ const props = defineProps({
 .flexPoint {
     display: flex;
     align-items: center;
-    gap: 2%;
+    gap: 3%;
     margin: 50px 0;
-    font-family: "BIZUDPGothic";
 }
 
 .reverse {

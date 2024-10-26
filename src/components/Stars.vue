@@ -4,10 +4,11 @@ import { ref } from 'vue';
 
 import { TresCanvas, useRenderLoop } from '@tresjs/core'
 
-import { OrbitControls, useGLTF, Text3D, MeshWobbleMaterial } from '@tresjs/cientos'
+import { OrbitControls, useGLTF, Text3D, MeshWobbleMaterial, Html } from '@tresjs/cientos'
 
 import { PerspectiveCamera, BackSide, Group, Intersection, MeshPhongMaterial, Mesh } from 'three'
 
+import AppList from '@/components/AppList.vue';
 import Config from '@/Config.ts'
 
 const { nodes } = await useGLTF('model/star.glb', { draco: true })
@@ -52,8 +53,6 @@ const maxPosition = boxWidth / 2;
 const minScale = 1;
 const maxScale = 3;
 
-// const minSpeed = 0.05;
-// const maxSpeed = 0.2;
 const minSpeed = 0.01;
 const maxSpeed = 0.05;
 
@@ -62,13 +61,11 @@ const stars = Array.from({ length: starCount }, () => ({
   position: [randomNum(minPosition, maxPosition), randomNum(minPosition, maxPosition), randomNum(minPosition, maxPosition)],
   moveSpeed: randomNum(minSpeed, maxSpeed),
 
-  // rotation: [(Math.random() - 0.5) * 10, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 10],
   rotation: [0, 0, 0],
   rollSpeed: [randomNum(minSpeed, maxSpeed) / 5, randomNum(minSpeed, maxSpeed) / 5, randomNum(minSpeed, maxSpeed) / 5],
 
   scale: [randomNum(minScale, maxScale), randomNum(minScale, maxScale), randomNum(minScale, maxScale) * 2],
 
-  // color: colors[Math.floor(Math.random() * colors.length)]
   material: materialColors[Math.floor(Math.random() * materialColors.length)]
 
 }));
@@ -117,17 +114,6 @@ onLoop(({ }) => {
 
   }
 
-  // //タイトルのアニメーション(カメラ位置基準)
-  // const position = cameraRef.value.position.z
-
-  // //位置の更新
-  // titleRef.value.instance.position.x = (position / 20) - 0.5
-  // titleRef.value.instance.position.y = 6 - (position / 8.8)
-  // titleRef.value.instance.position.z = (position * 1.1) - 15
-
-  // //回転の更新
-  // titleRef.value.instance.rotation.x = (position / 12) - 1;
-
   //タイトルのアニメーション(スクロール基準)
   const scroll = window.scrollY
   // // //位置の更新
@@ -164,9 +150,6 @@ function clickStar(ray: Intersection) {
 
   console.log('clickScreen_cameraRef', cameraRef.value!.position)
   console.log('clickScreen_title', titleRef.value!)
-
-  // console.log('clickScreen_cameraRef', cameraRef.value)
-  // console.log('clickScreen_spotLightRef', spotLightRef.value)
 
   console.log('3D空間のクリック位置', ray.point);
 
@@ -213,9 +196,13 @@ function clickStar(ray: Intersection) {
     </Suspense>
 
     <TresGroup :visible='starsVisible' ref="starsRef">
-      <primitive v-for="star in stars" :key="star" :position="star.position" :rotation="star.rotation"
-        :scale="star.scale" :object="createColoredModel(star.material)" @click="clickStar" />
+      <primitive v-for="star in stars" :key="star" :position="star.position" :rotation="star.rotation" :scale="star.scale"
+        :object="createColoredModel(star.material)" @click="clickStar" />
     </TresGroup>
+
+    <!-- <Html center transform  :position="[0, 0, -13.6]">
+      <AppList />
+    </Html> -->
 
   </TresCanvas>
 
@@ -230,6 +217,7 @@ function clickStar(ray: Intersection) {
   top: 1%;
   right: 1%;
   font-size: 20px;
+  font-family: "Marvel-Bold";
 }
 
 .enter {
@@ -239,5 +227,6 @@ function clickStar(ray: Intersection) {
   transform: translate(-50%, -50%);
   white-space: nowrap;
   font-size: 24px;
+  font-family: "Marvel-Bold";
 }
 </style>

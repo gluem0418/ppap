@@ -1,7 +1,9 @@
 <script setup lang="ts">
 
 import Config from '@/Config.ts';
+import Skills from '@/components/Skills.vue';
 import FlmItem2 from '@/components/flame/FlmItem2.vue';
+import FlmItem3 from '@/components/flame/FlmItem3.vue';
 
 import imgExp1 from "/img/exp1.jpg"
 import imgExp2 from "/img/exp2.jpg"
@@ -9,7 +11,6 @@ import imgExp2 from "/img/exp2.jpg"
 </script>
 
 <template>
-
   <div class="about" id="aboutFlame">
 
     <div class="secAbout">
@@ -50,10 +51,17 @@ import imgExp2 from "/img/exp2.jpg"
 
       </div>
 
+      <!-- Skill -->
+      <div class="secSkill">
+
+        <FlmItem3 class="midTitle" :inside="'Skills'" />
+        <Skills class="skills"  />
+
+      </div>
+
     </div>
 
   </div>
-
 </template>
 
 <style scoped>
@@ -61,7 +69,7 @@ import imgExp2 from "/img/exp2.jpg"
   position: relative;
   /* margin: 500px auto 0; */
   margin: auto;
-  width: 94%;
+  width: 98%;
   height: auto;
   /* background: radial-gradient(rgba(168, 184, 220, 0.97), rgba(228, 232, 242, 0.97)); */
   background: radial-gradient(rgb(168, 184, 220), rgb(228, 232, 242));
@@ -73,25 +81,26 @@ import imgExp2 from "/img/exp2.jpg"
 }
 
 .secAbout {
-  width: 90%;
+  width: 92%;
   margin: 0 auto;
 }
 
 .title {
   margin-bottom: 80px;
   font-size: 60px;
+  font-family: "Marvel-Bold";
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .secExp {
-  font-family: "BIZUDPGothic";
+  /* font-family: "BIZUDPGothic"; */
 }
 
 .flexExp1 {
   display: flex;
   gap: 4%;
-  margin-bottom:70px;
+  margin-bottom: 70px;
 }
 
 @media screen and (max-width: 800px) {
@@ -109,9 +118,9 @@ import imgExp2 from "/img/exp2.jpg"
 }
 
 .expText {
-  margin-top:40px;
+  margin-top: 40px;
   font-size: 16px;
-  line-height: 1.8;
+  line-height: 1.7;
 }
 
 .flameScreen {
@@ -135,5 +144,12 @@ import imgExp2 from "/img/exp2.jpg"
   .flexExp2 {
     flex-direction: column;
   }
+}
+.secSkill {
+  margin-top:80px;
+}
+
+.skills {
+  margin-top:50px;
 }
 </style>

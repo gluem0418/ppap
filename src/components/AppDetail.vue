@@ -130,16 +130,17 @@ watch(() => props.app, () => {
           </div>
         </div>
 
-        <div class="secDetailEnd">
-          <BtnChange :inside="'Prev'" @click="changeApp('prev')" />
-          <div class="indexList">
-            <div v-for="cnt in Config.appCount" class="appIndex" @click="changeApp('select', cnt - 1)"
-              :class="{ 'selectedApp': selectedIndex == cnt - 1 }">
-            </div>
-          </div>
-          <BtnChange :inside="'Next'" @click="changeApp('next')" />
-        </div>
 
+      </div>
+
+      <div class="secDetailEnd">
+        <BtnChange :inside="'Prev'" @click="changeApp('prev')" />
+        <div class="indexList">
+          <div v-for="cnt in Config.appCount" class="appIndex" @click="changeApp('select', cnt - 1)"
+            :class="{ 'selectedApp': selectedIndex == cnt - 1 }">
+          </div>
+        </div>
+        <BtnChange :inside="'Next'" @click="changeApp('next')" />
       </div>
 
     </div>
@@ -151,28 +152,21 @@ watch(() => props.app, () => {
 .appDetail {
   position: fixed;
   inset: 0;
-  margin: auto;
-  width: 98%;
-  height: 97%;
-  /* background: linear-gradient(-45deg, rgba(65, 64, 143, 0.95), rgba(84, 168, 214, 1)); */
   background: linear-gradient(-45deg, rgb(65, 64, 143), rgb(84, 168, 214));
   border-radius: 15px;
   border: 4px ridge #F5F5F5;
   z-index: 3;
+  padding:20px;
   overflow: auto;
-  /* scrollbar-width: none; */
 }
 
 .appFlame {
   position: relative;
-  height: auto;
-  /* padding: 30px 3%; */
-  padding: 30px 0;
 }
 
 .appTop {
   position: sticky;
-  top: 30px;
+  top: 0;
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
@@ -180,26 +174,24 @@ watch(() => props.app, () => {
 }
 
 .btnClose {
-  margin-right: 3%;
-  margin-left: 3%;
+  margin-right: 1%;
+  margin-left: 2%;
 }
 
 .titleFlame {
   margin: 0 auto;
-  text-align:center;
+  text-align: center;
 }
 
 .title {
   font-size: 60px;
+  font-family: "Marvel-Bold";
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   -webkit-text-stroke: 1px #121F30;
 }
 
 .intro {
   margin-top: 30px;
-  line-height: 30px;
-  /* width: 50%; */
-  font-family: "BIZUDPGothic";
 }
 
 hr {
@@ -209,14 +201,13 @@ hr {
 }
 
 .titleLine {
-  margin-top: 30px;
+  margin-top: 20px;
   margin-bottom: 50px;
-  /* margin: 40px auto; */
-  width: 93%;
+  width: 96%;
 }
 
 .secDetail {
-  width: 90%;
+  width: 94%;
   margin: 0 auto;
 }
 
@@ -243,22 +234,20 @@ hr {
 }
 
 .envToolList {
-  margin-top: 30px;
+  margin-top: 20px;
   margin-bottom: 50px;
-  /* font-family: "MPLUS1p"; */
-  font-family: "BIZUDPGothic";
-  line-height: 1.5;
 }
 
 .text {
-  margin-left: 16px;
-  margin-bottom: 6px;
+  margin-left: 12px;
+  line-height:1.7;
 }
 
 
 .secDetailEnd {
   position: sticky;
-  bottom: 30px;
+  bottom: 0;
+  margin: 0 1%;
   display: flex;
   justify-content: space-between;
 }
