@@ -86,7 +86,7 @@ const changeApp = (selectType: string, index: number) => {
   color: #07315D;
   font-size: 20px;
   font-family: "Marvel-Bold";
-  z-index: 2;
+  /* z-index: 2; */
 }
 
 .title {
