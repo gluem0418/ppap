@@ -1,6 +1,10 @@
 <script setup lang="ts">
 
 import Stars from '@/components/Stars.vue';
+import AppList from '@/components/AppList.vue';
+import About from '@/components/About.vue';
+
+console.log('app.scrollHeight',  document.body.scrollHeight)
 </script>
 
 <template>
@@ -9,6 +13,9 @@ import Stars from '@/components/Stars.vue';
     <Suspense>
       <Stars />
     </Suspense>
+
+    <AppList />
+    <About />
     <!-- </div> -->
   </main>
 </template>
@@ -25,7 +32,7 @@ import Stars from '@/components/Stars.vue';
   background-size: cover;
   background-position: center;
 } */
- main {
-  height:400vh;
- }
+main {
+  /* height: 500vh; */
+}
 </style>

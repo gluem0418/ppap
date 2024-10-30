@@ -151,13 +151,18 @@ watch(() => props.app, () => {
 <style scoped>
 .appDetail {
   position: fixed;
+  /* top:0;
+  left:0; */
   inset: 0;
+  /* width:100%; */
+  /* height:100%; */
   background: linear-gradient(-45deg, rgb(65, 64, 143), rgb(84, 168, 214));
   border-radius: 15px;
   border: 4px ridge #F5F5F5;
   z-index: 3;
-  padding:20px;
-  overflow: auto;
+  padding: 20px;
+  /* scrollbar-width: 10px; */
+  overflow-y: scroll;
 }
 
 .appFlame {
@@ -240,7 +245,7 @@ hr {
 
 .text {
   margin-left: 12px;
-  line-height:1.7;
+  line-height: 1.7;
 }
 
 

@@ -67,8 +67,8 @@ import imgExp2 from "/img/exp2.jpg"
 <style scoped>
 .about {
   position: relative;
-  /* margin: 500px auto 0; */
-  margin: auto;
+  margin: 1000px auto 0;
+  /* margin: auto; */
   width: 98%;
   height: auto;
   /* background: radial-gradient(rgba(168, 184, 220, 0.97), rgba(228, 232, 242, 0.97)); */

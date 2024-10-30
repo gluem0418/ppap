@@ -50,7 +50,7 @@ const changeApp = (selectType: string, index: number) => {
 <template>
   <div class="appList">
 
-    <div class="title"> {{ Config.mainMenu1 }} </div>
+    <!-- <div class="title"> {{ Config.mainMenu1 }} </div> -->
 
     <div class="message"> {{ Config.msgAppList }} </div>
 
@@ -75,11 +75,12 @@ const changeApp = (selectType: string, index: number) => {
 <style scoped>
 .appList {
   position: relative;
-  margin: 840px auto;
+  /* position: fixed; */
+  /* inset: 0; */
+  margin: 1500px auto;
+  /* margin: auto; */
   width: 98%;
-  height: auto;
-  /* background: radial-gradient(rgba(168, 184, 220, 0.97), rgba(228, 232, 242, 0.97)); */
-  /* background: radial-gradient(rgb(168, 184, 220), rgb(228, 232, 242)); */
+  /* height: auto; */
   background: rgba(168, 184, 220, 0.95);
   border-radius: 30px;
   text-align: center;
@@ -96,7 +97,8 @@ const changeApp = (selectType: string, index: number) => {
 }
 
 .message {
-  margin-top: 60px;
+  /* margin-top: 60px; */
+  padding-top: 60px;
   font-size: 28px;
 }
 

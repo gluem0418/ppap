@@ -10,8 +10,8 @@ import { PerspectiveCamera, Vector3, BackSide, Group, Intersection, MeshPhongMat
 
 import Config from '@/Config.ts'
 
-import AppList from '@/components/AppList.vue';
-import About from '@/components/About.vue';
+// import AppList from '@/components/AppList.vue';
+// import About from '@/components/About.vue';
 
 import BtnMenu from '@/components/flame/BtnMenu.vue';
 
@@ -24,21 +24,18 @@ const cameraRef = ref<PerspectiveCamera | null>(null);
 
 // const initCameraPosition: TresVector3 = new Vector3(0, 0, 50);  // カメラの初期位置
 // const initCameraLookAt: Vector3 = new Vector3(0, 0, 10)
-const initCameraPosition: TresVector3 = new Vector3(0, 50, 50);  // カメラの初期位置
-const initCameraLookAt: Vector3 = new Vector3(0, 50, 0)
+const initCameraPosition: TresVector3 = new Vector3(0, 0, 50);  // カメラの初期位置
+const initCameraLookAt: Vector3 = new Vector3(0, 0, 10)
 
+const RelayPosition1: Vector3 = new Vector3(-50, 0, 50);    // 中継地点1
 const AppPosition: Vector3 = new Vector3(-50, 50, 0);    // Application要素の配置位置
-const RelayPosition: Vector3 = new Vector3(50, 50, -50);    // 中継地点
-const AboutPosition: Vector3 = new Vector3(50, -50, -50);    // Application要素の配置位置
+const RelayPosition2: Vector3 = new Vector3(50, 50, -50);    // 中継地点2
+const AboutPosition: Vector3 = new Vector3(50, -50, -50);    // About要素の配置位置
 
 const starsRef = ref<Group | null>(null);
 const titleRef = ref<InstanceType<typeof Text3D> | null>(null);
-const titlePosition = ref([0, 4, -3]);
-
-// const cameraDistance = 10
 
 const starCount = 1000;
-// const boxWidth = 150;
 const boxWidth = 200;
 
 const startAnimation = ref<boolean>(true);
@@ -101,20 +98,17 @@ for (let i = 0; i < starPoints * 2; i++) {
 }
 
 
-const scrollLimitCam = 0.1 // カメラの向き調整
-const scrollLimitApp = 0.4 // Appへのスクロール閾値
-const scrollLimitRelay = 0.6 // 中継地点へのスクロール閾値
-const scrollLimitAbout = 0.9;  // Aboutへのスクロール閾値
-// const scrollLimitCam = 200 // カメラの向き調整
-// const scrollLimitApp = 1000 // Appへのスクロール閾値
-// const scrollLimitAbout = 2000;  // Aboutへのスクロール閾値
+const scrollLimitRelay1 = 0.1 // 中継地点へのスクロール閾値
+const scrollLimitApp = 0.3 // Appへのスクロール閾値
+const scrollLimitRelay2 = 0.5 // 中継地点へのスクロール閾値
+const scrollLimitAbout = 0.8;  // Aboutへのスクロール閾値
 
-// let targetPosition: Vector3;
 let targetPosition = initCameraPosition;
 let targetLookAt = new Vector3();
-// targetLookAt.lerp(initCameraLookAt, 0.1); // カメラの向きを変更
 targetLookAt.copy(initCameraLookAt); // カメラの向きを変更
 let progress = 0
+
+console.log('stars.scrollHeight', document.body.scrollHeight)
 
 const handleScroll = () => {
 
@@ -123,33 +117,28 @@ const handleScroll = () => {
   progress = window.scrollY / document.body.scrollHeight
 
   //カメラの移動ターゲットを設定
-  if (progress < scrollLimitApp) {
-    // console.log('handleScroll_scrollApp')
-    // progressが0からscrollLimitAppまではAppPositionに近づける
+  if (progress < scrollLimitRelay1) {
     const interpProgress = progress / scrollLimitApp;
-    targetPosition = calculatePosition(initCameraPosition, AppPosition, interpProgress)
-    // targetPosition = AppPosition.clone().lerp(initCameraPosition, 1 - interpProgress); // 初期位置とAppPosition間の補間
-    // targetPosition.lerp(initCameraPosition, 1 - interpProgress); // 初期位置とAppPosition間の補間
-    // targetLookAt = progress.value < scrollLimitCam ? initCameraLookAt : AppPosition
-    if (progress > scrollLimitCam) {
-      targetLookAt.lerp(AppPosition, 0.1); // カメラの向きを変更
-    } else {
-      targetLookAt.lerp(initCameraLookAt, 0.1); // カメラの向きを変更
-      // targetLookAt.lerp(AboutPosition, 0.1); // カメラの向きを変更
-      // targetLookAt.copy(initCameraLookAt); // カメラの向きを変更
-    }
-  } else if (progress >= scrollLimitApp && progress <= scrollLimitAbout) {
-    // progressがscrollLimitAppからscrollLimitAboutまではAppPositionからAboutPositionに移動
-    const interpProgress = (progress - scrollLimitApp) / (scrollLimitAbout - scrollLimitApp);
-    // const interpProgress = progress / scrollLimitAbout
     // console.log('handleScroll_interpProgress', interpProgress)
-    targetPosition = calculatePosition(AppPosition, AboutPosition, interpProgress)
-    // targetPosition = AppPosition.clone().lerp(AboutPosition, interpProgress); // AppPositionからAboutPosition間の補間
-    targetLookAt.lerp(AboutPosition, 0.1); // カメラの向きを変更
-    // targetLookAt = AboutPosition; // カメラの向きを変更
+    targetPosition = calculatePosition(initCameraPosition, RelayPosition1, interpProgress)
+    targetLookAt.lerp(initCameraLookAt, 0.2);
+  } else if (progress >= scrollLimitRelay1 && progress <= scrollLimitApp) {
+    const interpProgress = (progress - scrollLimitRelay1) / (scrollLimitApp - scrollLimitRelay1);
+    // console.log('handleScroll_interpProgress', interpProgress)
+    targetPosition = calculatePosition(RelayPosition1, AppPosition, interpProgress)
+    targetLookAt.lerp(AppPosition, 0.2);
+  } else if (progress >= scrollLimitApp && progress <= scrollLimitRelay2) {
+    const interpProgress = (progress - scrollLimitApp) / (scrollLimitRelay2 - scrollLimitApp);
+    targetPosition = calculatePosition(AppPosition, RelayPosition2, interpProgress)
+    targetLookAt.lerp(RelayPosition2, 0.2);
+  } else if (progress >= scrollLimitRelay2 && progress < scrollLimitAbout) {
+    const interpProgress = (progress - scrollLimitRelay2) / (scrollLimitAbout - scrollLimitRelay2);
+    targetPosition = calculatePosition(RelayPosition2, AboutPosition, interpProgress)
+    targetLookAt.lerp(AboutPosition, 0.2);
   }
 
-  // console.log('handleScroll_progress', progress)
+  console.log('handleScroll_progress', progress)
+  console.log('cameraPosition', cameraRef.value.position, 'targetPosition', targetPosition, 'targetLookAt', targetLookAt)
   // console.log('handleScroll_targetPosition', targetPosition)
   // console.log('handleScroll_targetLookAt', targetLookAt)
 
@@ -173,35 +162,6 @@ onLoop(({ }) => {
   // カメラの位置と向きを設定
   cameraRef.value.position.copy(targetPosition);
   cameraRef.value.lookAt(targetLookAt);
-
-  // console.log('cameraPosition', cameraRef.value.position, 'targetLookAt', targetLookAt, 'progress', progress.value)
-
-  // カメラの位置と方向をprogressの値に基づき算出
-  // if (progress.value < scrollLimitApp) {
-  //   const interpProgress = progress.value / scrollLimitApp;
-  //   const targetPosition = calculatePosition(cameraRef.value.position, AppPosition.value, interpProgress);
-  //   cameraRef.value.position.lerp(targetPosition, 0.05);  // スムーズな遷移
-  //   cameraRef.value.lookAt(AppPosition.value);  // AppPositionへ向く
-  // } else if (progress.value >= scrollLimitApp && progress.value < scrollLimitAbout) {
-  //   const interpProgress = (progress.value - scrollLimitApp) / (scrollLimitAbout - scrollLimitApp);
-  //   const targetPosition = calculatePosition(AppPosition.value, AboutPosition.value, interpProgress);
-  //   cameraRef.value.position.lerp(targetPosition, 0.05);
-  //   cameraRef.value.lookAt(AboutPosition.value);  // AboutPositionへ向く
-  // }
-
-  // if (progress.value < scrollLimitApp) {
-  //   targetPosition = AppPosition.value
-  //   targetLookAt = AppPosition.value;
-  //   // cameraLookat.value = AppPosition.value;
-  // } else if (progress.value >= scrollLimitApp && progress.value < scrollLimitAbout) {
-  //   targetPosition = AboutPosition.value;
-  //   targetLookAt = AboutPosition.value;
-  //   // cameraLookat.value = AboutPosition.value;
-  // }
-
-  // // cameraRef.value.position.lerp(targetPosition, 0.05 * progress.value);
-  // cameraRef.value.position.lerp(targetPosition, 0.05);  // 0.05はスムーズに移行する速度
-  // cameraRef.value.lookAt(targetLookAt);
 
   let count = 0
   //各星のアニメーション
@@ -227,12 +187,12 @@ onLoop(({ }) => {
   //タイトルのアニメーション(スクロール基準)
   const scroll = window.scrollY
   // // //位置の更新
-  titleRef.value.instance.position.x = (scroll / 600)
-  titleRef.value.instance.position.y = 4 - (scroll / 400)
-  titleRef.value.instance.position.z = (scroll / 300) - 3
+  // titleRef.value.instance.position.x = (scroll / 600)
+  // titleRef.value.instance.position.y = 4 - (scroll / 400)
+  // titleRef.value.instance.position.z = (scroll / 300) - 3
 
   // // //回転の更新
-  titleRef.value.instance.rotation.x = (scroll / 200) - 0.005;
+  // titleRef.value.instance.rotation.x = (scroll / 200) - 0.005;
 
 });
 
@@ -301,17 +261,14 @@ onUnmounted(() => {
     <TresCanvas>
       <!-- <TresPerspectiveCamera ref="cameraRef" :look-at="cameraLookat" :position="[0, 0, 50]" /> -->
       <!-- <TresPerspectiveCamera ref="cameraRef" :look-at="initCameraLookAt" :position="initCameraPosition" /> -->
-      <TresPerspectiveCamera ref="cameraRef"/>
-      
+      <TresPerspectiveCamera ref="cameraRef" />
+
       <!-- <OrbitControls :max-distance="boxWidth / 2" :enableZoom="false" :enableDamping="true" :dampingFactor="0.2" /> -->
-      <!-- <OrbitControls :max-distance="boxWidth / 2" /> -->
 
       <TresAmbientLight :intensity="3" />
       <TresDirectionalLight :position="[boxWidth / 2, boxWidth, 0]" :intensity="5" />
 
-      <!-- <ScrollControls v-model="progress" :pages="5" :smooth-scroll="0.1" class="scrollControls"/> -->
       <!-- <ScrollControls v-model="progress" :pages="5" :distance="0" :smooth-scroll="0.1"> -->
-      <!-- <ScrollControls v-model="progress" :distance="0" :smooth-scroll="0.1" htmlScroll /> -->
 
       <TresMesh @click="clickScreen">
         <!-- <TresMesh> -->
@@ -320,8 +277,24 @@ onUnmounted(() => {
       </TresMesh>
 
       <Suspense>
-        <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Bold.json" :size="1" :position="titlePosition">
-          <MeshWobbleMaterial :color="0xA8B8DC" :speed="0.5" :factor="0.5" />
+        <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Bold.json" :size="1" :position="[0, 3, 40]">
+          <!-- <MeshWobbleMaterial :color="0xA8B8DC" :speed="0.5" :factor="0.5" /> -->
+          <MeshWobbleMaterial :color="0xC7AC70" :speed="0.5" :factor="0.5" />
+        </Text3D>
+      </Suspense>
+
+      <Suspense>
+        <Text3D :text="Config.mainMenu1" font="font/Marvel_Bold.json" :size="1" :position="AppPosition"
+          :rotation="[0.7, 0, 0]">
+          <MeshWobbleMaterial :color="0xC7AC70" :speed="0.5" :factor="0.5" />
+        </Text3D>
+      </Suspense>
+
+      <Suspense>
+        <!-- <Text3D  :text="Config.mainMenu2" font="font/Marvel_Bold.json" :size="1" :position="AboutPosition" :rotation="[2, 3.2, -0.7]"> -->
+        <Text3D :text="Config.mainMenu2" font="font/Marvel_Bold.json" :size="1" :position="AboutPosition"
+          :rotation="[1.6, 3.2, -0.7]">
+          <MeshWobbleMaterial :color="0xC7AC70" :speed="0.5" :factor="0.5" />
         </Text3D>
       </Suspense>
 
@@ -330,15 +303,17 @@ onUnmounted(() => {
           :scale="star.scale" :object="createColoredModel(star.material)" @click="clickStar" />
       </TresGroup>
 
-      <Html center transform :position="AppPosition" :rotation="[0.3, 0, 0]">
+      <!-- <Html center transform :position="AppPosition" :rotation="[0.785, 0, 0]">
       <AppList />
 
-      </Html>
+      </Html> -->
 
-      <Html center transform :position="AboutPosition">
-      <About />
+      <!-- <Html center transform :position="AboutPosition" :rotation="[-1.5, 0, 2.2]"> -->
+      <!-- <Html center transform :position="AboutPosition" :rotation="[-2, -0.5, 2.2]"> -->
+      <!-- <Html center transform :position="AboutPosition" :rotation="[-2, -0.5, 2.2]"> -->
+      <!-- <About /> -->
 
-      </Html>
+      <!-- </Html> -->
       <!-- </ScrollControls> -->
 
     </TresCanvas>
@@ -355,7 +330,6 @@ onUnmounted(() => {
     <div v-if="startAnimation" class="enter">{{ Config.msgEnter }}</div>
 
   </div>
-
 </template>
 
 <style scoped>
