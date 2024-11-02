@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 import Application from '@/class/Application.ts';
 import { applications } from '@/class/Application.ts';
@@ -7,6 +7,7 @@ import { applications } from '@/class/Application.ts';
 import AppDetail from '@/components/AppDetail.vue';
 
 import Config from '@/Config.ts';
+
 
 //サムネイル画像クリック時の処理
 const selectedIndex = ref<number | undefined>(undefined);
@@ -45,72 +46,87 @@ const changeApp = (selectType: string, index: number) => {
 
 }
 
+onMounted(() => {
+  console.log('appList.scrollHeight', document.body.scrollHeight)
+});
+
 </script>
 
 <template>
-  <div class="appList">
 
-    <!-- <div class="title"> {{ Config.mainMenu1 }} </div> -->
+  <div class="compAppList" id="application">
 
-    <div class="message"> {{ Config.msgAppList }} </div>
+    <div class="appList">
 
-    <div class="listFlame">
+      <div class="title"> {{ Config.mainMenu1 }} </div>
 
-      <div v-for="(app, index) in applications" :key="index" class="appCard" @click="clickApp(app, index)">
+      <div class="message"> {{ Config.msgAppList }} </div>
 
-        <img :src="app.thumbnail" alt="app.id" class="thumbnail" />
+      <div class="listFlame">
 
-        <div class="appTitle"> {{ app.id }} </div>
+        <div v-for="(app, index) in applications" :key="index" class="appCard" @click="clickApp(app, index)">
+
+          <img :src="app.thumbnail" alt="app.id" class="thumbnail" />
+
+          <div class="appTitle"> {{ app.id }} </div>
+
+        </div>
 
       </div>
 
+
     </div>
 
+    <AppDetail :app="selectedApp" :index="selectedIndex" v-show="showApp" @close="closeAppDetail" @change="changeApp" />
 
   </div>
 
-  <AppDetail :app="selectedApp" :index="selectedIndex" v-show="showApp" @close="closeAppDetail" @change="changeApp" />
 </template>
 
 <style scoped>
-.appList {
+.compAppList {
   position: relative;
-  /* position: fixed; */
-  /* inset: 0; */
-  margin: 1500px auto;
-  /* margin: auto; */
+  /* margin-top: 2000px; */
+  margin-bottom: 2000px;
+  /* padding-top: 500px; */
+}
+
+.appList {
+  margin: auto;
   width: 98%;
-  /* height: auto; */
+  height: auto;
   background: rgba(168, 184, 220, 0.95);
   border-radius: 30px;
   text-align: center;
   color: #07315D;
   font-size: 20px;
   font-family: "Marvel-Bold";
+  padding: 70px 0 80px;
   /* z-index: 2; */
 }
 
 .title {
-  padding-top: 90px;
   font-size: 60px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .message {
-  /* margin-top: 60px; */
-  padding-top: 60px;
+  padding-top: 40px;
   font-size: 28px;
 }
 
 .listFlame {
-  display: flex;
-  margin:60px 20px;
-  padding-bottom: 110px;
+  /* display: flex;
+  flex-wrap: wrap;  */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin: 60px 20px 0;
+  gap: 10px;
 }
 
 .appCard {
-  flex: 1;
-  margin-left: 10px;
+  /* flex: 1; */
+  /* min-width: 150px; */
   cursor: pointer;
 }
 

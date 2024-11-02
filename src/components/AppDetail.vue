@@ -60,7 +60,10 @@ watch(() => props.app, () => {
     <div class="appFlame" id="appFlame">
 
       <div class="appTop">
-        <BtnLink class="btnLink1" :inside="'Visit Site'" />
+        <div v-if="selectedApp.id !== Config.appPortfolio">
+          <BtnLink class="btnLink1" :inside="'Visit Site'" :link="selectedApp.url" />
+        </div>
+
         <BtnClose class="btnClose" @click="closeDetail" />
       </div>
 
@@ -79,7 +82,8 @@ watch(() => props.app, () => {
           <FlmItem1 class="midTitle" :inside="'Points'" />
 
           <!-- Point1 -->
-          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]" :screen="selectedApp.screenShot[0]" />
+          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]"
+            :screen="selectedApp.screenShot[0]" />
           <!-- Point2 -->
           <div v-if="selectedApp.id == Config.appPortfolio || selectedApp.id == Config.appStarry">
             <FlexPoint class="flexPoint" :point1="selectedApp.points[1]" :point2="selectedApp.points[2]"
@@ -105,20 +109,25 @@ watch(() => props.app, () => {
         <div class="secEnvTool">
 
           <!-- Environment -->
-          <div class="flmEnvTool">
-            <div class="envToolTitle">
-              <FlmItem1 class="midTitle" :inside="'Environment'" />
-              <BtnLink class="btnLink2" :inside="'github'" />
-            </div>
-            <div class="envToolList">
-              <div v-for="(text, index) in selectedApp.environment" :key="index" class="text">
-                {{ text }}
+          <div class="secEnv">
+            <div class="flmEnv1">
+              <div class="envToolTitle">
+                <FlmItem1 class="midTitle" :inside="'Environment'" />
               </div>
+              <div class="envToolList">
+                <div v-for="(text, index) in selectedApp.environment" :key="index" class="text">
+                  {{ text }}
+                </div>
+              </div>
+            </div>
+            <div class="flmEnv2"
+              v-if="selectedApp.id == Config.appStarry || selectedApp.id == Config.appWhack || selectedApp.id == Config.appFear">
+              <BtnLink :inside="'github'" :link="selectedApp.githubUrl" />
             </div>
           </div>
 
           <!-- Tool -->
-          <div class="flmEnvTool">
+          <div class="secTool">
             <div class="envToolTitle">
               <FlmItem1 class="midTitle" :inside="'Tool'" />
             </div>
@@ -151,18 +160,21 @@ watch(() => props.app, () => {
 <style scoped>
 .appDetail {
   position: fixed;
-  /* top:0;
-  left:0; */
   inset: 0;
-  /* width:100%; */
-  /* height:100%; */
+  margin: 10px 1%;
+  height: auto;
   background: linear-gradient(-45deg, rgb(65, 64, 143), rgb(84, 168, 214));
   border-radius: 15px;
   border: 4px ridge #F5F5F5;
   z-index: 3;
   padding: 20px;
-  /* scrollbar-width: 10px; */
   overflow-y: scroll;
+}
+
+@media screen and (max-width: 800px) {
+  .appDetail {
+    padding: 10px;
+  }
 }
 
 .appFlame {
@@ -207,22 +219,44 @@ hr {
 
 .titleLine {
   margin-top: 20px;
-  margin-bottom: 50px;
-  width: 96%;
+  margin-bottom: 60px;
+  width: 94%;
 }
 
 .secDetail {
-  width: 94%;
+  width: 90%;
   margin: 0 auto;
 }
 
-.midTitle {
-  position: relative;
+@media screen and (max-width: 800px) {
+  .midTitle {
+    /* margin: auto; */
+  }
 }
+
 
 .secEnvTool {
   margin-top: 80px;
   display: flex;
+  /* gap: 5%; */
+  gap: 30px;
+}
+
+@media screen and (max-width: 800px) {
+  .secEnvTool {
+    margin-top: 60px;
+  }
+}
+
+.secEnv {
+  flex: 1;
+  display: flex;
+}
+
+@media screen and (max-width: 800px) {
+  .secEnv {
+    flex-direction: column;
+  }
 }
 
 .envToolTitle {
@@ -230,17 +264,31 @@ hr {
   align-items: center;
 }
 
-.btnLink2 {
-  margin-left: 7%;
+@media screen and (min-width: 800px) {
+  .flmEnv2 {
+    margin-left: 7%;
+  }
 }
 
-.flmEnvTool {
+@media screen and (max-width: 800px) {
+  .flmEnv2 {
+    margin-bottom: 40px;
+  }
+}
+
+.secTool {
   flex: 1;
 }
 
 .envToolList {
   margin-top: 20px;
   margin-bottom: 50px;
+}
+
+@media screen and (max-width: 800px) {
+  .envToolList {
+    margin-bottom: 40px;
+  }
 }
 
 .text {

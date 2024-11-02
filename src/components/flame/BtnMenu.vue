@@ -1,30 +1,35 @@
 <template>
-  <div class="flame">
-    <div class="text">{{ inside }}</div>
-  </div>
+  <a :href="`#${inside}`" class="flame">
+    {{ inside }}
+  </a>
 </template>
 
 <script setup lang="ts">
 
-  const props = defineProps({
-    inside: { type: String },
-  });
+const props = defineProps({
+  inside: { type: String },
+});
 
 </script>
 <style scoped>
-  .flame {
-    width:150px;
-    background: linear-gradient(to bottom, rgba(84, 168, 214, 0.8), rgba(65, 64, 143, 0.8));
-    border-radius: 10px;
-    text-align:center;
-    padding:6px;
-    cursor: pointer;
-  }
+.flame {
+  display: block;
+  width: 150px;
+  background: linear-gradient(to bottom, rgba(84, 168, 214, 0.8), rgba(65, 64, 143, 0.8));
+  border-radius: 10px;
+  text-align: center;
+  padding: 6px;
+  cursor: pointer;
+  text-decoration: none;
 
-  .text {
-    font-family: "Marvel-Bold";
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    font-size: 28px;
-  }
+  font-family: "Marvel-Bold";
+  color: #F5F5F5;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 28px;
 
+}
+
+.flame:hover {
+  background: linear-gradient(to bottom, rgb(84, 168, 214), rgb(65, 64, 143));
+}
 </style>

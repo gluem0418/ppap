@@ -46,7 +46,7 @@ function getStars(rank: number): string {
 }
 
 .skill {
-  width:280px;
+  width: 280px;
 }
 
 .subTitle {
@@ -58,23 +58,31 @@ hr {
   background: linear-gradient(to right, #C7AC70, #E4E8F2);
   border: none;
 }
+
 .titleLine1 {
-  margin-top:2px;
+  margin-top: 2px;
 }
+
 .subTitleText {
   font-size: 18px;
 }
 
+@media screen and (max-width: 800px) {
+  .subTitleText {
+    font-size: 16px;
+  }
+}
+
 .techs {
   display: flex;
-  font-size: 16px;
+  /* font-size: 16px; */
   margin-left: 12px;
-  width:250px;
+  width: 250px;
   justify-content: space-between;
   line-height: 1.7;
 }
+
 .techRank {
   /* color:#C7AC70; */
 }
-
 </style>

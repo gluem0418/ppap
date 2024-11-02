@@ -34,9 +34,16 @@ const props = defineProps({
 <style scoped>
 .flexPoint {
     display: flex;
-    align-items: center;
-    gap: 3%;
-    margin: 50px 0;
+    /* align-items: center; */
+    gap: 20px 3%;
+    margin: 50px auto;
+}
+
+@media screen and (max-width: 800px) {
+    .flexPoint {
+        margin: 40px auto;
+        flex-direction: column;
+    }
 }
 
 .reverse {
@@ -50,7 +57,7 @@ const props = defineProps({
 }
 
 .flameScreen {
-    align-content: center;
+    /* align-content: center; */
     flex: 1;
 }
 

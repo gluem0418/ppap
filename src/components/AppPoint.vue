@@ -34,6 +34,11 @@ const props = defineProps({
 .subTitleText {
     font-size: 18px;
 }
+@media screen and (max-width: 800px) {
+.subTitleText {
+    font-size: 16px;
+}
+}
 
 hr {
     height: 2px;

@@ -42,7 +42,9 @@
             "Visual Studio Code",
             "GitHub",
             "Figma"
-        ]
+        ],
+        "url": "",
+        "githubUrl": ""
     },
     {
         "id": "Seventh Dawn",
@@ -101,7 +103,9 @@
             "Figma",
             "MediBang Paint Pro",
             "Blender"
-        ]
+        ],
+        "url": "https://gluem0418.github.io/SeventhDawn/",
+        "githubUrl": ""
     },
     {
         "id": "Web Detection",
@@ -138,7 +142,9 @@
             "Visual Studio Code",
             "PythonAnywhere",
             "Figma"
-        ]
+        ],
+        "url": "https://gluem0418.github.io/SeventhDawn/",
+        "githubUrl": ""
     },
     {
         "id": "Starry Island",
@@ -165,8 +171,7 @@
             },
             {
                 "title": "画面内のどこかをクリックすると！？",
-                "texts": [
-                ]
+                "texts": []
             }
         ],
         "screenShot": [
@@ -182,7 +187,9 @@
         "tool": [
             "Visual Studio Code",
             "GitHub"
-        ]
+        ],
+        "url": "https://gluem0418.github.io/stars1/",
+        "githubUrl": "https://github.com/gluem0418/stars1"
     },
     {
         "id": "Whack-a-mole",
@@ -215,7 +222,9 @@
         "tool": [
             "Visual Studio Code",
             "GitHub"
-        ]
+        ],
+        "url": "https://gluem0418.github.io/ClickT/",
+        "githubUrl": "https://github.com/gluem0418/ClickT"
     },
     {
         "id": "The End Of Fear",
@@ -247,6 +256,8 @@
         "tool": [
             "Visual Studio Code",
             "GitHub"
-        ]
+        ],
+        "url": "https://gluem0418.github.io/app1/",
+        "githubUrl": "https://github.com/gluem0418/app1"
     }
 ]

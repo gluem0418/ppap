@@ -13,7 +13,9 @@ export default class Application {
   screenShot: string[];
   environment: string[];
   tool: string[];
-  
+  url: string;
+  githubUrl: string;
+
   constructor(data: Application) {
     this.id = data.id;
     this.introduction = data.introduction;
@@ -22,6 +24,8 @@ export default class Application {
     this.screenShot = data.screenShot;
     this.environment = data.environment;
     this.tool = data.tool;
+    this.url = data.url;
+    this.githubUrl = data.githubUrl;
   }
 }
 

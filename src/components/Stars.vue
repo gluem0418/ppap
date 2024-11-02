@@ -4,7 +4,8 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 import { TresCanvas, TresVector3, useRenderLoop } from '@tresjs/core'
 
-import { OrbitControls, ScrollControls, useGLTF, Text3D, MeshWobbleMaterial, Html } from '@tresjs/cientos'
+// import { OrbitControls, ScrollControls, useGLTF, Text3D, MeshWobbleMaterial, Html } from '@tresjs/cientos'
+import { useGLTF, Text3D, MeshWobbleMaterial } from '@tresjs/cientos'
 
 import { PerspectiveCamera, Vector3, BackSide, Group, Intersection, MeshPhongMaterial, Mesh } from 'three'
 
@@ -22,18 +23,23 @@ const { nodes } = await useGLTF('model/star.glb', { draco: true })
 /////////////////////////////////////////////
 const cameraRef = ref<PerspectiveCamera | null>(null);
 
-// const initCameraPosition: TresVector3 = new Vector3(0, 0, 50);  // カメラの初期位置
-// const initCameraLookAt: Vector3 = new Vector3(0, 0, 10)
-const initCameraPosition: TresVector3 = new Vector3(0, 0, 50);  // カメラの初期位置
+const initCameraPosition: TresVector3 = new Vector3(0, 0, 50);  // カメラの初期位置 
 const initCameraLookAt: Vector3 = new Vector3(0, 0, 10)
 
 const RelayPosition1: Vector3 = new Vector3(-50, 0, 50);    // 中継地点1
+const AppTitlePosition: Vector3 = new Vector3(-50, 51, 0.5);    // Applicationの配置位置
 const AppPosition: Vector3 = new Vector3(-50, 50, 0);    // Application要素の配置位置
 const RelayPosition2: Vector3 = new Vector3(50, 50, -50);    // 中継地点2
+const AboutTitlePosition: Vector3 = new Vector3(49.5, -40, -49.5);    // Aboutの配置位置
 const AboutPosition: Vector3 = new Vector3(50, -50, -50);    // About要素の配置位置
 
 const starsRef = ref<Group | null>(null);
 const titleRef = ref<InstanceType<typeof Text3D> | null>(null);
+const titleRotation = ref([0, 0, 0]);
+const initTitlePosition: Vector3 = new Vector3(0, 3, 40);    // タイトルの初期位置
+// const endTitlePosition: Vector3 = new Vector3(-4.5, 1.5, 15.3);    // タイトルの最終位置
+const endTitlePosition: Vector3 = new Vector3(-5.8, 1.8, 17);    // タイトルの最終位置
+const endTitleRotation = [3.05, 0.8, 3.2]
 
 const starCount = 1000;
 const boxWidth = 200;
@@ -47,13 +53,16 @@ const randomNum = (min: number, max: number) => {
 }
 
 const materialColors = [
-  new MeshPhongMaterial({ color: 0xFCF16E }),
-  new MeshPhongMaterial({ color: 0xffff00 }),
-  new MeshPhongMaterial({ color: 0xffd700 }),
-  new MeshPhongMaterial({ color: 0xffa500 }),
-  new MeshPhongMaterial({ color: 0x00ffff }),
-  new MeshPhongMaterial({ color: 0x00ff00 }),
-  new MeshPhongMaterial({ color: 0xffa07a }),
+  // new MeshPhongMaterial({ color: 0xe0ffff }),  //白
+  new MeshPhongMaterial({ color: 0xFCF16E }), //薄い黄色
+  new MeshPhongMaterial({ color: 0xffd700 }), //少し薄い黄色
+  // new MeshPhongMaterial({ color: 0xffa500 }),
+  // new MeshPhongMaterial({ color: 0x00ffff }),
+  // new MeshPhongMaterial({ color: 0x32DBDB }),
+  new MeshPhongMaterial({ color: 0x7af4ff }), //ターコイズブルー
+
+  // new MeshPhongMaterial({ color: 0x00ff00 }),
+  // new MeshPhongMaterial({ color: 0xffa07a }),
 ];
 
 const starShapeVertices: number[] = [];
@@ -97,50 +106,61 @@ for (let i = 0; i < starPoints * 2; i++) {
   starShapeVertices.push(Math.cos(angle) * radius, Math.sin(angle) * radius, 0);
 }
 
-
 const scrollLimitRelay1 = 0.1 // 中継地点へのスクロール閾値
 const scrollLimitApp = 0.3 // Appへのスクロール閾値
 const scrollLimitRelay2 = 0.5 // 中継地点へのスクロール閾値
-const scrollLimitAbout = 0.8;  // Aboutへのスクロール閾値
+// const scrollLimitAbout = 0.75;  // Aboutへのスクロール閾値
+const scrollLimitAbout = 0.75;  // Aboutへのスクロール閾値
 
 let targetPosition = initCameraPosition;
-let targetLookAt = new Vector3();
-targetLookAt.copy(initCameraLookAt); // カメラの向きを変更
+let targetLookAt = initCameraLookAt.clone();
+
+let targetTitle = initTitlePosition;
 let progress = 0
 
-console.log('stars.scrollHeight', document.body.scrollHeight)
+let scrollableHeight = 0
 
 const handleScroll = () => {
 
   if (!cameraRef.value) return
 
-  progress = window.scrollY / document.body.scrollHeight
+  progress = window.scrollY / scrollableHeight
 
   //カメラの移動ターゲットを設定
   if (progress < scrollLimitRelay1) {
     const interpProgress = progress / scrollLimitApp;
-    // console.log('handleScroll_interpProgress', interpProgress)
     targetPosition = calculatePosition(initCameraPosition, RelayPosition1, interpProgress)
-    targetLookAt.lerp(initCameraLookAt, 0.2);
+    targetLookAt.lerp(initCameraLookAt, 0.5);
+    targetTitle = initTitlePosition;
+    titleRotation.value = [0, 0, 0]
   } else if (progress >= scrollLimitRelay1 && progress <= scrollLimitApp) {
     const interpProgress = (progress - scrollLimitRelay1) / (scrollLimitApp - scrollLimitRelay1);
-    // console.log('handleScroll_interpProgress', interpProgress)
     targetPosition = calculatePosition(RelayPosition1, AppPosition, interpProgress)
-    targetLookAt.lerp(AppPosition, 0.2);
+    targetLookAt.lerp(AppPosition, 0.1);
   } else if (progress >= scrollLimitApp && progress <= scrollLimitRelay2) {
     const interpProgress = (progress - scrollLimitApp) / (scrollLimitRelay2 - scrollLimitApp);
     targetPosition = calculatePosition(AppPosition, RelayPosition2, interpProgress)
-    targetLookAt.lerp(RelayPosition2, 0.2);
+    targetLookAt.lerp(RelayPosition2, 0.001);
   } else if (progress >= scrollLimitRelay2 && progress < scrollLimitAbout) {
     const interpProgress = (progress - scrollLimitRelay2) / (scrollLimitAbout - scrollLimitRelay2);
     targetPosition = calculatePosition(RelayPosition2, AboutPosition, interpProgress)
-    targetLookAt.lerp(AboutPosition, 0.2);
+    targetLookAt.lerp(AboutPosition, 0.1);
+    // targetLookAt.lerp(AboutPosition, 0.05);
+  } else if (progress >= scrollLimitAbout) {
+    targetPosition.lerp(initCameraLookAt, 0.1);
+    targetLookAt.lerp(initCameraLookAt, 0.5);
+
+    targetTitle = endTitlePosition;
+    titleRotation.value = endTitleRotation
   }
 
-  console.log('handleScroll_progress', progress)
-  console.log('cameraPosition', cameraRef.value.position, 'targetPosition', targetPosition, 'targetLookAt', targetLookAt)
-  // console.log('handleScroll_targetPosition', targetPosition)
-  // console.log('handleScroll_targetLookAt', targetLookAt)
+
+  console.log('window.scrollY', window.scrollY, 'progress', progress)
+  // console.log('cameraPosition', cameraRef.value.position, 'targetPosition', targetPosition, 'targetLookAt', targetLookAt)
+
+  cameraRef.value.position.copy(targetPosition);
+  cameraRef.value.lookAt(targetLookAt);
+  titleRef.value.instance.position.copy(targetTitle)
 
 };
 
@@ -158,10 +178,6 @@ onLoop(({ }) => {
   if (!starsRef.value) return
   if (!cameraRef.value) return
   if (!titleRef.value) return
-
-  // カメラの位置と向きを設定
-  cameraRef.value.position.copy(targetPosition);
-  cameraRef.value.lookAt(targetLookAt);
 
   let count = 0
   //各星のアニメーション
@@ -183,16 +199,6 @@ onLoop(({ }) => {
     count++
 
   }
-
-  //タイトルのアニメーション(スクロール基準)
-  const scroll = window.scrollY
-  // // //位置の更新
-  // titleRef.value.instance.position.x = (scroll / 600)
-  // titleRef.value.instance.position.y = 4 - (scroll / 400)
-  // titleRef.value.instance.position.z = (scroll / 300) - 3
-
-  // // //回転の更新
-  // titleRef.value.instance.rotation.x = (scroll / 200) - 0.005;
 
 });
 
@@ -245,6 +251,18 @@ function clickStar(ray: Intersection) {
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
+
+  scrollableHeight = document.body.scrollHeight - (window.innerHeight / 2);
+
+  // if (window.innerHeight < window.innerWidth) {
+  //   //pc用のスクロール量
+  //   scrollableHeight = document.body.scrollHeight - (window.innerHeight / 2);
+  // } else {
+  //   //スマホ用のスクロール量
+  //   scrollableHeight = document.body.scrollHeight ;
+  // }
+
+  console.log('scrollHeight', document.body.scrollHeight, 'window.innerHeight', window.innerHeight, 'scrollableHeight', scrollableHeight)
 });
 
 onUnmounted(() => {
@@ -260,8 +278,7 @@ onUnmounted(() => {
     <!-- <div class="tresBg" @click="clickScreen"> -->
     <TresCanvas>
       <!-- <TresPerspectiveCamera ref="cameraRef" :look-at="cameraLookat" :position="[0, 0, 50]" /> -->
-      <!-- <TresPerspectiveCamera ref="cameraRef" :look-at="initCameraLookAt" :position="initCameraPosition" /> -->
-      <TresPerspectiveCamera ref="cameraRef" />
+      <TresPerspectiveCamera ref="cameraRef" :position="initCameraPosition" />
 
       <!-- <OrbitControls :max-distance="boxWidth / 2" :enableZoom="false" :enableDamping="true" :dampingFactor="0.2" /> -->
 
@@ -271,30 +288,29 @@ onUnmounted(() => {
       <!-- <ScrollControls v-model="progress" :pages="5" :distance="0" :smooth-scroll="0.1"> -->
 
       <TresMesh @click="clickScreen">
-        <!-- <TresMesh> -->
         <TresBoxGeometry :args="[boxWidth, boxWidth, boxWidth]" />
         <TresMeshBasicMaterial :transparent="true" :opacity="0" :side="BackSide" />
       </TresMesh>
 
       <Suspense>
-        <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Bold.json" :size="1" :position="[0, 3, 40]">
-          <!-- <MeshWobbleMaterial :color="0xA8B8DC" :speed="0.5" :factor="0.5" /> -->
+
+        <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Bold.json" :size="1" :position="initTitlePosition"
+          :rotation="titleRotation">
           <MeshWobbleMaterial :color="0xC7AC70" :speed="0.5" :factor="0.5" />
         </Text3D>
       </Suspense>
 
       <Suspense>
-        <Text3D :text="Config.mainMenu1" font="font/Marvel_Bold.json" :size="1" :position="AppPosition"
-          :rotation="[0.7, 0, 0]">
-          <MeshWobbleMaterial :color="0xC7AC70" :speed="0.5" :factor="0.5" />
+        <Text3D :text="Config.mainMenu1" font="font/Marvel_Bold.json" :size="1" :position="AppTitlePosition"
+          :rotation="[0.7, 0, 0.3]">
+          <MeshWobbleMaterial :color="0xfbf5e9" :speed="0.5" :factor="0.5" />
         </Text3D>
       </Suspense>
 
       <Suspense>
-        <!-- <Text3D  :text="Config.mainMenu2" font="font/Marvel_Bold.json" :size="1" :position="AboutPosition" :rotation="[2, 3.2, -0.7]"> -->
-        <Text3D :text="Config.mainMenu2" font="font/Marvel_Bold.json" :size="1" :position="AboutPosition"
+        <Text3D :text="Config.mainMenu2" font="font/Marvel_Bold.json" :size="1" :position="AboutTitlePosition"
           :rotation="[1.6, 3.2, -0.7]">
-          <MeshWobbleMaterial :color="0xC7AC70" :speed="0.5" :factor="0.5" />
+          <MeshWobbleMaterial :color="0xfbf5e9" :speed="0.5" :factor="0.5" />
         </Text3D>
       </Suspense>
 
@@ -309,8 +325,6 @@ onUnmounted(() => {
       </Html> -->
 
       <!-- <Html center transform :position="AboutPosition" :rotation="[-1.5, 0, 2.2]"> -->
-      <!-- <Html center transform :position="AboutPosition" :rotation="[-2, -0.5, 2.2]"> -->
-      <!-- <Html center transform :position="AboutPosition" :rotation="[-2, -0.5, 2.2]"> -->
       <!-- <About /> -->
 
       <!-- </Html> -->
@@ -318,18 +332,18 @@ onUnmounted(() => {
 
     </TresCanvas>
 
-
-    <div v-if="starsVisible" class="message">{{ Config.msgMain1 }}</div>
-    <div class="menu">
+    <!-- <div v-if="starsVisible" class="message">{{ Config.msgMain1 }}</div> -->
+    <!-- <div class="menu">
 
       <BtnMenu class="menu1" :inside="Config.mainMenu1" />
       <BtnMenu class="menu2" :inside="Config.mainMenu2" />
 
-    </div>
+    </div> -->
 
     <div v-if="startAnimation" class="enter">{{ Config.msgEnter }}</div>
 
   </div>
+
 </template>
 
 <style scoped>
@@ -344,11 +358,6 @@ onUnmounted(() => {
   background-size: cover;
   background-position: center;
 }
-
-/* .tresBg {
-  width: 100%;
-  height: 800%;
-} */
 
 .message {
   position: absolute;
