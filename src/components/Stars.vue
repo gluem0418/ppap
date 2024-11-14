@@ -5,7 +5,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { TresCanvas, TresVector3, useRenderLoop } from '@tresjs/core'
 
 // import { OrbitControls, ScrollControls, useGLTF, Text3D, MeshWobbleMaterial, Html } from '@tresjs/cientos'
-import { useGLTF, Text3D, MeshWobbleMaterial } from '@tresjs/cientos'
+import { useGLTF, Text3D, MeshWobbleMaterial, Environment } from '@tresjs/cientos'
 
 import { PerspectiveCamera, Vector3, BackSide, Group, Intersection, MeshPhongMaterial, Mesh } from 'three'
 
@@ -287,6 +287,8 @@ onUnmounted(() => {
 
       <!-- <ScrollControls v-model="progress" :pages="5" :distance="0" :smooth-scroll="0.1"> -->
 
+      <Environment files="/sunset.hdr" />
+
       <TresMesh @click="clickScreen">
         <TresBoxGeometry :args="[boxWidth, boxWidth, boxWidth]" />
         <TresMeshBasicMaterial :transparent="true" :opacity="0" :side="BackSide" />
@@ -353,7 +355,7 @@ onUnmounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/img/sky1.jpg');
+  background-image: url('@/assets/img/sky23.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

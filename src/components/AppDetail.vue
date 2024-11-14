@@ -161,9 +161,14 @@ watch(() => props.app, () => {
 .appDetail {
   position: fixed;
   inset: 0;
-  margin: 10px 1%;
+  /* margin: 10px 1%; */
   height: auto;
-  background: linear-gradient(-45deg, rgb(65, 64, 143), rgb(84, 168, 214));
+  /* background: linear-gradient(-45deg, rgb(65, 64, 143), rgb(84, 168, 214)); */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('@/assets/img/sky23.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
   border-radius: 15px;
   border: 4px ridge #F5F5F5;
   z-index: 3;

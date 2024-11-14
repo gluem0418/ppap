@@ -86,11 +86,13 @@ onMounted(() => {
 }
 
 .about {
-  margin: auto;
-  width: 98%;
   height: auto;
-  /* background: radial-gradient(rgba(168, 184, 220, 0.97), rgba(228, 232, 242, 0.97)); */
-  background: radial-gradient(rgb(168, 184, 220), rgb(228, 232, 242));
+  /* background: radial-gradient(rgb(168, 184, 220), rgb(228, 232, 242)); */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('@/assets/img/sky23.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
   border-radius: 30px;
   color: #121F30;
   z-index: 2;
