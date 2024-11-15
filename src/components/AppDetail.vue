@@ -70,6 +70,7 @@ watch(() => props.app, () => {
       <div class="titleFlame">
         <div class="title"> {{ selectedApp.id }} </div>
         <div class="intro"> {{ selectedApp.introduction }} </div>
+        <div v-if="selectedApp.id == Config.appSeventh" class="caution"> {{ selectedApp.caution }} </div>
       </div>
 
       <!-- <hr size="1" color="#A8B8DC" class="titleLine"> -->
@@ -82,10 +83,10 @@ watch(() => props.app, () => {
           <FlmItem1 class="midTitle" :inside="'Points'" />
 
           <!-- Point1 -->
-          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]"
-            :screen="selectedApp.screenShot[0]" />
+          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]" :screen="selectedApp.screenShot[0]" />
           <!-- Point2 -->
-          <div v-if="selectedApp.id == Config.appPortfolio || selectedApp.id == Config.appStarry">
+          <!-- <div v-if="selectedApp.id == Config.appPortfolio || selectedApp.id == Config.appStarry"> -->
+          <div v-if="selectedApp.id == Config.appStarry">
             <FlexPoint class="flexPoint" :point1="selectedApp.points[1]" :point2="selectedApp.points[2]"
               :screen="selectedApp.screenShot[1]" />
           </div>
@@ -196,7 +197,7 @@ watch(() => props.app, () => {
 }
 
 .titleFlame {
-  margin: 0 auto;
+  margin: 0 auto 30px;
   text-align: center;
 }
 
@@ -208,7 +209,11 @@ watch(() => props.app, () => {
 }
 
 .intro {
-  margin-top: 30px;
+  margin: 30px 10px 0 ;
+}
+
+.caution {
+  margin: 10px 10px 0 ;
 }
 
 hr {
@@ -228,18 +233,12 @@ hr {
   margin: 0 auto;
 }
 
-@media screen and (max-width: 800px) {
-  .midTitle {
-    /* margin: auto; */
-  }
-}
-
 
 .secEnvTool {
   margin-top: 80px;
   display: flex;
   /* gap: 5%; */
-  gap: 30px;
+  gap: 20px;
 }
 
 @media screen and (max-width: 800px) {

@@ -14,7 +14,8 @@ const props = defineProps({
 <style scoped>
 .flame {
   width: fit-content;
-  min-width: 120px;
+  /* min-width: 120px; */
+  min-width: 100px;
   background: #D6A254;
   border-radius: 5px;
   text-align: center;
@@ -28,12 +29,14 @@ const props = defineProps({
 
 @media screen and (max-width: 800px) {
   .flame {
-    padding: 4px 20px;
+    /* padding: 4px 20px; */
+    padding: 4px 10px;
     width: auto;
 }
 
   .text {
     font-size: 36px;
+    /* font-size: 30px; */
   }
 
 }

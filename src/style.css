@@ -19,7 +19,9 @@
 }
 
 :root {
-    font-family: "Meiryo";
+    /* font-family: "Meiryo"; */
+    font-family: "MPLUS1p";
+    /* font-family: "BIZUDPGothic"; */
     color: #F5F5F5;
 }
 

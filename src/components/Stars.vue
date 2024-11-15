@@ -13,8 +13,7 @@ import Config from '@/Config.ts'
 
 // import AppList from '@/components/AppList.vue';
 // import About from '@/components/About.vue';
-
-import BtnMenu from '@/components/flame/BtnMenu.vue';
+// import BtnMenu from '@/components/flame/BtnMenu.vue';
 
 const { nodes } = await useGLTF('model/star.glb', { draco: true })
 
@@ -155,12 +154,12 @@ const handleScroll = () => {
   }
 
 
-  console.log('window.scrollY', window.scrollY, 'progress', progress)
+  // console.log('window.scrollY', window.scrollY, 'progress', progress)
   // console.log('cameraPosition', cameraRef.value.position, 'targetPosition', targetPosition, 'targetLookAt', targetLookAt)
 
   cameraRef.value.position.copy(targetPosition);
   cameraRef.value.lookAt(targetLookAt);
-  titleRef.value.instance.position.copy(targetTitle)
+  titleRef.value?.instance.position.copy(targetTitle)
 
 };
 
@@ -238,7 +237,6 @@ function clickStar(ray: Intersection) {
 
     const index = count % (starShapeVertices.length / 3);
 
-    //各星の位置を更新
     star.position.x = randomNum(ray.point.x - starRandom, ray.point.x + starRandom) + starShapeVertices[index * 3];
     star.position.y = randomNum(ray.point.y - starRandom, ray.point.y + starRandom) + starShapeVertices[index * 3 + 1];
     star.position.z = randomNum(ray.point.z - starRandom, ray.point.z + starRandom) + starShapeVertices[index * 3 + 2];
@@ -294,21 +292,21 @@ onUnmounted(() => {
 
       <Suspense>
 
-        <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Bold.json" :size="1" :position="initTitlePosition"
-          :rotation="titleRotation">
+        <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Regular.json" :size="1"
+          :position="initTitlePosition" :rotation="titleRotation">
           <MeshWobbleMaterial :color="0xC7AC70" :speed="0.5" :factor="0.5" />
         </Text3D>
       </Suspense>
 
       <Suspense>
-        <Text3D :text="Config.mainMenu1" font="font/Marvel_Bold.json" :size="1" :position="AppTitlePosition"
+        <Text3D :text="Config.mainMenu1" font="font/Marvel_Regular.json" :size="1" :position="AppTitlePosition"
           :rotation="[0.7, 0, 0.3]">
           <MeshWobbleMaterial :color="0xfbf5e9" :speed="0.5" :factor="0.5" />
         </Text3D>
       </Suspense>
 
       <Suspense>
-        <Text3D :text="Config.mainMenu2" font="font/Marvel_Bold.json" :size="1" :position="AboutTitlePosition"
+        <Text3D :text="Config.mainMenu2" font="font/Marvel_Regular.json" :size="1" :position="AboutTitlePosition"
           :rotation="[1.6, 3.2, -0.7]">
           <MeshWobbleMaterial :color="0xfbf5e9" :speed="0.5" :factor="0.5" />
         </Text3D>
@@ -333,6 +331,7 @@ onUnmounted(() => {
     </TresCanvas>
 
     <!-- <div v-if="starsVisible" class="message">{{ Config.msgMain1 }}</div> -->
+
     <!-- <div class="menu">
 
       <BtnMenu class="menu1" :inside="Config.mainMenu1" />
@@ -343,7 +342,6 @@ onUnmounted(() => {
     <div v-if="startAnimation" class="enter">{{ Config.msgEnter }}</div>
 
   </div>
-
 </template>
 
 <style scoped>

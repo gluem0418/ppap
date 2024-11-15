@@ -8,6 +8,7 @@ export interface Point {
 export default class Application {
   id: string;
   introduction: string;
+  caution: string;
   thumbnail: string;
   points: Point[];
   screenShot: string[];
@@ -19,6 +20,7 @@ export default class Application {
   constructor(data: Application) {
     this.id = data.id;
     this.introduction = data.introduction;
+    this.caution = data.caution;
     this.thumbnail = data.thumbnail;
     this.points = data.points;
     this.screenShot = data.screenShot;
