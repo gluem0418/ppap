@@ -34,9 +34,9 @@ const props = defineProps({
 <style scoped>
 .flexPoint {
     display: flex;
-    /* align-items: center; */
-    gap: 20px 3%;
-    margin: 50px auto;
+    justify-content: center;
+    gap: 20px 2%;
+    margin: 40px auto 90px;
 }
 
 @media screen and (max-width: 800px) {
@@ -57,8 +57,8 @@ const props = defineProps({
 }
 
 .flameScreen {
-    /* align-content: center; */
     flex: 1;
+    max-width:550px;
 }
 
 .imgScreen {
@@ -67,8 +67,7 @@ const props = defineProps({
 }
 
 .flamePoint {
-    padding: 10px 1%;
-    border-radius: 10px;
+    max-width:550px;
     flex: 1;
 }
 

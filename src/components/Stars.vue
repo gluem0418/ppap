@@ -52,16 +52,12 @@ const randomNum = (min: number, max: number) => {
 }
 
 const materialColors = [
-  // new MeshPhongMaterial({ color: 0xe0ffff }),  //白
-  new MeshPhongMaterial({ color: 0xFCF16E }), //薄い黄色
-  new MeshPhongMaterial({ color: 0xffd700 }), //少し薄い黄色
-  // new MeshPhongMaterial({ color: 0xffa500 }),
-  // new MeshPhongMaterial({ color: 0x00ffff }),
-  // new MeshPhongMaterial({ color: 0x32DBDB }),
-  new MeshPhongMaterial({ color: 0x7af4ff }), //ターコイズブルー
-
-  // new MeshPhongMaterial({ color: 0x00ff00 }),
-  // new MeshPhongMaterial({ color: 0xffa07a }),
+  // new MeshPhongMaterial({ color: 0xFCF16E }), //薄い黄色
+  // new MeshPhongMaterial({ color: 0xffd700 }), //少し薄い黄色
+  // new MeshPhongMaterial({ color: 0x7af4ff }), //ターコイズブルー
+  new MeshPhongMaterial({ color: 0xFFFFE0 }), //レモンホワイト
+  new MeshPhongMaterial({ color: 0xFEF263 }), //薄い黄色
+  new MeshPhongMaterial({ color: 0xB1E9FF }), //薄い青
 ];
 
 const starShapeVertices: number[] = [];
@@ -285,8 +281,6 @@ onUnmounted(() => {
 
       <!-- <ScrollControls v-model="progress" :pages="5" :distance="0" :smooth-scroll="0.1"> -->
 
-      <Environment files="/sunset.hdr" />
-
       <TresMesh @click="clickScreen">
         <TresBoxGeometry :args="[boxWidth, boxWidth, boxWidth]" />
         <TresMeshBasicMaterial :transparent="true" :opacity="0" :side="BackSide" />
@@ -359,33 +353,14 @@ onUnmounted(() => {
   background-position: center;
 }
 
-.message {
-  position: absolute;
-  top: 1%;
-  right: 1%;
-  font-size: 20px;
-  font-family: "Marvel-Bold";
-}
-
-.menu {
-  position: absolute;
-  top: 45px;
-  right: 1%;
-  height: auto;
-  z-index: 1;
-}
-
-.menu2 {
-  margin-top: 20px;
-}
-
 .enter {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   white-space: nowrap;
-  font-size: 24px;
+  font-size: 28px;
   font-family: "Marvel-Bold";
+  text-shadow: 1px 1px 1px rgba(2, 29, 52, 0.5);
 }
 </style>

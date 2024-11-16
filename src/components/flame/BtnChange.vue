@@ -14,18 +14,21 @@ const props = defineProps({
 <style scoped>
 .flame {
   /* width: fit-content; */
-  background: #121F30;
+  /* background: #121F30; */
   border-radius: 10px;
   text-align: center;
   padding: 7px 30px;
-  color: #F5F5F5;
+  color: #FEF263;
+  border: 1px solid #FEF263;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
   cursor: pointer;
+  user-select: none;
 }
 
 .flame:hover {
-  color: #121F30;
-  background: #f5f5f5;
+  /* color: #121F30; */
+  background: linear-gradient(to bottom, #3076A3,#074D76 );
+  /* background: #f5f5f5; */
   ;
 }
 

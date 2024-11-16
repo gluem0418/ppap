@@ -92,7 +92,6 @@ onMounted(() => {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-
   border-radius: 30px;
   color: #121F30;
   z-index: 2;

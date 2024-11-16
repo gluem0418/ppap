@@ -95,32 +95,31 @@ onMounted(() => {
   margin: auto;
   width: 98%;
   height: auto;
-  background: rgba(168, 184, 220, 0.95);
+  background: rgba(2, 29, 52, 0.9);
   border-radius: 30px;
+  border: 2px ridge #FFFFE0;
   text-align: center;
-  color: #07315D;
   font-size: 20px;
   font-family: "Marvel-Bold";
   padding: 70px 0 80px;
-  /* z-index: 2; */
 }
 
 .title {
-  font-size: 60px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 70px;
+  letter-spacing: 0.05em;
+  text-shadow: 3px 3px 4px rgba(255, 255, 224, 0.3);
 }
 
 .message {
-  padding-top: 40px;
+  padding-top: 50px;
   font-size: 28px;
+  color: #FEF263;
 }
 
 .listFlame {
-  /* display: flex;
-  flex-wrap: wrap;  */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  margin: 60px 20px 0;
+  margin: 40px 20px 0;
   gap: 10px;
 }
 
@@ -134,13 +133,15 @@ onMounted(() => {
   height: auto;
   width: 100%;
   border-radius: 5px 5px 0 0;
+  /* border-radius: 5px; */
 }
 
 .appTitle {
   margin-top: -5px;
   height: 35px;
-  background: #121F30;
-  color: #f5f5f5;
+  background: #09111F;
+  /* background: #A1C5D7; */
+  /* color:#09111F; */
   align-content: center;
   border-radius: 0 0 5px 5px;
 }

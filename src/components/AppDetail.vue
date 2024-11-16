@@ -63,7 +63,6 @@ watch(() => props.app, () => {
         <div v-if="selectedApp.id !== Config.appPortfolio">
           <BtnLink class="btnLink1" :inside="'Visit Site'" :link="selectedApp.url" />
         </div>
-
         <BtnClose class="btnClose" @click="closeDetail" />
       </div>
 
@@ -74,13 +73,16 @@ watch(() => props.app, () => {
       </div>
 
       <!-- <hr size="1" color="#A8B8DC" class="titleLine"> -->
-      <hr class="titleLine">
+      <!-- <hr class="titleLine"> -->
 
       <div class="secDetail">
 
         <!-- Point -->
         <div class="secPoint">
-          <FlmItem1 class="midTitle" :inside="'Points'" />
+          <div class="midTitle">
+            <div class="midTitle1">Points</div>
+          </div>
+          <!-- <FlmItem1 class="midTitle" :inside="'Points'" /> -->
 
           <!-- Point1 -->
           <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]" :screen="selectedApp.screenShot[0]" />
@@ -111,26 +113,21 @@ watch(() => props.app, () => {
 
           <!-- Environment -->
           <div class="secEnv">
-            <div class="flmEnv1">
-              <div class="envToolTitle">
-                <FlmItem1 class="midTitle" :inside="'Environment'" />
-              </div>
-              <div class="envToolList">
-                <div v-for="(text, index) in selectedApp.environment" :key="index" class="text">
-                  {{ text }}
-                </div>
-              </div>
+            <!-- <div class="flmEnv1"> -->
+            <div class="midTitle">
+              <div class="midTitle2">Environment</div>
             </div>
-            <div class="flmEnv2"
-              v-if="selectedApp.id == Config.appStarry || selectedApp.id == Config.appWhack || selectedApp.id == Config.appFear">
-              <BtnLink :inside="'github'" :link="selectedApp.githubUrl" />
+            <div class="envToolList">
+              <div v-for="(text, index) in selectedApp.environment" :key="index" class="text">
+                {{ text }}
+              </div>
             </div>
           </div>
 
           <!-- Tool -->
           <div class="secTool">
-            <div class="envToolTitle">
-              <FlmItem1 class="midTitle" :inside="'Tool'" />
+            <div class="midTitle">
+              <div class="midTitle1">Tool</div>
             </div>
             <div class="envToolList">
               <div v-for="(text, index) in selectedApp.tool" :key="index" class="text">
@@ -138,9 +135,13 @@ watch(() => props.app, () => {
               </div>
             </div>
           </div>
+
         </div>
+      </div>
 
-
+      <div class="btnGit"
+        v-if="selectedApp.id == Config.appStarry || selectedApp.id == Config.appWhack || selectedApp.id == Config.appFear">
+        <BtnLink :inside="'github'" :link="selectedApp.githubUrl" />
       </div>
 
       <div class="secDetailEnd">
@@ -169,10 +170,8 @@ watch(() => props.app, () => {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-
-  border-radius: 15px;
-  border: 4px ridge #F5F5F5;
-  z-index: 3;
+  /* border-radius: 15px; */
+  /* border: 4px ridge #F5F5F5; */
   padding: 20px;
   overflow-y: scroll;
 }
@@ -190,10 +189,11 @@ watch(() => props.app, () => {
 .appTop {
   position: sticky;
   top: 0;
+  right: 0;
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
-  right: 0;
+  height: 50px;
 }
 
 .btnClose {
@@ -207,41 +207,69 @@ watch(() => props.app, () => {
 }
 
 .title {
-  font-size: 60px;
+  font-size: 70px;
   font-family: "Marvel-Bold";
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  -webkit-text-stroke: 1px #121F30;
+  letter-spacing: 0.1em;
+  text-shadow: 3px 3px 4px rgba(255, 255, 224, 0.3);
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
+  /* -webkit-text-stroke: 1px #121F30; */
 }
 
 .intro {
-  margin: 30px 10px 0 ;
+  margin: 20px auto 0;
 }
 
 .caution {
-  margin: 10px 10px 0 ;
-}
-
-hr {
-  height: 2px;
-  background: linear-gradient(to right, #F5F5F5, #32DBDB);
-  border: none;
-}
-
-.titleLine {
-  margin-top: 20px;
-  margin-bottom: 60px;
-  width: 94%;
+  margin: 10px 10px 0;
 }
 
 .secDetail {
-  width: 90%;
-  margin: 0 auto;
+  margin: 70px auto;
 }
 
 
-.secEnvTool {
-  margin-top: 80px;
+.midTitle {
+  margin:0 auto;
+  max-width:1200px;
+  font-size: 48px;
+  font-family: "Marvel-Bold";
   display: flex;
+  align-items: center;
+  color: #FEF263;
+}
+
+.midTitle1 {
+  letter-spacing: 0.1em;
+}
+
+.midTitle2 {
+  letter-spacing: 0.05em;
+}
+
+.midTitle:before,
+.midTitle:after {
+  content: "";
+  flex-grow: 1;
+  height: 2px;
+}
+
+.midTitle:before {
+  margin-right: 20px;
+  /* margin-right: 2%; */
+  background: linear-gradient(to right, rgba(254, 242, 99, 0), rgba(254, 242, 99, 1));
+}
+
+.midTitle:after {
+  margin-left: 20px;
+  /* margin-left: 2%; */
+  background: linear-gradient(to left, rgba(254, 242, 99, 0), rgba(254, 242, 99, 1));
+}
+
+.secEnvTool {
+  /* margin: 100px auto; */
+  margin: 100px auto 50px;
+  display: flex;
+  justify-content: center;
   /* gap: 5%; */
   gap: 20px;
 }
@@ -253,8 +281,8 @@ hr {
 }
 
 .secEnv {
+  max-width: 550px;
   flex: 1;
-  display: flex;
 }
 
 @media screen and (max-width: 800px) {
@@ -268,25 +296,25 @@ hr {
   align-items: center;
 }
 
-@media screen and (min-width: 800px) {
-  .flmEnv2 {
-    margin-left: 7%;
-  }
+.btnGit {
+  max-width:150px;
+  margin: 0 0 30px auto;
 }
 
 @media screen and (max-width: 800px) {
-  .flmEnv2 {
+  .btnGit {
     margin-bottom: 40px;
   }
 }
 
 .secTool {
+  max-width: 550px;
   flex: 1;
 }
 
 .envToolList {
-  margin-top: 20px;
-  margin-bottom: 50px;
+  margin: 20px auto;
+  width: fit-content;
 }
 
 @media screen and (max-width: 800px) {
@@ -296,10 +324,8 @@ hr {
 }
 
 .text {
-  margin-left: 12px;
-  line-height: 1.7;
+  line-height: 1.8;
 }
-
 
 .secDetailEnd {
   position: sticky;
@@ -310,21 +336,21 @@ hr {
 }
 
 .indexList {
-  width: 130px;
   margin-top: auto;
   margin-bottom: 0;
   display: flex;
   justify-content: space-between;
+  width: 130px;
+  height: 8px;
 }
 
 .appIndex {
   width: 20px;
-  height: 8px;
-  background: #F5F5F5;
+  background: #FFFFE0;
   cursor: pointer;
 }
 
 .selectedApp {
-  background: #121F30;
+  background: #021D34;
 }
 </style>

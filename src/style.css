@@ -18,11 +18,16 @@
     src: url('@/assets/font/MPLUS1p-Regular.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: "MPLUS1p-Medium";
+    src: url('@/assets/font/MPLUS1p-Medium.ttf') format('truetype');
+}
+
 :root {
     /* font-family: "Meiryo"; */
-    font-family: "MPLUS1p";
-    /* font-family: "BIZUDPGothic"; */
-    color: #F5F5F5;
+    font-family: "BIZUDPGothic";
+    /* font-family: "MPLUS1p"; */
+    color: #FFFFE0;
 }
 
 html {
