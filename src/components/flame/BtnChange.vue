@@ -18,8 +18,8 @@ const props = defineProps({
   border-radius: 10px;
   text-align: center;
   padding: 7px 30px;
-  color: #FEF263;
-  border: 1px solid #FEF263;
+  color: #FFE98C;
+  border: 1px solid #FFE98C;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
   cursor: pointer;
   user-select: none;
@@ -27,9 +27,8 @@ const props = defineProps({
 
 .flame:hover {
   /* color: #121F30; */
-  background: linear-gradient(to bottom, #3076A3,#074D76 );
-  /* background: #f5f5f5; */
-  ;
+  /* background: linear-gradient(to bottom, #3076A3,#074D76 ); */
+  background: #090F1A;
 }
 
 .text {

@@ -7,7 +7,7 @@ import { TresCanvas, TresVector3, useRenderLoop } from '@tresjs/core'
 // import { OrbitControls, ScrollControls, useGLTF, Text3D, MeshWobbleMaterial, Html } from '@tresjs/cientos'
 import { useGLTF, Text3D, MeshWobbleMaterial, Environment } from '@tresjs/cientos'
 
-import { PerspectiveCamera, Vector3, BackSide, Group, Intersection, MeshPhongMaterial, Mesh } from 'three'
+import { PerspectiveCamera, Vector3, BackSide, Group, Intersection, MeshStandardMaterial, Mesh, MeshPhongMaterial } from 'three'
 
 import Config from '@/Config.ts'
 
@@ -35,7 +35,7 @@ const AboutPosition: Vector3 = new Vector3(50, -50, -50);    // About要素の�
 const starsRef = ref<Group | null>(null);
 const titleRef = ref<InstanceType<typeof Text3D> | null>(null);
 const titleRotation = ref([0, 0, 0]);
-const initTitlePosition: Vector3 = new Vector3(0, 3, 40);    // タイトルの初期位置
+const initTitlePosition: Vector3 = new Vector3(0, 5, 35);    // タイトルの初期位置
 // const endTitlePosition: Vector3 = new Vector3(-4.5, 1.5, 15.3);    // タイトルの最終位置
 const endTitlePosition: Vector3 = new Vector3(-5.8, 1.8, 17);    // タイトルの最終位置
 const endTitleRotation = [3.05, 0.8, 3.2]
@@ -52,12 +52,14 @@ const randomNum = (min: number, max: number) => {
 }
 
 const materialColors = [
-  // new MeshPhongMaterial({ color: 0xFCF16E }), //薄い黄色
-  // new MeshPhongMaterial({ color: 0xffd700 }), //少し薄い黄色
-  // new MeshPhongMaterial({ color: 0x7af4ff }), //ターコイズブルー
   new MeshPhongMaterial({ color: 0xFFFFE0 }), //レモンホワイト
-  new MeshPhongMaterial({ color: 0xFEF263 }), //薄い黄色
-  new MeshPhongMaterial({ color: 0xB1E9FF }), //薄い青
+  new MeshPhongMaterial({ color: 0xFFE98C }), //薄い黄色
+  new MeshPhongMaterial({ color: 0xA1F6FF }), //薄い青
+  // new MeshPhongMaterial({ color: 0x8CFFEA }), //薄い青
+  // new MeshStandardMaterial({ color: 0xFFFFE0, roughness: 0 }), //レモンホワイト
+  // new MeshStandardMaterial({ color: 0xFFE98C, roughness: 0 }), //薄い黄色
+  // // new MeshPhongMaterial({ color: 0x8CDBFF }), //薄い青
+  // new MeshStandardMaterial({ color: 0x8CFFEA, roughness: 0 }), //薄い青
 ];
 
 const starShapeVertices: number[] = [];
@@ -87,6 +89,7 @@ const stars = Array.from({ length: starCount }, () => ({
 }));
 
 const createColoredModel = (material: MeshPhongMaterial): Mesh => {
+  // const createColoredModel = (material: MeshStandardMaterial): Mesh => {
   const model = nodes['star'].clone() as Mesh;
   model.material = material;
   return model;
@@ -276,8 +279,10 @@ onUnmounted(() => {
 
       <!-- <OrbitControls :max-distance="boxWidth / 2" :enableZoom="false" :enableDamping="true" :dampingFactor="0.2" /> -->
 
-      <TresAmbientLight :intensity="3" />
-      <TresDirectionalLight :position="[boxWidth / 2, boxWidth, 0]" :intensity="5" />
+      <TresAmbientLight :intensity="2" />
+      <TresDirectionalLight :position="[boxWidth / 2, boxWidth, 0]" :intensity="3" />
+      <!-- <TresAmbientLight :intensity="3" />
+      <TresDirectionalLight :position="[boxWidth / 2, boxWidth, 0]" :intensity="5" /> -->
 
       <!-- <ScrollControls v-model="progress" :pages="5" :distance="0" :smooth-scroll="0.1"> -->
 
@@ -287,17 +292,16 @@ onUnmounted(() => {
       </TresMesh>
 
       <Suspense>
-
         <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Regular.json" :size="1"
           :position="initTitlePosition" :rotation="titleRotation">
-          <MeshWobbleMaterial :color="0xC7AC70" :speed="0.5" :factor="0.5" />
+          <MeshWobbleMaterial :color="0xFFFFE0" :speed="0.5" :factor="0.5" />
         </Text3D>
       </Suspense>
 
       <Suspense>
         <Text3D :text="Config.mainMenu1" font="font/Marvel_Regular.json" :size="1" :position="AppTitlePosition"
           :rotation="[0.7, 0, 0.3]">
-          <MeshWobbleMaterial :color="0xfbf5e9" :speed="0.5" :factor="0.5" />
+          <MeshWobbleMaterial :color="0xFFFFE0" :speed="0.5" :factor="0.5" />
         </Text3D>
       </Suspense>
 
@@ -347,7 +351,9 @@ onUnmounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/img/sky23.jpg');
+  /* background-image: url('@/assets/img/sky21.jpg'); */
+  /* background-image: url('@/assets/img/sky23.jpg'); */
+  background-image: url('@/assets/img/sky42.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -361,6 +367,6 @@ onUnmounted(() => {
   white-space: nowrap;
   font-size: 28px;
   font-family: "Marvel-Bold";
-  text-shadow: 1px 1px 1px rgba(2, 29, 52, 0.5);
+  /* color: #FFF57F */
 }
 </style>

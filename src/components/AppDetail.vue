@@ -6,7 +6,7 @@ import FlexPoint from '@/components/FlexPoint.vue';
 import BtnLink from '@/components/flame/BtnLink.vue';
 import BtnChange from '@/components/flame/BtnChange.vue';
 
-import FlmItem1 from '@/components/flame/FlmItem1.vue';
+import MidTitle1 from '@/components/flame/MidTitle1.vue';
 
 import BtnClose from '@/components/icon/BtnClose.vue';
 
@@ -79,13 +79,14 @@ watch(() => props.app, () => {
 
         <!-- Point -->
         <div class="secPoint">
-          <div class="midTitle">
+          <MidTitle1 class="midTitle" :inside="'Points'" :spacing="0.1" />
+          <!-- <div class="midTitle">
             <div class="midTitle1">Points</div>
-          </div>
-          <!-- <FlmItem1 class="midTitle" :inside="'Points'" /> -->
+          </div> -->
 
           <!-- Point1 -->
-          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]" :screen="selectedApp.screenShot[0]" />
+          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]"
+            :screen="selectedApp.screenShot[0]" />
           <!-- Point2 -->
           <!-- <div v-if="selectedApp.id == Config.appPortfolio || selectedApp.id == Config.appStarry"> -->
           <div v-if="selectedApp.id == Config.appStarry">
@@ -113,10 +114,11 @@ watch(() => props.app, () => {
 
           <!-- Environment -->
           <div class="secEnv">
+            <MidTitle1 class="midTitle" :inside="'Environment'" :spacing="0.05" />
             <!-- <div class="flmEnv1"> -->
-            <div class="midTitle">
+            <!-- <div class="midTitle">
               <div class="midTitle2">Environment</div>
-            </div>
+            </div> -->
             <div class="envToolList">
               <div v-for="(text, index) in selectedApp.environment" :key="index" class="text">
                 {{ text }}
@@ -126,9 +128,10 @@ watch(() => props.app, () => {
 
           <!-- Tool -->
           <div class="secTool">
-            <div class="midTitle">
+            <MidTitle1 class="midTitle" :inside="'Tool'" :spacing="0.1" />
+            <!-- <div class="midTitle">
               <div class="midTitle1">Tool</div>
-            </div>
+            </div> -->
             <div class="envToolList">
               <div v-for="(text, index) in selectedApp.tool" :key="index" class="text">
                 {{ text }}
@@ -141,7 +144,7 @@ watch(() => props.app, () => {
 
       <div class="btnGit"
         v-if="selectedApp.id == Config.appStarry || selectedApp.id == Config.appWhack || selectedApp.id == Config.appFear">
-        <BtnLink :inside="'github'" :link="selectedApp.githubUrl" />
+        <BtnLink :inside="'GitHub'" :link="selectedApp.githubUrl" />
       </div>
 
       <div class="secDetailEnd">
@@ -165,8 +168,11 @@ watch(() => props.app, () => {
   inset: 0;
   /* margin: 10px 1%; */
   height: auto;
-  /* background: linear-gradient(-45deg, rgb(65, 64, 143), rgb(84, 168, 214)); */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('@/assets/img/sky23.jpg');
+  /* 243B66 */
+  background-image: linear-gradient(rgba(36, 59, 102, 0.7), rgba(36, 59, 102, 0.7)), url('@/assets/img/sky42.jpg');
+  /* 090F1A */
+  /* background-image: linear-gradient(rgba(9, 15, 26, 0.5), rgba(9, 15, 26, 0.5)), url('@/assets/img/sky42.jpg'); */
+  /* background-image: linear-gradient(rgba(7, 41, 81, 0.8), rgba(7, 41, 81, 0.8)), url('@/assets/img/sky21.jpg'); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -209,9 +215,8 @@ watch(() => props.app, () => {
 .title {
   font-size: 70px;
   font-family: "Marvel-Bold";
-  letter-spacing: 0.1em;
-  text-shadow: 3px 3px 4px rgba(255, 255, 224, 0.3);
-  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
+  letter-spacing: 0.05em;
+  text-shadow: 2px 2px rgba(255, 255, 224, 0.5);
   /* -webkit-text-stroke: 1px #121F30; */
 }
 
@@ -227,51 +232,13 @@ watch(() => props.app, () => {
   margin: 70px auto;
 }
 
-
-.midTitle {
-  margin:0 auto;
-  max-width:1200px;
-  font-size: 48px;
-  font-family: "Marvel-Bold";
-  display: flex;
-  align-items: center;
-  color: #FEF263;
-}
-
-.midTitle1 {
-  letter-spacing: 0.1em;
-}
-
-.midTitle2 {
-  letter-spacing: 0.05em;
-}
-
-.midTitle:before,
-.midTitle:after {
-  content: "";
-  flex-grow: 1;
-  height: 2px;
-}
-
-.midTitle:before {
-  margin-right: 20px;
-  /* margin-right: 2%; */
-  background: linear-gradient(to right, rgba(254, 242, 99, 0), rgba(254, 242, 99, 1));
-}
-
-.midTitle:after {
-  margin-left: 20px;
-  /* margin-left: 2%; */
-  background: linear-gradient(to left, rgba(254, 242, 99, 0), rgba(254, 242, 99, 1));
-}
-
 .secEnvTool {
   /* margin: 100px auto; */
   margin: 100px auto 50px;
   display: flex;
   justify-content: center;
-  /* gap: 5%; */
-  gap: 20px;
+  gap: 5%;
+  /* gap: 20px; */
 }
 
 @media screen and (max-width: 800px) {
@@ -297,7 +264,7 @@ watch(() => props.app, () => {
 }
 
 .btnGit {
-  max-width:150px;
+  max-width: 150px;
   margin: 0 0 30px auto;
 }
 
@@ -351,6 +318,6 @@ watch(() => props.app, () => {
 }
 
 .selectedApp {
-  background: #021D34;
+  background: #090F1A;
 }
 </style>

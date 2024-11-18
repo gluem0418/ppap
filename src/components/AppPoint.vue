@@ -24,9 +24,9 @@ const props = defineProps({
 
 <style scoped>
 .subTitle {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     font-size: 20px;
-    color:#FEF263;
+    color:#FFE98C;
 }
 
 

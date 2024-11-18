@@ -92,12 +92,23 @@ onMounted(() => {
 }
 
 .appList {
-  margin: auto;
-  width: 98%;
+  /* margin: auto; */
+  /* width: 98%; */
   height: auto;
-  background: rgba(2, 29, 52, 0.9);
-  border-radius: 30px;
-  border: 2px ridge #FFFFE0;
+  /* background: linear-gradient(to bottom, #243B66, #3076A3 40%, #243B66); */
+  background: linear-gradient(to bottom, #243B66, #3076A3, #243B66);
+  /* background:#021D34; */
+  /* background: rgba(2, 29, 52, 0.9); */
+  /* background:#BED4EE; */
+  /* background: rgba(7, 41, 81, 0.95); */
+  /* background:#074D76; */
+  /* background: rgba(7, 77, 118, 0.9); */
+  /* background:#A1C5D7; */
+  /* background: rgba(161, 197, 215, 0.9); */
+  /* 3076A3 */
+  /* background: rgba(48, 118, 163, 0.9); */
+  border-radius: 50px;
+  /* border: 2px ridge #FFFFE0; */
   text-align: center;
   font-size: 20px;
   font-family: "Marvel-Bold";
@@ -107,13 +118,14 @@ onMounted(() => {
 .title {
   font-size: 70px;
   letter-spacing: 0.05em;
-  text-shadow: 3px 3px 4px rgba(255, 255, 224, 0.3);
+  /* FFFFE0 */
+  text-shadow: 2px 2px rgba(255, 255, 224, 0.5);
 }
 
 .message {
   padding-top: 50px;
-  font-size: 28px;
-  color: #FEF263;
+  font-size: 32px;
+  color: #FFE98C;
 }
 
 .listFlame {

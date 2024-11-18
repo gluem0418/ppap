@@ -23,13 +23,13 @@ const props = defineProps({
   text-decoration: none;
   font-family: "Marvel-Bold";
   color: #FFFFE0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   font-size: 28px;
-  border: 1px solid #FFFFE0;
   user-select: none;
+  border: 1px solid #090F1A;
 }
 
 .flame:hover {
-  background: linear-gradient(to bottom, #3076A3,#074D76 );
+  /* border: 1px solid #FFF57F; */
+  border: 1px solid #FFFFE0;
 }
 </style>

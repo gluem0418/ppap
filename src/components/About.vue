@@ -88,13 +88,17 @@ onMounted(() => {
 .about {
   height: auto;
   /* background: radial-gradient(rgb(168, 184, 220), rgb(228, 232, 242)); */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('@/assets/img/sky23.jpg');
+  /* background: #A1C5D7; */
+  /* background: #3076A3; */
+  /* background: #074D76; */
+  /* background: #021D34; */
+  /* background-image: linear-gradient(rgba(2, 29, 52, 0.7), rgba(2, 29, 52, 0.7)), url('@/assets/img/sky23.jpg'); */
+  background-image: linear-gradient(rgba(7, 41, 81, 0.8), rgba(7, 41, 81, 0.8)), url('@/assets/img/sky21.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   border-radius: 30px;
-  color: #121F30;
-  z-index: 2;
+  color: #FFFFE0;
   padding: 70px 0 80px;
 }
 

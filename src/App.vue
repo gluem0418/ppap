@@ -94,6 +94,6 @@ onMounted(() => {
 }
 
 .menu2 {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 </style>
