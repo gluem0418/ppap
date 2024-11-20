@@ -25,9 +25,7 @@ const props = defineProps({
   user-select: none;
 }
 
-.flame:hover {
-  /* color: #121F30; */
-  /* background: linear-gradient(to bottom, #3076A3,#074D76 ); */
+.flame:active {
   background: #090F1A;
 }
 
@@ -43,6 +41,12 @@ const props = defineProps({
   .text {
     font-family: "Marvel-Bold";
     font-size: 24px;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .flame:hover {
+    background: #090F1A;
   }
 }
 </style>

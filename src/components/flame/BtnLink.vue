@@ -33,17 +33,21 @@ const props = defineProps({
   user-select: none;
 }
 
-.flame:hover {
-  /* color: #f5f5f5; */
-  /* background: linear-gradient(to bottom, #B1E9FF, #FEF263); */
-  /* color:#FFFFE0; */
-  background: #FFFFE0;
-}
 
 @media screen and (max-width: 800px) {
   .flame {
     font-size: 24px;
     padding: 5px 20px;
+  }
+}
+
+.flame:active {
+  background: #FFFFE0;
+}
+
+@media screen and (min-width: 800px) {
+  .flame:hover {
+    background: #FFFFE0;
   }
 }
 </style>

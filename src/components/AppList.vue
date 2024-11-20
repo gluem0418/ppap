@@ -53,7 +53,6 @@ onMounted(() => {
 </script>
 
 <template>
-
   <div class="compAppList" id="application">
 
     <div class="appList">
@@ -80,7 +79,6 @@ onMounted(() => {
     <AppDetail :app="selectedApp" :index="selectedIndex" v-show="showApp" @close="closeAppDetail" @change="changeApp" />
 
   </div>
-
 </template>
 
 <style scoped>
@@ -120,6 +118,12 @@ onMounted(() => {
   letter-spacing: 0.05em;
   /* FFFFE0 */
   text-shadow: 2px 2px rgba(255, 255, 224, 0.5);
+}
+
+@media screen and (max-width: 800px) {
+  .title {
+    font-size: 60px;
+  }
 }
 
 .message {

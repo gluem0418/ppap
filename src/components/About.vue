@@ -4,6 +4,8 @@ import { onMounted } from 'vue'
 
 import Config from '@/Config.ts';
 import Skills from '@/components/Skills.vue';
+import MidTitle1 from '@/components/flame/MidTitle1.vue';
+
 import FlmItem2 from '@/components/flame/FlmItem2.vue';
 import FlmItem3 from '@/components/flame/FlmItem3.vue';
 
@@ -26,11 +28,13 @@ onMounted(() => {
 
         <!-- Experience -->
         <div class="secExp">
+          <MidTitle1 class="midTitle" :inside="'Experience'" :spacing="0.05" />
 
           <!-- Experience1 -->
           <div class="flexExp1">
             <div class="flameExp">
-              <FlmItem2 class="midTitle" :inside="'システムエンジニアとしての経験'" />
+              <div class="subTitle">システムエンジニアとしての経験</div>
+              <!-- <FlmItem2 class="midTitle" :inside="'システムエンジニアとしての経験'" /> -->
               <div class="expText">
                 独立系SI企業に勤務し、主に信託銀行や地方銀行のシステム部門にて、基幹システムや営業支援システム等の開発を担当しました。<br>
                 複数のシステム開発を通じてシステム全体のデータフローを理解するようになりました。また、様々な案件をリーダーやサブリーダーとして進めていく中で、案件管理のノウハウを習得しました。さらに、大規模なシステム開発を通して、他システムの担当者やユーザーとの調整を経験しました。<br>
@@ -45,7 +49,8 @@ onMounted(() => {
           <!-- Experience2 -->
           <div class="flexExp2">
             <div class="flameExp">
-              <FlmItem2 class="midTitle" :inside="'フロントエンドエンジニアに向けて'" />
+              <div class="subTitle">フロントエンドエンジニアに向けて</div>
+              <!-- <FlmItem2 class="midTitle" :inside="'フロントエンドエンジニアに向けて'" /> -->
               <div class="expText">
                 SI企業を退社後、フリーランスとして活動を開始。以前から興味があったフロントエンド分野での仕事を目指し、Vue.jsの学習を始めました。<br>
                 Vue.jsを用いて独学でWEBアプリケーションを作成しながら、フロントエンド開発のノウハウを習得しました。また、Figmaを活用してアプリのデザインを行い、WEBデザインの手法も学びました。さらに、アプリで使用する素材の編集のため、ペイントソフトやBlenderの基本的な使い方を習得しました。
@@ -61,7 +66,8 @@ onMounted(() => {
         <!-- Skill -->
         <div class="secSkill">
 
-          <FlmItem3 class="midTitle" :inside="'Skills'" />
+          <!-- <FlmItem3 class="midTitle" :inside="'Skills'" /> -->
+          <MidTitle1 class="midTitle" :inside="'Skills'" :spacing="0.1" />
           <Skills class="skills" />
 
         </div>
@@ -87,32 +93,29 @@ onMounted(() => {
 
 .about {
   height: auto;
+  background: linear-gradient(to left bottom, #3076A3, #243B66 45%, #3076A3);
   /* background: radial-gradient(rgb(168, 184, 220), rgb(228, 232, 242)); */
   /* background: #A1C5D7; */
   /* background: #3076A3; */
   /* background: #074D76; */
   /* background: #021D34; */
-  /* background-image: linear-gradient(rgba(2, 29, 52, 0.7), rgba(2, 29, 52, 0.7)), url('@/assets/img/sky23.jpg'); */
-  background-image: linear-gradient(rgba(7, 41, 81, 0.8), rgba(7, 41, 81, 0.8)), url('@/assets/img/sky21.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
   border-radius: 30px;
   color: #FFFFE0;
-  padding: 70px 0 80px;
+  padding: 70px 20px 80px;
 }
 
 .secAbout {
-  width: 88%;
+  /* width: 88%; */
   margin: 0 auto;
 }
 
 .title {
-  margin-bottom: 80px;
-  font-size: 60px;
+  margin-bottom: 50px;
+  font-size: 70px;
   font-family: "Marvel-Bold";
+  letter-spacing: 0.05em;
   text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px rgba(255, 255, 224, 0.5);
 }
 
 .secExp {
@@ -121,29 +124,39 @@ onMounted(() => {
 
 .flexExp1 {
   display: flex;
-  gap: 20px 4%;
-  margin-bottom: 70px;
+  justify-content: center;
+  gap: 20px 2.5%;
+  margin: 50px auto 90px;
+  /* margin-bottom: 70px; */
 }
 
 .flameExp {
   width: 60%;
+  max-width: 550px;
+}
+
+.subTitle {
+  font-size: 20px;
+  /* font-size: 18px; */
+  color: #FFE98C;
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 800px) {
-  .midTitle {
+  .subTitle {
     width: auto;
   }
 }
 
 .expText {
-  margin-top: 40px;
   /* font-size: 16px; */
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
 .flameScreen {
   align-content: center;
   width: 36%;
+  max-width: 450px;
 }
 
 .imgScreen {
@@ -161,14 +174,16 @@ onMounted(() => {
   }
 
   .flameScreen {
-    width: 100%;
+    /* width: 100%; */
+    n: 100%;
   }
 }
 
 
 .flexExp2 {
   display: flex;
-  gap: 20px 4%;
+  justify-content: center;
+  gap: 20px 2.5%;
   flex-direction: row-reverse;
   margin-bottom: 50px;
 }
@@ -184,6 +199,7 @@ onMounted(() => {
 }
 
 .skills {
-  margin-top: 50px;
+  /* margin-top: 50px; */
+  margin: 50px auto;
 }
 </style>

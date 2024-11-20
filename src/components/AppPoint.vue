@@ -25,10 +25,10 @@ const props = defineProps({
 <style scoped>
 .subTitle {
     margin-bottom: 20px;
+    /* font-size: 18px; */
     font-size: 20px;
     color:#FFE98C;
 }
-
 
 @media screen and (max-width: 800px) {
     .subTitle {

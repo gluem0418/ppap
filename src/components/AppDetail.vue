@@ -85,8 +85,7 @@ watch(() => props.app, () => {
           </div> -->
 
           <!-- Point1 -->
-          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]"
-            :screen="selectedApp.screenShot[0]" />
+          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]" :screen="selectedApp.screenShot[0]" />
           <!-- Point2 -->
           <!-- <div v-if="selectedApp.id == Config.appPortfolio || selectedApp.id == Config.appStarry"> -->
           <div v-if="selectedApp.id == Config.appStarry">
@@ -120,7 +119,7 @@ watch(() => props.app, () => {
               <div class="midTitle2">Environment</div>
             </div> -->
             <div class="envToolList">
-              <div v-for="(text, index) in selectedApp.environment" :key="index" class="text">
+              <div v-for="(text, index) in selectedApp.environment" :key="index" class="listText">
                 {{ text }}
               </div>
             </div>
@@ -133,7 +132,7 @@ watch(() => props.app, () => {
               <div class="midTitle1">Tool</div>
             </div> -->
             <div class="envToolList">
-              <div v-for="(text, index) in selectedApp.tool" :key="index" class="text">
+              <div v-for="(text, index) in selectedApp.tool" :key="index" class="listText">
                 {{ text }}
               </div>
             </div>
@@ -199,7 +198,7 @@ watch(() => props.app, () => {
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
-  height: 50px;
+  height: 60px;
 }
 
 .btnClose {
@@ -220,8 +219,16 @@ watch(() => props.app, () => {
   /* -webkit-text-stroke: 1px #121F30; */
 }
 
+@media screen and (max-width: 800px) {
+  .title {
+    font-size: 60px;
+  }
+}
+
 .intro {
   margin: 20px auto 0;
+  /* width: 90%; */
+  line-height: 1.8;
 }
 
 .caution {
@@ -241,27 +248,23 @@ watch(() => props.app, () => {
   /* gap: 20px; */
 }
 
-@media screen and (max-width: 800px) {
-  .secEnvTool {
-    margin-top: 60px;
-  }
-}
-
 .secEnv {
   max-width: 550px;
   flex: 1;
 }
 
 @media screen and (max-width: 800px) {
-  .secEnv {
+  .secDetail {
+    margin: 60px auto;
+  }
+
+  .secEnvTool {
+    margin: 70px auto;
     flex-direction: column;
   }
+
 }
 
-.envToolTitle {
-  display: flex;
-  align-items: center;
-}
 
 .btnGit {
   max-width: 150px;
@@ -291,8 +294,14 @@ watch(() => props.app, () => {
 }
 
 .text {
-  line-height: 1.8;
 }
+
+.listText {
+  font-family: "Marvel-Bold";
+  font-size:20px;
+  line-height: 1.5;
+}
+
 
 .secDetailEnd {
   position: sticky;

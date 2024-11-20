@@ -41,12 +41,14 @@ function getStars(rank: number): string {
 .skillFlame {
   display: flex;
   justify-content: space-around;
+  /* justify-content: center; */
   flex-wrap: wrap;
-  gap: 30px 10%;
+  gap: 40px 5%;
+  max-width:1100px;
 }
 
 .skill {
-  width: 280px;
+  width: 270px;
 }
 
 .subTitle {
@@ -55,12 +57,12 @@ function getStars(rank: number): string {
 
 hr {
   height: 2px;
-  background: linear-gradient(to right, #C7AC70, #E4E8F2);
+  background: linear-gradient(to right, rgba(255, 233, 140, 1), rgba(255, 233, 140, 0));
   border: none;
 }
 
 .titleLine1 {
-  margin-top: 2px;
+  margin-top: 6px;
 }
 
 .subTitleText {
@@ -76,13 +78,14 @@ hr {
 .techs {
   display: flex;
   /* font-size: 16px; */
-  margin-left: 12px;
-  width: 250px;
+  /* margin-left: 12px; */
+  /* width: 250px; */
   justify-content: space-between;
-  line-height: 1.7;
+  font-size: 15px;
+  line-height: 1.8;
 }
 
 .techRank {
-  /* color:#C7AC70; */
+  /* color:#FFE98C; */
 }
 </style>

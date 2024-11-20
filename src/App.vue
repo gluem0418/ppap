@@ -88,7 +88,7 @@ onMounted(() => {
 
 .menu {
   position: absolute;
-  top: 20px;
+  top: 10px;
   right: 1%;
   height: auto;
 }
