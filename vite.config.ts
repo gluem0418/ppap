@@ -17,7 +17,7 @@ export default defineConfig({
   ],
   define: { 'process.env': {} },
   build: {
-    // outDir: './docs', 
+    outDir: './docs', 
     sourcemap: true,
   },
   resolve: {

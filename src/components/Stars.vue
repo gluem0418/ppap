@@ -58,6 +58,12 @@ const materialColors = [
   new MeshPhongMaterial({ color: 0xFFF9E0 }), //レモンホワイト
   new MeshPhongMaterial({ color: 0xFFE98C }), //薄い黄色
   new MeshPhongMaterial({ color: 0x8cf9ff }), //薄い青
+  // new MeshStandardMaterial({ color: 0xFFF9E0, roughness: 0 }), //レモンホワイト
+  // new MeshStandardMaterial({ color: 0xFFE98C, roughness: 0 }), //薄い黄色
+  // new MeshStandardMaterial({ color: 0x8cf9ff, roughness: 0 }), //薄い青
+  // new MeshStandardMaterial({ color: 0xFFF9E0 }), //レモンホワイト
+  // new MeshStandardMaterial({ color: 0xFFE98C }), //薄い黄色
+  // new MeshStandardMaterial({ color: 0x8cf9ff }), //薄い青
 ];
 
 const starShapeVertices: number[] = [];
@@ -278,7 +284,11 @@ onUnmounted(() => {
       <!-- <OrbitControls :max-distance="boxWidth / 2" :enableZoom="false" :enableDamping="true" :dampingFactor="0.2" /> -->
 
       <TresAmbientLight :intensity="2" />
-      <TresDirectionalLight :position="[boxWidth / 2, boxWidth, 0]" :intensity="4" />
+      <!-- <TresDirectionalLight :position="[boxWidth / 2, boxWidth, 0]" :intensity="4" /> -->
+      <!-- <TresDirectionalLight :position="[boxWidth / 2, boxWidth / 2, boxWidth / 2]" :intensity="4" /> -->
+      <TresDirectionalLight :position="[0, boxWidth / 2, boxWidth / 2]" :intensity="4" />
+      <!-- <TresDirectionalLight :position="[-(boxWidth / 2), boxWidth / 2, boxWidth / 2]" :intensity="4" /> -->
+
       <!-- <TresAmbientLight :intensity="3" />
       <TresDirectionalLight :position="[boxWidth / 2, boxWidth, 0]" :intensity="5" /> -->
 
