@@ -177,13 +177,13 @@ watch(() => props.app, () => {
   background-position: center;
   /* border-radius: 15px; */
   /* border: 4px ridge #F5F5F5; */
-  padding: 20px;
+  padding: 16px;
   overflow-y: scroll;
 }
 
 @media screen and (max-width: 800px) {
   .appDetail {
-    padding: 10px;
+    padding: 8px;
   }
 }
 
@@ -198,7 +198,7 @@ watch(() => props.app, () => {
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
-  height: 60px;
+  height: 48px;
 }
 
 .btnClose {
@@ -207,12 +207,12 @@ watch(() => props.app, () => {
 }
 
 .titleFlame {
-  margin: 0 auto 30px;
+  /* margin: 0 auto 32px; */
   text-align: center;
 }
 
 .title {
-  font-size: 70px;
+  font-size: 72px;
   font-family: "Marvel-Bold";
   letter-spacing: 0.05em;
   text-shadow: 2px 2px rgba(255, 255, 224, 0.5);
@@ -221,12 +221,13 @@ watch(() => props.app, () => {
 
 @media screen and (max-width: 800px) {
   .title {
-    font-size: 60px;
+    font-size: 64px;
   }
 }
 
 .intro {
-  margin: 20px auto 0;
+  margin-top:16px;
+  /* margin: 20px auto 0; */
   /* width: 90%; */
   line-height: 1.8;
 }
@@ -236,7 +237,8 @@ watch(() => props.app, () => {
 }
 
 .secDetail {
-  margin: 70px auto;
+  /* margin: 60px auto; */
+  margin: 50px auto;
 }
 
 .secEnvTool {

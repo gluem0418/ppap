@@ -4,19 +4,19 @@
         "techs": [
             {
                 "name": "HTML&CSS",
-                "rank": 4
+                "rank": 3
             },
             {
                 "name": "JavaScript",
-                "rank": 4
+                "rank": 3
             },
             {
                 "name": "TypeScript",
-                "rank": 4
+                "rank": 3
             },
             {
                 "name": "Three.js",
-                "rank": 3
+                "rank": 2
             },
             {
                 "name": "TresJS",
@@ -29,7 +29,7 @@
         "techs": [
             {
                 "name": "Vue.js",
-                "rank": 4
+                "rank": 3
             },
             {
                 "name": "Flask",

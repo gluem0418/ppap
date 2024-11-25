@@ -1,19 +1,24 @@
 <script setup lang="ts">
 
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
 
 import { TresCanvas, TresVector3, useRenderLoop } from '@tresjs/core'
 
 // import { OrbitControls, ScrollControls, useGLTF, Text3D, MeshWobbleMaterial, Html } from '@tresjs/cientos'
-import { useGLTF, Text3D, MeshWobbleMaterial, Environment } from '@tresjs/cientos'
+import { useGLTF, Text3D, MeshWobbleMaterial } from '@tresjs/cientos'
 
-import { PerspectiveCamera, Vector3, BackSide, Group, Intersection, MeshStandardMaterial, Mesh, MeshPhongMaterial } from 'three'
+import { PerspectiveCamera, Vector3, Group, Intersection, Mesh, MeshPhongMaterial, Raycaster, Vector2 } from 'three'
 
 import Config from '@/Config.ts'
 
 // import AppList from '@/components/AppList.vue';
 // import About from '@/components/About.vue';
 // import BtnMenu from '@/components/flame/BtnMenu.vue';
+
+const props = defineProps({
+  progress: { type: Number },
+  starsVisible: { type: Boolean },
+});
 
 const { nodes } = await useGLTF('model/star.glb', { draco: true })
 
@@ -41,10 +46,8 @@ const endTitlePosition: Vector3 = new Vector3(-5.8, 1.8, 17);    // タイトル
 const endTitleRotation = [3.05, 0.8, 3.2]
 
 const starCount = 1000;
+// const starCount = 100;
 const boxWidth = 200;
-
-const startAnimation = ref<boolean>(true);
-const starsVisible = ref<boolean>(false);
 
 //minからmaxまでのランダムな値を返す
 const randomNum = (min: number, max: number) => {
@@ -118,15 +121,29 @@ let targetPosition = initCameraPosition;
 let targetLookAt = initCameraLookAt.clone();
 
 let targetTitle = initTitlePosition;
-let progress = 0
+// let progress = 0
+const progress = ref(0); // スクロール率
 
-let scrollableHeight = 0
+// let scrollableHeight = 0
 
-const handleScroll = () => {
+// watch(() => props.starsVisible,
+//   (visible) => {
+//     if (visible) scrollAction(newProgress)
+//   }, { immediate: true }
+// );
+
+watch(() => props.progress,
+  (newProgress) => {
+    if (newProgress) scrollAction(newProgress)
+  }, { immediate: true }
+);
+
+// const handleScroll = () => {
+const scrollAction = (progress: number) => {
 
   if (!cameraRef.value) return
 
-  progress = window.scrollY / scrollableHeight
+  // progress = window.scrollY / scrollableHeight
 
   //カメラの移動ターゲットを設定
   if (progress < scrollLimitRelay1) {
@@ -173,7 +190,7 @@ const calculatePosition = (start: Vector3, end: Vector3, progress: number): Vect
   return interpolated;
 };
 
-//アニメーションレンタリング
+// アニメーションレンタリング
 const { onLoop } = useRenderLoop()
 onLoop(({ }) => {
 
@@ -184,6 +201,7 @@ onLoop(({ }) => {
   let count = 0
   //各星のアニメーション
   for (const star of starsRef.value.children) {
+    if (count >= starCount) return
     //各星の設定取得
     const starA = stars[count]
 
@@ -204,33 +222,19 @@ onLoop(({ }) => {
 
 });
 
-//////////////////////////////////////////////
-// 画面を最初にクリックした際の処理
-/////////////////////////////////////////////
-function clickScreen() {
-  console.log('clickScreen')
-  if (startAnimation.value) {
-    starsVisible.value = true;
-    startAnimation.value = false
-  }
-}
 
 //////////////////////////////////////////////
 // クリックした場所に星を表示する処理
 /////////////////////////////////////////////
 const starRandom = 1.5; //表示位置のバラつき 
-function clickStar(ray: Intersection) {
+// function clickStar(ray: Intersection) {
+function clickStar(point: Vector3) {
 
   if (!starsRef.value) return
 
-  console.log('clickScreen ray', ray)
-  console.log('clickScreen ray.point', ray.point)
-  console.log('clickScreen_starsRef', starsRef.value)
-
-  // console.log('clickScreen_cameraRef', cameraRef.value!.position)
-  console.log('clickScreen_title', titleRef.value!)
-
-  console.log('3D空間のクリック位置', ray.point);
+  // console.log('clickScreen ray', ray)
+  console.log('clickStar point', point)
+  // console.log('clickScreen_starsRef', starsRef.value)
 
   // クリック位置の周辺に星を配置
   let count = 0;
@@ -240,9 +244,13 @@ function clickStar(ray: Intersection) {
 
     const index = count % (starShapeVertices.length / 3);
 
-    star.position.x = randomNum(ray.point.x - starRandom, ray.point.x + starRandom) + starShapeVertices[index * 3];
-    star.position.y = randomNum(ray.point.y - starRandom, ray.point.y + starRandom) + starShapeVertices[index * 3 + 1];
-    star.position.z = randomNum(ray.point.z - starRandom, ray.point.z + starRandom) + starShapeVertices[index * 3 + 2];
+    // star.position.x = randomNum(ray.point.x - starRandom, ray.point.x + starRandom) + starShapeVertices[index * 3];
+    // star.position.y = randomNum(ray.point.y - starRandom, ray.point.y + starRandom) + starShapeVertices[index * 3 + 1];
+    // star.position.z = randomNum(ray.point.z - starRandom, ray.point.z + starRandom) + starShapeVertices[index * 3 + 2];
+
+    star.position.x = randomNum(point.x - starRandom, point.x + starRandom) + starShapeVertices[index * 3];
+    star.position.y = randomNum(point.y - starRandom, point.y + starRandom) + starShapeVertices[index * 3 + 1];
+    star.position.z = randomNum(point.z - starRandom, point.z + starRandom) + starShapeVertices[index * 3 + 2];
 
     count++
 
@@ -250,131 +258,132 @@ function clickStar(ray: Intersection) {
 
 }
 
+
+// function clickDounuts(ray: Intersection) {
+//   console.log('clickDounuts ray.point', ray.point)
+// }
+
+const raycaster = new Raycaster();
+const pointer = new Vector2();
+
+const onPointerDown = (event: Event) => {
+  const pointerEvent = event as PointerEvent;
+  console.log('onPointerDown_event', event)
+  // スクリーン座標を Three.js の正規化座標に変換
+  const canvas = pointerEvent.target as HTMLCanvasElement;
+  pointer.x = (pointerEvent.clientX / canvas.offsetWidth) * 2 - 1;
+  pointer.y = -(pointerEvent.clientY / canvas.offsetHeight) * 2 + 1;
+
+  // レイキャストを実行
+  raycaster.setFromCamera(pointer, cameraRef.value!);
+  const intersects = raycaster.intersectObjects(starsRef.value!.children, true);
+
+  if (intersects.length > 0) {
+    const clickedStar = intersects[0].object;
+    console.log('onPointerDown_clickedStar', clickedStar)
+    clickStar(clickedStar.position);
+  }
+};
+
+
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
+  // const canvas = document.querySelector(".tres-canvas");
+  const canvas = document.querySelector(".Stars");
+  if (canvas) canvas.addEventListener("pointerdown", onPointerDown);
+  //   window.addEventListener('scroll', handleScroll, { passive: true });
+  //   // window.addEventListener('scroll', siteScroll);
 
-  scrollableHeight = document.body.scrollHeight - (window.innerHeight / 2);
+  //   // scrollableHeight = document.body.scrollHeight - (window.innerHeight / 2);
 
-  // if (window.innerHeight < window.innerWidth) {
-  //   //pc用のスクロール量
-  //   scrollableHeight = document.body.scrollHeight - (window.innerHeight / 2);
-  // } else {
-  //   //スマホ用のスクロール量
-  //   scrollableHeight = document.body.scrollHeight ;
-  // }
+  //   scrollableHeight = Math.max(
+  //     document.body.scrollHeight,
+  //     document.documentElement.scrollHeight
+  //   ) - window.innerHeight;
+  //   // if (window.innerHeight < window.innerWidth) {
+  //   //   //pc用のスクロール量
+  //   //   scrollableHeight = document.body.scrollHeight - (window.innerHeight / 2);
+  //   // } else {
+  //   //   //スマホ用のスクロール量
+  //   //   scrollableHeight = document.body.scrollHeight ;
+  //   // }
 
-  console.log('scrollHeight', document.body.scrollHeight, 'window.innerHeight', window.innerHeight, 'scrollableHeight', scrollableHeight)
+  //   console.log('scrollHeight', document.body.scrollHeight, 'window.innerHeight', window.innerHeight, 'scrollableHeight', scrollableHeight)
 });
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener("pointerdown", onPointerDown);
+  // window.removeEventListener('scroll', siteScroll);
 });
 
 
 </script>
 
 <template>
-  <div class="tresBg">
+  <!-- <div @click="clickScreen"> -->
 
-    <!-- <div class="tresBg" @click="clickScreen"> -->
-    <TresCanvas>
-      <!-- <TresPerspectiveCamera ref="cameraRef" :look-at="cameraLookat" :position="[0, 0, 50]" /> -->
-      <TresPerspectiveCamera ref="cameraRef" :position="initCameraPosition" />
+  <!-- <div class="tresBg" @click="clickScreen"> -->
 
-      <!-- <OrbitControls :max-distance="boxWidth / 2" :enableZoom="false" :enableDamping="true" :dampingFactor="0.2" /> -->
+  <!-- <TresCanvas window-size touch-action="auto" pointer-events="auto"> -->
+  <TresCanvas>
 
-      <TresAmbientLight :intensity="2" />
-      <!-- <TresDirectionalLight :position="[boxWidth / 2, boxWidth, 0]" :intensity="4" /> -->
-      <!-- <TresDirectionalLight :position="[boxWidth / 2, boxWidth / 2, boxWidth / 2]" :intensity="4" /> -->
-      <TresDirectionalLight :position="[0, boxWidth / 2, boxWidth / 2]" :intensity="4" />
-      <!-- <TresDirectionalLight :position="[-(boxWidth / 2), boxWidth / 2, boxWidth / 2]" :intensity="4" /> -->
+    <TresPerspectiveCamera ref="cameraRef" :position="initCameraPosition" />
 
-      <!-- <TresAmbientLight :intensity="3" />
-      <TresDirectionalLight :position="[boxWidth / 2, boxWidth, 0]" :intensity="5" /> -->
+    <!-- <TresMesh @pointer-down="(event) => console.log('pointer-down')">
+      <TresTorusGeometry :args="[1, 0.5, 16, 32]" />
+      <TresMeshBasicMaterial color="orange" />
+    </TresMesh> -->
 
-      <!-- <ScrollControls v-model="progress" :pages="5" :distance="0" :smooth-scroll="0.1"> -->
+    <Suspense>
+      <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Regular.json" :size="1"
+        :position="initTitlePosition" :rotation="titleRotation">
+        <MeshWobbleMaterial :color="0xFFFFE0" :speed="0.5" :factor="0.5" />
+      </Text3D>
+    </Suspense>
 
-      <TresMesh @click="clickScreen">
-        <TresBoxGeometry :args="[boxWidth, boxWidth, boxWidth]" />
-        <TresMeshBasicMaterial :transparent="true" :opacity="0" :side="BackSide" />
-      </TresMesh>
+    <Suspense>
+      <Text3D :text="Config.mainMenu1" font="font/Marvel_Regular.json" :size="1" :position="AppTitlePosition"
+        :rotation="[0.7, 0, 0.3]">
+        <MeshWobbleMaterial :color="0xFFFFE0" :speed="0.5" :factor="0.5" />
+      </Text3D>
+    </Suspense>
 
-      <Suspense>
-        <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Regular.json" :size="1"
-          :position="initTitlePosition" :rotation="titleRotation">
-          <MeshWobbleMaterial :color="0xFFFFE0" :speed="0.5" :factor="0.5" />
-        </Text3D>
-      </Suspense>
+    <Suspense>
+      <Text3D :text="Config.mainMenu2" font="font/Marvel_Regular.json" :size="1" :position="AboutTitlePosition"
+        :rotation="[1.6, 3.2, -0.7]">
+        <MeshWobbleMaterial :color="0xfbf5e9" :speed="0.5" :factor="0.5" />
+      </Text3D>
+    </Suspense>
 
-      <Suspense>
-        <Text3D :text="Config.mainMenu1" font="font/Marvel_Regular.json" :size="1" :position="AppTitlePosition"
-          :rotation="[0.7, 0, 0.3]">
-          <MeshWobbleMaterial :color="0xFFFFE0" :speed="0.5" :factor="0.5" />
-        </Text3D>
-      </Suspense>
+    <TresGroup :visible='starsVisible' ref="starsRef">
+      <!-- <primitive v-for="star in stars" :key="star" :position="star.position" :rotation="star.rotation"
+        :scale="star.scale" :object="createColoredModel(star.material)" @click="clickStar" @pointer-down="clickStar" /> -->
+      <primitive v-for="star in stars" :key="star" :position="star.position" :rotation="star.rotation"
+        :scale="star.scale" :object="createColoredModel(star.material)" />
+    </TresGroup>
 
-      <Suspense>
-        <Text3D :text="Config.mainMenu2" font="font/Marvel_Regular.json" :size="1" :position="AboutTitlePosition"
-          :rotation="[1.6, 3.2, -0.7]">
-          <MeshWobbleMaterial :color="0xfbf5e9" :speed="0.5" :factor="0.5" />
-        </Text3D>
-      </Suspense>
+    <!-- </ScrollControls> -->
 
-      <TresGroup :visible='starsVisible' ref="starsRef">
-        <primitive v-for="star in stars" :key="star" :position="star.position" :rotation="star.rotation"
-          :scale="star.scale" :object="createColoredModel(star.material)" @click="clickStar" />
-      </TresGroup>
+    <TresAmbientLight :intensity="2" />
+    <TresDirectionalLight :position="[0, boxWidth / 2, boxWidth / 2]" :intensity="4" />
 
-      <!-- <Html center transform :position="AppPosition" :rotation="[0.785, 0, 0]">
-      <AppList />
+  </TresCanvas>
 
-      </Html> -->
+  <!-- </div> -->
 
-      <!-- <Html center transform :position="AboutPosition" :rotation="[-1.5, 0, 2.2]"> -->
-      <!-- <About /> -->
-
-      <!-- </Html> -->
-      <!-- </ScrollControls> -->
-
-    </TresCanvas>
-
-    <!-- <div v-if="starsVisible" class="message">{{ Config.msgMain1 }}</div> -->
-
-    <!-- <div class="menu">
-
-      <BtnMenu class="menu1" :inside="Config.mainMenu1" />
-      <BtnMenu class="menu2" :inside="Config.mainMenu2" />
-
-    </div> -->
-
-    <div v-if="startAnimation" class="enter">{{ Config.msgEnter }}</div>
-
-  </div>
 </template>
 
 <style scoped>
 .tresBg {
-  position: fixed;
-  top: 0;
-  left: 0;
+  /* width: 100%;
+  height: 100%; */
+  /* position: fixed;
+  inset: 0;
   width: 100%;
   height: 100%;
-  /* background-image: url('@/assets/img/sky21.jpg'); */
-  /* background-image: url('@/assets/img/sky23.jpg'); */
   background-image: url('@/assets/img/sky42.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
-}
-
-.enter {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  white-space: nowrap;
-  font-size: 28px;
-  font-family: "Marvel-Bold";
-  /* color: #FFF57F */
+  background-position: center; */
+  /* pointer-events: none; */
 }
 </style>

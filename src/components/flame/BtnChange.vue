@@ -18,8 +18,8 @@ const props = defineProps({
   border-radius: 10px;
   text-align: center;
   padding: 7px 30px;
-  color: #FFE98C;
-  border: 1px solid #FFE98C;
+  /* color: #FFE98C; */
+  border: 1px solid #ffffe0;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
   cursor: pointer;
   user-select: none;

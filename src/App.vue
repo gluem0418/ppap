@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 import Stars from '@/components/Stars.vue';
 import AppList from '@/components/AppList.vue';
@@ -9,91 +9,130 @@ import BtnMenu from '@/components/flame/BtnMenu.vue';
 
 import Config from '@/Config.ts';
 
-const starsRef = ref<HTMLElement | null>(null)
-const appListRef = ref<HTMLElement | null>(null)
-const aboutRef = ref<HTMLElement | null>(null)
+const progress = ref(0); // スクロール率
+let scrollableHeight = 0;
 
-const getElementHeightWithMargin = (element: Element) => {
-  if (!element) return 0;
-  console.log('element', element)
-  // const styles = window.getComputedStyle(element);
-  // const marginTop = parseFloat(styles.marginTop);
-  // const marginBottom = parseFloat(styles.marginBottom);
-  const height = element.getBoundingClientRect().height;
-
-  // return height + marginTop + marginBottom;
-  return height;
+const handleScroll = () => {
+  progress.value = window.scrollY / scrollableHeight;
 };
 
-
 onMounted(() => {
-  // 各コンポーネントの高さを取得
-  if (!starsRef.value) return
-  if (!appListRef.value) return
-  if (!aboutRef.value) return
-
-  const starsHeight = starsRef.value.offsetHeight;
-  const appListHeight = appListRef.value.offsetHeight;
-  const aboutHeight = aboutRef.value.offsetHeight;
-
-  const totalCompHeight = starsHeight + appListHeight + aboutHeight;
-
-  console.log('app.scrollHeight:', document.body.scrollHeight)
-
-  console.log("starsHeight:", starsHeight);
-  console.log("appListHeight:", appListHeight);
-  console.log("aboutHeight:", aboutHeight);
-
-  console.log("totalCompHeight:", totalCompHeight);
+  window.addEventListener("scroll", handleScroll);
+  scrollableHeight = document.body.scrollHeight - window.innerHeight;
+  console.log('documentElement.scrollHeight', document.documentElement.scrollHeight)
+  console.log('scrollHeight', document.body.scrollHeight, 'window.innerHeight', window.innerHeight, 'scrollableHeight', scrollableHeight)
 });
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
+
+const startAnimation = ref<boolean>(true);
+const starsVisible = ref<boolean>(false);
+
+
+//////////////////////////////////////////////
+// 画面を最初にクリックした際の処理
+/////////////////////////////////////////////
+function clickScreen() {
+  console.log('clickScreen')
+  if (startAnimation.value) {
+    starsVisible.value = true;
+    startAnimation.value = false
+  }
+}
 
 </script>
 
 <template>
 
-  <div ref="starsRef" class="compStars">
+  <!-- <div @click="clickScreen">
     <Suspense>
-      <Stars />
+      <Stars class="Stars" :progress="progress" :starsVisible="starsVisible" />
+    </Suspense>
+    <div class="dummy"> </div>
+  </div> -->
+
+  <div class="Stars-container" @click.once="clickScreen">
+    <Suspense>
+      <Stars class="Stars" :progress="progress" :starsVisible="starsVisible" />
     </Suspense>
   </div>
 
   <div class="menu">
-
     <BtnMenu class="menu1" :inside="Config.mainMenu1" />
     <BtnMenu class="menu2" :inside="Config.mainMenu2" />
-
   </div>
 
-  <div ref="appListRef" :id="Config.mainMenu1">
+  <div v-if="startAnimation" class="enter">{{ Config.msgEnter }}</div>
+
+  <div class="space"></div>
+  <div :id="Config.mainMenu1">
     <AppList />
   </div>
 
-  <div ref="aboutRef" :id="Config.mainMenu2">
+  <div :id="Config.mainMenu2">
     <About />
   </div>
 
 </template>
 
 <style scoped>
-.compStars {
-  padding-bottom: 2100px;
+.Stars-container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
 }
 
-@media screen and (max-width: 800px) {
-  .compStars {
-    padding-bottom: 2400px;
-  }
+.Stars {
+  position: absolute;
+  inset: 0;
+  touch-action: auto !important;
+  pointer-events: auto !important;
 }
 
+/* .Stars {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ffff00;
+} */
+
+.dummy {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* pointer-events: none; */
+  /* touch-action: auto;
+  -webkit-overflow-scrolling: touch; */
+}
 
 .menu {
   position: absolute;
-  top: 10px;
+  top: 12px;
   right: 1%;
   height: auto;
 }
 
 .menu2 {
-  margin-top: 10px;
+  margin-top: 8px;
+}
+
+.space {
+  width: 100%;
+  height: 2000px;
+}
+
+.enter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  font-size: 28px;
+  font-family: "Marvel-Bold";
+  /* color: #FFF57F */
 }
 </style>

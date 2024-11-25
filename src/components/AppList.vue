@@ -105,16 +105,16 @@ onMounted(() => {
   /* background: rgba(161, 197, 215, 0.9); */
   /* 3076A3 */
   /* background: rgba(48, 118, 163, 0.9); */
-  border-radius: 50px;
   /* border: 2px ridge #FFFFE0; */
+  border-radius: 48px;
   text-align: center;
-  font-size: 20px;
   font-family: "Marvel-Bold";
-  padding: 70px 0 80px;
+  padding: 64px 0 88px;
+  /* padding: 72px 0 88px; */
 }
 
 .title {
-  font-size: 70px;
+  font-size: 72px;
   letter-spacing: 0.05em;
   /* FFFFE0 */
   text-shadow: 2px 2px rgba(255, 255, 224, 0.5);
@@ -122,21 +122,25 @@ onMounted(() => {
 
 @media screen and (max-width: 800px) {
   .title {
-    font-size: 60px;
+    font-size: 64px;
   }
 }
 
 .message {
-  padding-top: 50px;
+  padding-top: 48px;
   font-size: 32px;
   color: #FFE98C;
 }
 
 .listFlame {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  margin: 40px 20px 0;
-  gap: 10px;
+  max-width:1000px;
+  /* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
+  grid-template-columns: repeat(3, 1fr); /* デフォルトは3列 */
+  /* justify-content: center; */
+  margin: 40px auto 0;
+  /* margin: 32px auto 0; */
+  gap: 16px;
 }
 
 .appCard {
@@ -154,7 +158,8 @@ onMounted(() => {
 
 .appTitle {
   margin-top: -5px;
-  height: 35px;
+  height: 40px;
+  font-size: 24px;
   background: #09111F;
   /* background: #A1C5D7; */
   /* color:#09111F; */
