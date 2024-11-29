@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 
 import FlexPoint from '@/components/FlexPoint.vue';
 
@@ -17,10 +17,13 @@ import Config from '@/Config.ts';
 const props = defineProps({
   index: { type: Number },
   app: { type: Application },
+  show: { type: Boolean },
 });
 
 const selectedIndex = ref<number>(0);
 const selectedApp = ref<Application | undefined>(undefined);
+
+const detailContainer = ref<HTMLDivElement | null>(null);
 
 const emit = defineEmits(["close", "change"]);
 
@@ -29,13 +32,10 @@ function closeDetail() {
 }
 
 // 対象アプリケーション指定
+
 const changeApp = (selectType: string, index?: number) => {
   // ページのトップにスクロール
-  const appDetailElement = document.querySelector('.appDetail');
-  if (appDetailElement) {
-    appDetailElement.scrollTop = 0;
-  }
-
+  if (detailContainer.value) detailContainer.value.scrollTop = 0;
   emit('change', selectType, index)
 
 };
@@ -52,10 +52,14 @@ watch(() => props.app, () => {
   }
 })
 
+watch(() => props.show, () => {
+  if (detailContainer.value) detailContainer.value.scrollTop = 0;
+})
+
 </script>
 
 <template>
-  <div v-if="selectedApp" class="appDetail">
+  <div v-if="selectedApp" class="appDetail" ref="detailContainer">
 
     <div class="appFlame" id="appFlame">
 
@@ -69,32 +73,19 @@ watch(() => props.app, () => {
       <div class="titleFlame">
         <div class="title"> {{ selectedApp.id }} </div>
         <div class="intro"> {{ selectedApp.introduction }} </div>
-        <div v-if="selectedApp.id == Config.appSeventh" class="caution"> {{ selectedApp.caution }} </div>
       </div>
-
-      <!-- <hr size="1" color="#A8B8DC" class="titleLine"> -->
-      <!-- <hr class="titleLine"> -->
 
       <div class="secDetail">
 
         <!-- Point -->
         <div class="secPoint">
           <MidTitle1 class="midTitle" :inside="'Points'" :spacing="0.1" />
-          <!-- <div class="midTitle">
-            <div class="midTitle1">Points</div>
-          </div> -->
 
           <!-- Point1 -->
-          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]" :screen="selectedApp.screenShot[0]" />
+          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]"
+            :screen="selectedApp.screenShot[0]" />
           <!-- Point2 -->
-          <!-- <div v-if="selectedApp.id == Config.appPortfolio || selectedApp.id == Config.appStarry"> -->
-          <div v-if="selectedApp.id == Config.appStarry">
-            <FlexPoint class="flexPoint" :point1="selectedApp.points[1]" :point2="selectedApp.points[2]"
-              :screen="selectedApp.screenShot[1]" />
-          </div>
-          <div v-else>
-            <FlexPoint class="flexPoint" :point1="selectedApp.points[1]" :screen="selectedApp.screenShot[1]" />
-          </div>
+          <FlexPoint class="flexPoint" :point1="selectedApp.points[1]" :screen="selectedApp.screenShot[1]" />
 
           <!-- Point3 -->
           <div v-if="selectedApp.id == Config.appSeventh">
@@ -112,12 +103,8 @@ watch(() => props.app, () => {
         <div class="secEnvTool">
 
           <!-- Environment -->
-          <div class="secEnv">
+          <div class="secEnvToolList">
             <MidTitle1 class="midTitle" :inside="'Environment'" :spacing="0.05" />
-            <!-- <div class="flmEnv1"> -->
-            <!-- <div class="midTitle">
-              <div class="midTitle2">Environment</div>
-            </div> -->
             <div class="envToolList">
               <div v-for="(text, index) in selectedApp.environment" :key="index" class="listText">
                 {{ text }}
@@ -126,11 +113,8 @@ watch(() => props.app, () => {
           </div>
 
           <!-- Tool -->
-          <div class="secTool">
+          <div class="secEnvToolList">
             <MidTitle1 class="midTitle" :inside="'Tool'" :spacing="0.1" />
-            <!-- <div class="midTitle">
-              <div class="midTitle1">Tool</div>
-            </div> -->
             <div class="envToolList">
               <div v-for="(text, index) in selectedApp.tool" :key="index" class="listText">
                 {{ text }}
@@ -165,7 +149,6 @@ watch(() => props.app, () => {
 .appDetail {
   position: fixed;
   inset: 0;
-  /* margin: 10px 1%; */
   height: auto;
   /* 243B66 */
   background-image: linear-gradient(rgba(36, 59, 102, 0.7), rgba(36, 59, 102, 0.7)), url('@/assets/img/sky42.jpg');
@@ -175,9 +158,9 @@ watch(() => props.app, () => {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  /* border-radius: 15px; */
+  /* border-radius: 48px; */
   /* border: 4px ridge #F5F5F5; */
-  padding: 16px;
+  padding: 16px 24px;
   overflow-y: scroll;
 }
 
@@ -198,11 +181,11 @@ watch(() => props.app, () => {
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
-  height: 48px;
+  height: 56px;
 }
 
 .btnClose {
-  margin-right: 1%;
+  /* margin-right: 1%; */
   margin-left: 2%;
 }
 
@@ -226,42 +209,34 @@ watch(() => props.app, () => {
 }
 
 .intro {
-  margin-top:16px;
-  /* margin: 20px auto 0; */
-  /* width: 90%; */
+  margin-top: 16px;
   line-height: 1.8;
 }
 
-.caution {
-  margin: 10px 10px 0;
-}
-
 .secDetail {
-  /* margin: 60px auto; */
-  margin: 50px auto;
+  /* margin: 48px auto; */
+  margin: 56px auto;
 }
 
 .secEnvTool {
-  /* margin: 100px auto; */
-  margin: 100px auto 50px;
   display: flex;
   justify-content: center;
   gap: 5%;
   /* gap: 20px; */
 }
 
-.secEnv {
+.secEnvToolList {
   max-width: 550px;
   flex: 1;
 }
 
 @media screen and (max-width: 800px) {
   .secDetail {
-    margin: 60px auto;
+    margin: 64px auto;
   }
 
   .secEnvTool {
-    margin: 70px auto;
+    margin: 72px auto;
     flex-direction: column;
   }
 
@@ -270,7 +245,7 @@ watch(() => props.app, () => {
 
 .btnGit {
   max-width: 150px;
-  margin: 0 0 30px auto;
+  margin: 0 0 32px auto;
 }
 
 @media screen and (max-width: 800px) {
@@ -279,13 +254,9 @@ watch(() => props.app, () => {
   }
 }
 
-.secTool {
-  max-width: 550px;
-  flex: 1;
-}
 
 .envToolList {
-  margin: 20px auto;
+  margin: 24px auto;
   width: fit-content;
 }
 
@@ -295,20 +266,17 @@ watch(() => props.app, () => {
   }
 }
 
-.text {
-}
-
 .listText {
-  font-family: "Marvel-Bold";
-  font-size:20px;
-  line-height: 1.5;
+  /* font-family: "Marvel-Bold";
+  font-size:20px; */
+  line-height: 1.8;
 }
 
 
 .secDetailEnd {
   position: sticky;
   bottom: 0;
-  margin: 0 1%;
+  /* margin: 0 1%; */
   display: flex;
   justify-content: space-between;
 }

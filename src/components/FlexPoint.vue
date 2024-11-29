@@ -36,7 +36,7 @@ const props = defineProps({
     display: flex;
     justify-content: center;
     gap: 20px 2.5%;
-    margin: 40px auto 90px;
+    margin: 48px auto 88px;
 }
 
 @media screen and (max-width: 800px) {
@@ -72,6 +72,6 @@ const props = defineProps({
 }
 
 .appPoint2 {
-    margin-top: 30px;
+    margin-top: 32px;
 }
 </style>

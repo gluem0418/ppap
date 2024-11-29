@@ -25,7 +25,6 @@ const props = defineProps({
 <style scoped>
 .subTitle {
     margin-bottom: 20px;
-    /* font-size: 18px; */
     font-size: 20px;
     color:#FFE98C;
 }
@@ -37,6 +36,7 @@ const props = defineProps({
 }
 
 .text {
-    line-height: 1.8;
+    /* line-height: 1.8; */
+    line-height: 1.7;
 }
 </style>

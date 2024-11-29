@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
 import Application from '@/class/Application.ts';
 import { applications } from '@/class/Application.ts';
@@ -12,14 +12,14 @@ import Config from '@/Config.ts';
 //サムネイル画像クリック時の処理
 const selectedIndex = ref<number | undefined>(undefined);
 const selectedApp = ref<Application | undefined>(undefined);
-const showApp = ref<Boolean>(false);
+const showApp = ref<boolean>(false);
 
 function clickApp(app: Application, index: number) {
-  // console.log('clickApp', app.id)
+  showApp.value = true;
   selectedIndex.value = index;
   selectedApp.value = app;
-  showApp.value = true;
   document.body.style.overflow = 'hidden'; // スクロールを無効にする
+  console.log('clickApp', selectedIndex.value, app.id, showApp.value)
 }
 
 function closeAppDetail() {
@@ -46,10 +46,6 @@ const changeApp = (selectType: string, index: number) => {
 
 }
 
-onMounted(() => {
-  console.log('appList.scrollHeight', document.body.scrollHeight)
-});
-
 </script>
 
 <template>
@@ -73,10 +69,10 @@ onMounted(() => {
 
       </div>
 
-
     </div>
 
-    <AppDetail :app="selectedApp" :index="selectedIndex" v-show="showApp" @close="closeAppDetail" @change="changeApp" />
+    <AppDetail :app="selectedApp" :index="selectedIndex" :show="showApp" v-show="showApp" @close="closeAppDetail"
+      @change="changeApp" />
 
   </div>
 </template>
@@ -84,14 +80,9 @@ onMounted(() => {
 <style scoped>
 .compAppList {
   position: relative;
-  /* margin-top: 2000px; */
-  margin-bottom: 2000px;
-  /* padding-top: 500px; */
 }
 
 .appList {
-  /* margin: auto; */
-  /* width: 98%; */
   height: auto;
   /* background: linear-gradient(to bottom, #243B66, #3076A3 40%, #243B66); */
   background: linear-gradient(to bottom, #243B66, #3076A3, #243B66);
@@ -109,7 +100,8 @@ onMounted(() => {
   border-radius: 48px;
   text-align: center;
   font-family: "Marvel-Bold";
-  padding: 64px 0 88px;
+  padding: 64px 24px 88px;
+  /* padding: 72px 16px 88px; */
   /* padding: 72px 0 88px; */
 }
 
@@ -134,13 +126,18 @@ onMounted(() => {
 
 .listFlame {
   display: grid;
-  max-width:1000px;
+  max-width: 1000px;
+  grid-template-columns: repeat(3, 1fr);
   /* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
-  grid-template-columns: repeat(3, 1fr); /* デフォルトは3列 */
   /* justify-content: center; */
   margin: 40px auto 0;
-  /* margin: 32px auto 0; */
   gap: 16px;
+}
+
+@media (max-width: 800px) {
+  .listFlame {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .appCard {
@@ -161,8 +158,6 @@ onMounted(() => {
   height: 40px;
   font-size: 24px;
   background: #09111F;
-  /* background: #A1C5D7; */
-  /* color:#09111F; */
   align-content: center;
   border-radius: 0 0 5px 5px;
 }

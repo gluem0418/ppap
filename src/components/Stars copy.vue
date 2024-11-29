@@ -27,34 +27,27 @@ const { nodes } = await useGLTF('model/star.glb', { draco: true })
 /////////////////////////////////////////////
 const cameraRef = ref<PerspectiveCamera | null>(null);
 
-const initCameraPosition: TresVector3 = new Vector3(0, 0, 30);  // カメラの初期位置 
+const initCameraPosition: TresVector3 = new Vector3(0, 0, 50);  // カメラの初期位置 
 const initCameraLookAt: Vector3 = new Vector3(0, 0, 10)
 
-const RelayPosition1: Vector3 = new Vector3(-30, 0, 30);    // 中継地点1
-const AppTitlePosition: Vector3 = new Vector3(-30, 30, 1);    // Applicationの配置位置
-const AppPosition: Vector3 = new Vector3(-30, 30, 0);    // Application要素の配置位置
-// const RelayPosition2: Vector3 = new Vector3(0, 0, -30);    // 中継地点2
-// const RelayPosition2: Vector3 = new Vector3(0, 0, 0);    // 中継地点2
-const RelayPosition2: Vector3 = new Vector3(0, 30, -30);    // 中継地点2
-const AboutTitlePosition: Vector3 = new Vector3(29.6, -25, -29.6);    // Aboutの配置位置
-// const AboutPosition: Vector3 = new Vector3(30, -30, -30);    // About要素の配置位置
-const AboutPosition: Vector3 = new Vector3(30, 0, -30);    // About要素の配置位置
+const RelayPosition1: Vector3 = new Vector3(-50, 0, 50);    // 中継地点1
+const AppTitlePosition: Vector3 = new Vector3(-50, 51, 0.5);    // Applicationの配置位置
+const AppPosition: Vector3 = new Vector3(-50, 50, 0);    // Application要素の配置位置
+const RelayPosition2: Vector3 = new Vector3(50, 50, -50);    // 中継地点2
+const AboutTitlePosition: Vector3 = new Vector3(49.5, -40, -49.5);    // Aboutの配置位置
+const AboutPosition: Vector3 = new Vector3(50, -50, -50);    // About要素の配置位置
 
 const starsRef = ref<Group | null>(null);
 const titleRef = ref<InstanceType<typeof Text3D> | null>(null);
 const titleRotation = ref([0, 0, 0]);
-const initTitlePosition: Vector3 = new Vector3(0, 4.2, 18);    // タイトルの初期位置
-const endTitlePosition: Vector3 = new Vector3(-7.4, 2, 20);    // タイトルの最終位置
+const initTitlePosition: Vector3 = new Vector3(0, 5, 35);    // タイトルの初期位置
+// const endTitlePosition: Vector3 = new Vector3(-4.5, 1.5, 15.3);    // タイトルの最終位置
+const endTitlePosition: Vector3 = new Vector3(-5.8, 1.8, 17);    // タイトルの最終位置
 const endTitleRotation = [3.05, 0.8, 3.2]
 
-const scrollLimitRelay1 = 0.1 // 中継地点へのスクロール閾値
-const scrollLimitApp = 0.35 // Appへのスクロール閾値
-const scrollLimitRelay2 = 0.55 // 中継地点へのスクロール閾値
-const scrollLimitAbout = 0.83;  // Aboutへのスクロール閾値
-
-// const starCount = 1000;
-const starCount = 700;
-const boxWidth = 130;
+const starCount = 1000;
+// const starCount = 100;
+const boxWidth = 200;
 
 //minからmaxまでのランダムな値を返す
 const randomNum = (min: number, max: number) => {
@@ -117,6 +110,12 @@ for (let i = 0; i < starPoints * 2; i++) {
   const radius = i % 2 === 0 ? starRadius : starRadius / 2;
   starShapeVertices.push(Math.cos(angle) * radius, Math.sin(angle) * radius, 0);
 }
+
+const scrollLimitRelay1 = 0.1 // 中継地点へのスクロール閾値
+const scrollLimitApp = 0.3 // Appへのスクロール閾値
+const scrollLimitRelay2 = 0.5 // 中継地点へのスクロール閾値
+// const scrollLimitAbout = 0.75;  // Aboutへのスクロール閾値
+const scrollLimitAbout = 0.75;  // Aboutへのスクロール閾値
 
 let targetPosition = initCameraPosition;
 let targetLookAt = initCameraLookAt.clone();
