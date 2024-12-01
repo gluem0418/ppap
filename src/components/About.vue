@@ -82,11 +82,6 @@ import imgExp2 from "/img/exp2.jpg"
   padding-bottom: 160px;
 }
 
-@media screen and (max-width: 800px) {
-  .compAbout {
-    margin-top: 2400px;
-  }
-}
 
 .about {
   height: auto;
@@ -135,15 +130,10 @@ import imgExp2 from "/img/exp2.jpg"
   margin-bottom: 20px;
 }
 
-@media screen and (max-width: 800px) {
-  .subTitle {
-    width: auto;
-  }
-}
 
 .expText {
   /* font-size: 16px; */
-  line-height: 1.8;
+  line-height: 1.7;
 }
 
 .flameScreen {
@@ -157,9 +147,43 @@ import imgExp2 from "/img/exp2.jpg"
   border-radius: 10px;
 }
 
+
+.flexExp2 {
+  display: flex;
+  justify-content: center;
+  gap: 20px 2.5%;
+  flex-direction: row-reverse;
+}
+
+
+.secSkill {
+  margin-top: 88px;
+}
+
+.skills {
+  margin: 40px auto 0;
+}
+
 @media screen and (max-width: 800px) {
+  .compAbout {
+    margin-top: 2500px;
+    padding-bottom: 120px;
+  }
+
+  .title {
+    font-size: 64px;
+    /* margin-bottom: 32px; */
+  }
+
+  .subTitle {
+    /* width: auto; */
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
   .flexExp1 {
     flex-direction: column;
+    margin: 32px auto 64px;
   }
 
   .flameExp {
@@ -169,27 +193,18 @@ import imgExp2 from "/img/exp2.jpg"
   .flameScreen {
     width: 100%;
   }
-}
 
-
-.flexExp2 {
-  display: flex;
-  justify-content: center;
-  gap: 20px 2.5%;
-  flex-direction: row-reverse;
-}
-
-@media screen and (max-width: 800px) {
   .flexExp2 {
     flex-direction: column;
   }
-}
 
-.secSkill {
-  margin-top: 88px;
-}
+  .secSkill {
+    margin-top: 72px;
+  }
 
-.skills {
-  margin: 40px auto 0;
+  .skills {
+    margin: 32px auto 0;
+  }
+
 }
 </style>

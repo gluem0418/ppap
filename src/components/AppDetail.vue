@@ -82,8 +82,7 @@ watch(() => props.show, () => {
           <MidTitle1 class="midTitle" :inside="'Points'" :spacing="0.1" />
 
           <!-- Point1 -->
-          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]"
-            :screen="selectedApp.screenShot[0]" />
+          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]" :screen="selectedApp.screenShot[0]" />
           <!-- Point2 -->
           <FlexPoint class="flexPoint" :point1="selectedApp.points[1]" :screen="selectedApp.screenShot[1]" />
 
@@ -164,12 +163,6 @@ watch(() => props.show, () => {
   overflow-y: scroll;
 }
 
-@media screen and (max-width: 800px) {
-  .appDetail {
-    padding: 8px;
-  }
-}
-
 .appFlame {
   position: relative;
 }
@@ -202,19 +195,12 @@ watch(() => props.show, () => {
   /* -webkit-text-stroke: 1px #121F30; */
 }
 
-@media screen and (max-width: 800px) {
-  .title {
-    font-size: 64px;
-  }
-}
-
 .intro {
   margin-top: 16px;
   line-height: 1.8;
 }
 
 .secDetail {
-  /* margin: 48px auto; */
   margin: 56px auto;
 }
 
@@ -230,40 +216,19 @@ watch(() => props.show, () => {
   flex: 1;
 }
 
-@media screen and (max-width: 800px) {
-  .secDetail {
-    margin: 64px auto;
-  }
-
-  .secEnvTool {
-    margin: 72px auto;
-    flex-direction: column;
-  }
-
-}
-
 
 .btnGit {
   max-width: 150px;
-  margin: 0 0 32px auto;
+  position:absolute;
+  right:0;
+  bottom:72px;
 }
 
-@media screen and (max-width: 800px) {
-  .btnGit {
-    margin-bottom: 40px;
-  }
-}
 
 
 .envToolList {
   margin: 24px auto;
   width: fit-content;
-}
-
-@media screen and (max-width: 800px) {
-  .envToolList {
-    margin-bottom: 40px;
-  }
 }
 
 .listText {
@@ -298,5 +263,38 @@ watch(() => props.show, () => {
 
 .selectedApp {
   background: #090F1A;
+}
+
+@media screen and (max-width: 800px) {
+  .appDetail {
+    padding: 12px 24px;
+  }
+
+
+  .appTop {
+    height: 52px;
+  }
+
+  .title {
+    font-size: 48px;
+  }
+
+  .secDetail {
+    margin: 40px auto;
+  }
+
+  .secEnvTool {
+    /* margin: 72px auto; */
+    flex-direction: column;
+  }
+
+  .btnGit {
+    bottom:64px;
+  }
+
+  .envToolList {
+    margin: 16px auto 40px;
+  }
+
 }
 </style>

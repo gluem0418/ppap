@@ -27,27 +27,31 @@ const { nodes } = await useGLTF('model/star.glb', { draco: true })
 /////////////////////////////////////////////
 const cameraRef = ref<PerspectiveCamera | null>(null);
 
-const initCameraPosition: TresVector3 = new Vector3(0, 0, 50);  // カメラの初期位置 
+const initCameraPosition: TresVector3 = new Vector3(0, 0, 30);  // カメラの初期位置 
 const initCameraLookAt: Vector3 = new Vector3(0, 0, 10)
 
-const RelayPosition1: Vector3 = new Vector3(-50, 0, 50);    // 中継地点1
-const AppTitlePosition: Vector3 = new Vector3(-50, 51, 0.5);    // Applicationの配置位置
-const AppPosition: Vector3 = new Vector3(-50, 50, 0);    // Application要素の配置位置
-const RelayPosition2: Vector3 = new Vector3(50, 50, -50);    // 中継地点2
-const AboutTitlePosition: Vector3 = new Vector3(49.5, -40, -49.5);    // Aboutの配置位置
-const AboutPosition: Vector3 = new Vector3(50, -50, -50);    // About要素の配置位置
+const RelayPosition1: Vector3 = new Vector3(-30, 0, 30);    // 中継地点1
+const AppTitlePosition: Vector3 = new Vector3(-30, 29.5, 1);    // Applicationの配置位置
+const AppPosition: Vector3 = new Vector3(-30, 30, 0);    // Application要素の配置位置
+const RelayPosition2: Vector3 = new Vector3(0, 30, -30);    // 中継地点2
+const AboutTitlePosition: Vector3 = new Vector3(27.5, 3, -30);    // Aboutの配置位置
+const AboutPosition: Vector3 = new Vector3(30, 0, -30);    // About要素の配置位置
 
 const starsRef = ref<Group | null>(null);
 const titleRef = ref<InstanceType<typeof Text3D> | null>(null);
 const titleRotation = ref([0, 0, 0]);
-const initTitlePosition: Vector3 = new Vector3(0, 5, 35);    // タイトルの初期位置
-// const endTitlePosition: Vector3 = new Vector3(-4.5, 1.5, 15.3);    // タイトルの最終位置
-const endTitlePosition: Vector3 = new Vector3(-5.8, 1.8, 17);    // タイトルの最終位置
-const endTitleRotation = [3.05, 0.8, 3.2]
+const initTitlePosition: Vector3 = new Vector3(0, 4.2, 18);    // タイトルの初期位置
+const endTitlePosition: Vector3 = new Vector3(-7.4, -5, 20);    // タイトルの最終位置
+const endTitleRotation = [-2.1, 0.5, 2.55]
 
-const starCount = 1000;
-// const starCount = 100;
-const boxWidth = 200;
+const scrollLimitRelay1 = 0.1 // 中継地点へのスクロール閾値
+const scrollLimitApp = 0.32 // Appへのスクロール閾値
+const scrollLimitRelay2 = 0.5 // 中継地点へのスクロール閾値
+const scrollLimitAbout = 0.75;  // Aboutへのスクロール閾値
+
+// const starCount = 1000;
+const starCount = 750;
+const boxWidth = 150;
 
 //minからmaxまでのランダムな値を返す
 const randomNum = (min: number, max: number) => {
@@ -111,12 +115,6 @@ for (let i = 0; i < starPoints * 2; i++) {
   starShapeVertices.push(Math.cos(angle) * radius, Math.sin(angle) * radius, 0);
 }
 
-const scrollLimitRelay1 = 0.1 // 中継地点へのスクロール閾値
-const scrollLimitApp = 0.3 // Appへのスクロール閾値
-const scrollLimitRelay2 = 0.5 // 中継地点へのスクロール閾値
-// const scrollLimitAbout = 0.75;  // Aboutへのスクロール閾値
-const scrollLimitAbout = 0.75;  // Aboutへのスクロール閾値
-
 let targetPosition = initCameraPosition;
 let targetLookAt = initCameraLookAt.clone();
 
@@ -168,7 +166,7 @@ const scrollAction = (progress: number) => {
   }
 
   console.log('window.scrollY', window.scrollY, 'progress', progress)
-  // console.log('cameraPosition', cameraRef.value.position, 'targetPosition', targetPosition, 'targetLookAt', targetLookAt)
+  console.log('cameraPosition', cameraRef.value.position, 'targetPosition', targetPosition, 'targetLookAt', targetLookAt)
 
   cameraRef.value.position.copy(targetPosition);
   cameraRef.value.lookAt(targetLookAt);
@@ -303,8 +301,8 @@ onUnmounted(() => {
     </TresMesh> -->
 
     <Suspense>
-      <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Regular.json" :size="1"
-        :position="initTitlePosition" :rotation="titleRotation">
+      <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Regular.json" :size="1" :position="initTitlePosition"
+        :rotation="titleRotation">
         <MeshWobbleMaterial :color="0xFFFFE0" :speed="0.5" :factor="0.5" />
       </Text3D>
     </Suspense>
@@ -317,8 +315,10 @@ onUnmounted(() => {
     </Suspense>
 
     <Suspense>
+      <!-- <Text3D :text="Config.mainMenu2" font="font/Marvel_Regular.json" :size="1" :position="AboutTitlePosition"
+        :rotation="[1.6, -2.3, 2]"> -->
       <Text3D :text="Config.mainMenu2" font="font/Marvel_Regular.json" :size="1" :position="AboutTitlePosition"
-        :rotation="[1.6, 3.2, -0.7]">
+        :rotation="[1.6, -2.3, 1.9]">
         <MeshWobbleMaterial :color="0xfbf5e9" :speed="0.5" :factor="0.5" />
       </Text3D>
     </Suspense>
@@ -326,8 +326,8 @@ onUnmounted(() => {
     <TresGroup :visible='starsVisible' ref="starsRef">
       <!-- <primitive v-for="star in stars" :key="star" :position="star.position" :rotation="star.rotation"
         :scale="star.scale" :object="createColoredModel(star.material)" @click="clickStar" @pointer-down="clickStar" /> -->
-      <primitive v-for="star in stars" :key="star" :position="star.position" :rotation="star.rotation"
-        :scale="star.scale" :object="createColoredModel(star.material)" />
+      <primitive v-for="star in stars" :key="star" :position="star.position" :rotation="star.rotation" :scale="star.scale"
+        :object="createColoredModel(star.material)" />
     </TresGroup>
 
     <!-- </ScrollControls> -->
@@ -338,9 +338,6 @@ onUnmounted(() => {
   </TresCanvas>
 
   <!-- </div> -->
-
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

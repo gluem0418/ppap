@@ -6,6 +6,7 @@ import AppList from '@/components/AppList.vue';
 import About from '@/components/About.vue';
 
 import BtnMenu from '@/components/flame/BtnMenu.vue';
+import ScrollDown from '@/components/icon/ScrollDown.vue';
 
 import Config from '@/Config.ts';
 
@@ -25,8 +26,7 @@ let scrollableHeight = 0;
 const handleScroll = () => {
   // if (isScrollPaused.value) return; // スクロールが停止中なら無視
   progress.value = window.scrollY / scrollableHeight;
-};
-
+  
 // スクロールを一時停止する処理
 // const pauseScroll = () => {
 //   isScrollPaused.value = true;
@@ -35,12 +35,13 @@ const handleScroll = () => {
 //     isScrollPaused.value = false;
 //     document.body.style.overflow = ''; // スクロールを再有効化
 //   }, 1000); // 1秒間停止
-// };
+};
 
 onMounted(() => {
   // スクロールイベントを設定
   window.addEventListener('scroll', handleScroll);
-  scrollableHeight = document.body.scrollHeight - window.innerHeight;
+  // scrollableHeight = document.body.scrollHeight - window.innerHeight;
+  scrollableHeight = document.body.scrollHeight;
 
   // const observer = new IntersectionObserver(
   //   (entries) => {
@@ -107,21 +108,18 @@ function clickScreen() {
     <BtnMenu class="menu2" :inside="Config.mainMenu2" />
   </div>
 
+  
   <div v-if="startAnimation" class="enter">{{ Config.msgEnter }}</div>
 
-  <div v-else class="scroll_down">
-    <span>Scroll</span>
-  </div>
+  <ScrollDown v-else class="scroll_down" />
 
   <div class="space"></div>
 
-  <!-- <div :id="Config.mainMenu1" ref="refAppList"> -->
-  <div :id="Config.mainMenu1">
+  <div :id="Config.mainMenu1" class="AppList">
     <AppList />
   </div>
 
-  <!-- <div :id="Config.mainMenu2" ref="refAbout"> -->
-  <div :id="Config.mainMenu2">
+  <div :id="Config.mainMenu2" class="About">
     <About />
   </div>
 
@@ -140,13 +138,6 @@ function clickScreen() {
   touch-action: auto !important;
   /* -webkit-overflow-scrolling: touch; */
   /* pointer-events: auto !important; */
-}
-
-.dummy {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
 }
 
 .menu {
@@ -181,34 +172,7 @@ function clickScreen() {
   left: 40px;
 }
 
-.scroll_down span {
-  position: absolute;
-  left: -24px;
-  bottom: 16px;
-  font-size: 18px;
-  font-family: "Marvel-Bold";
-  letter-spacing: .2em;
-  writing-mode: vertical-rl;
-  text-transform: uppercase;
-}
-
-.scroll_down:before {
-  content: "";
-  position: absolute;
-  bottom: 5px;
-  right: -8px;
-  width: 2px;
-  height: 20px;
-  background: #ffffe0;
-  transform: skewX(-31deg);
-}
-
-.scroll_down:after {
-  content: "";
-  position: absolute;
-  bottom: 5px;
-  width: 2px;
-  height: 85px;
-  background: #ffffe0;
+.AppList {
+  animation: slideBottom 2.0s ease-in-out;
 }
 </style>

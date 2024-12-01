@@ -31,6 +31,7 @@ const props = defineProps({
 
 @media screen and (max-width: 800px) {
     .subTitle {
+        margin-bottom: 16px;
         font-size: 16px;
     }
 }

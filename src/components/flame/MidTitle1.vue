@@ -23,14 +23,6 @@ const props = defineProps({
   color: #FFE98C;
 }
 
-/* .midTitle1 {
-  letter-spacing: 0.1em;
-}
-
-.midTitle2 {
-  letter-spacing: 0.05em;
-} */
-
 .midTitle:before,
 .midTitle:after {
   content: "";
@@ -50,10 +42,8 @@ const props = defineProps({
 
 
 @media screen and (max-width: 800px) {
-  .flame {
-    /* padding: 4px 20px; */
-    padding: 4px 10px;
-    width: auto;
+  .midTitle {
+    font-size: 40px;
   }
 
   .text {

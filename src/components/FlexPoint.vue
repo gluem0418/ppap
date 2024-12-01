@@ -15,7 +15,6 @@ const props = defineProps({
 </script>
 
 <template>
-
     <div class="flexPoint" :class="{ 'reverse': order === '1' }">
 
         <div class="flamePoint">
@@ -28,7 +27,6 @@ const props = defineProps({
         </div>
 
     </div>
-
 </template>
 
 <style scoped>
@@ -39,26 +37,15 @@ const props = defineProps({
     margin: 48px auto 88px;
 }
 
-@media screen and (max-width: 800px) {
-    .flexPoint {
-        margin: 34px auto 80px;
-        flex-direction: column;
-    }
-}
 
 .reverse {
     flex-direction: row-reverse;
 }
 
-@media screen and (max-width: 800px) {
-    .reverse {
-        flex-direction: column;
-    }
-}
 
 .flameScreen {
     flex: 1;
-    max-width:500px;
+    max-width: 500px;
 }
 
 .imgScreen {
@@ -67,11 +54,28 @@ const props = defineProps({
 }
 
 .flamePoint {
-    max-width:500px;
+    max-width: 500px;
     flex: 1;
 }
 
 .appPoint2 {
     margin-top: 32px;
+}
+
+@media screen and (max-width: 800px) {
+    .flexPoint {
+        margin: 32px auto 64px;
+        flex-direction: column;
+    }
+
+    .reverse {
+        flex-direction: column;
+    }
+
+    .appPoint2 {
+        margin-top: 24px;
+    }
+
+
 }
 </style>

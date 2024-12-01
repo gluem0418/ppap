@@ -105,6 +105,7 @@ const changeApp = (selectType: string, index: number) => {
   /* padding: 72px 0 88px; */
 }
 
+
 .title {
   font-size: 72px;
   letter-spacing: 0.05em;
@@ -128,21 +129,11 @@ const changeApp = (selectType: string, index: number) => {
   display: grid;
   max-width: 1000px;
   grid-template-columns: repeat(3, 1fr);
-  /* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
-  /* justify-content: center; */
   margin: 40px auto 0;
   gap: 16px;
 }
 
-@media (max-width: 800px) {
-  .listFlame {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 .appCard {
-  /* flex: 1; */
-  /* min-width: 150px; */
   cursor: pointer;
 }
 
@@ -150,7 +141,6 @@ const changeApp = (selectType: string, index: number) => {
   height: auto;
   width: 100%;
   border-radius: 5px 5px 0 0;
-  /* border-radius: 5px; */
 }
 
 .appTitle {
@@ -160,5 +150,24 @@ const changeApp = (selectType: string, index: number) => {
   background: #09111F;
   align-content: center;
   border-radius: 0 0 5px 5px;
+}
+
+@media (max-width: 800px) {
+  .listFlame {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .title {
+    font-size: 64px;
+  }
+
+  .message {
+    font-size: 28px;
+  }
+
+  .appTitle {
+    font-size: 20px;
+  }
+
 }
 </style>
