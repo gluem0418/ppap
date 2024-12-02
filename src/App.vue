@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
+import anime from 'animejs';
 
 import Stars from '@/components/Stars.vue';
 import AppList from '@/components/AppList.vue';
@@ -10,31 +11,15 @@ import ScrollDown from '@/components/icon/ScrollDown.vue';
 
 import Config from '@/Config.ts';
 
-// const refAppList = ref<HTMLElement | null>(null);
-// const refAbout = ref<HTMLElement | null>(null);
-
-// const elementsToObserve = ref([
-//   { target: refAppList, paused: false },
-//   { target: refAbout, paused: false },
-// ]);
+const refAppList = ref<HTMLElement | null>(null);
+const refAbout = ref<HTMLElement | null>(null);
 
 const progress = ref(0); // スクロール率
-const isScrollPaused = ref(false); // スクロールを一時停止するフラグ
 let scrollableHeight = 0;
 
 // スクロール量を更新
 const handleScroll = () => {
-  // if (isScrollPaused.value) return; // スクロールが停止中なら無視
   progress.value = window.scrollY / scrollableHeight;
-  
-// スクロールを一時停止する処理
-// const pauseScroll = () => {
-//   isScrollPaused.value = true;
-//   document.body.style.overflow = 'hidden'; // スクロールを無効化
-//   setTimeout(() => {
-//     isScrollPaused.value = false;
-//     document.body.style.overflow = ''; // スクロールを再有効化
-//   }, 1000); // 1秒間停止
 };
 
 onMounted(() => {
@@ -43,35 +28,27 @@ onMounted(() => {
   // scrollableHeight = document.body.scrollHeight - window.innerHeight;
   scrollableHeight = document.body.scrollHeight;
 
-  // const observer = new IntersectionObserver(
-  //   (entries) => {
-  //     entries.forEach((entry) => {
-  //       const elementData = elementsToObserve.value.find(
-  //         (el) => el.target === entry.target
-  //       );
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // entry.target.classList.add('scaleFlame');
+        anime({
+          targets: entry.target,
+          // scale: [0.5, 1],
+          opacity: [0 , 1],
+          duration: 800,
+          easing: 'easeOutCubic' // 加減速の種類
+        });
+      } else {
+        // entry.target.classList.remove('scaleFlame');
+      }
+    });
+  });
 
-  //       if (!elementData) return;
+  if (refAppList.value) observer.observe(refAppList.value);
+  if (refAbout.value) observer.observe(refAbout.value);
 
-  //       if (entry.isIntersecting && !elementData.paused) {
-  //         pauseScroll(); // 要素が表示されたらスクロール停止
-  //         elementData.paused = true; // この要素では一度だけ停止
-  //       } else if (!entry.isIntersecting) {
-  //         elementData.paused = false; // 要素が見えなくなったらリセット
-  //       }
-  //     });
-  //   },
-  //   { threshold: 0.5 } // 50%表示されたら検知
-  // );
-
-  // // 各リアクティブ要素を監視
-  // elementsToObserve.value.forEach(({ target }) => {
-  //   if (target) observer.observe(target);
-  //   console.log('elementsToObserve_observer', observer)
-  //   console.log('elementsToObserve_target', target)
-  // });
-
-  console.log('documentElement.scrollHeight', document.documentElement.scrollHeight)
-  console.log('scrollHeight', document.body.scrollHeight, 'window.innerHeight', window.innerHeight, 'scrollableHeight', scrollableHeight)
+  console.log('scrollHeight', document.body.scrollHeight, 'documentElement.scrollHeight', document.documentElement.scrollHeight, 'window.innerHeight', window.innerHeight)
 });
 
 onUnmounted(() => {
@@ -80,7 +57,6 @@ onUnmounted(() => {
 
 const startAnimation = ref<boolean>(true);
 const starsVisible = ref<boolean>(false);
-
 
 //////////////////////////////////////////////
 // 画面を最初にクリックした際の処理
@@ -96,7 +72,6 @@ function clickScreen() {
 </script>
 
 <template>
-
   <div class="Stars-container" @click.once="clickScreen">
     <Suspense>
       <Stars class="Stars" :progress="progress" :starsVisible="starsVisible" />
@@ -108,21 +83,20 @@ function clickScreen() {
     <BtnMenu class="menu2" :inside="Config.mainMenu2" />
   </div>
 
-  
+
   <div v-if="startAnimation" class="enter">{{ Config.msgEnter }}</div>
 
   <ScrollDown v-else class="scroll_down" />
 
   <div class="space"></div>
 
-  <div :id="Config.mainMenu1" class="AppList">
+  <div :id="Config.mainMenu1" ref="refAppList">
     <AppList />
   </div>
 
-  <div :id="Config.mainMenu2" class="About">
+  <div :id="Config.mainMenu2" ref="refAbout">
     <About />
   </div>
-
 </template>
 
 <style scoped>
@@ -170,9 +144,5 @@ function clickScreen() {
   position: absolute;
   bottom: 2%;
   left: 40px;
-}
-
-.AppList {
-  animation: slideBottom 2.0s ease-in-out;
 }
 </style>

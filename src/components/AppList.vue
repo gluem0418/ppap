@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+
+import { ref, nextTick } from 'vue'
+import anime from 'animejs';
 
 import Application from '@/class/Application.ts';
 import { applications } from '@/class/Application.ts';
@@ -19,6 +21,16 @@ function clickApp(app: Application, index: number) {
   selectedIndex.value = index;
   selectedApp.value = app;
   document.body.style.overflow = 'hidden'; // スクロールを無効にする
+  nextTick(() => {
+    // 詳細表示のアニメーション
+    anime({
+      targets: '.AppDetail',
+      translateY: [window.innerHeight * -1, 0],
+      scale: [0, 1],
+      duration: 500,
+      easing: 'easeOutCubic' // 加減速の種類
+    });
+  });
   console.log('clickApp', selectedIndex.value, app.id, showApp.value)
 }
 
@@ -28,21 +40,91 @@ function closeAppDetail() {
 }
 
 const changeApp = (selectType: string, index: number) => {
-  // console.log('changeApp_selectType', selectType)
-  // console.log('changeApp_beforeindex', selectedIndex.value)
-  // console.log('changeApp_applications.length', applications.length)
 
   if (selectType == 'next') {
-    selectedIndex.value = selectedIndex.value == applications.length - 1 ? 0 : selectedIndex.value! + 1
-    selectedApp.value = applications[selectedIndex.value]
+    //左にフェードアウト
+    fadeInOut('leftOut')
+    setTimeout(() => {
+      selectedIndex.value = selectedIndex.value == applications.length - 1 ? 0 : selectedIndex.value! + 1
+      selectedApp.value = applications[selectedIndex.value]
+      // 右からフェードイン
+      fadeInOut('rightIn')
+    }, 300);
   } else if (selectType == 'prev') {
-    selectedIndex.value = selectedIndex.value == 0 ? applications.length - 1 : selectedIndex.value! - 1
-    selectedApp.value = applications[selectedIndex.value]
+    //右にフェードアウト
+    fadeInOut('rightOut')
+    setTimeout(() => {
+      selectedIndex.value = selectedIndex.value == 0 ? applications.length - 1 : selectedIndex.value! - 1
+      selectedApp.value = applications[selectedIndex.value]
+      // 左からフェードイン
+      fadeInOut('leftIn')
+    }, 300);
   } else if (selectType == 'select') {
-    selectedIndex.value = index
-    selectedApp.value = applications[index]
+    // if (!selectedIndex.value) return
+    console.log('changeApp', 'selectedIndex.value', selectedIndex.value, 'index', index)
+    if (selectedIndex.value! < index) {
+      //左にフェードアウト
+      fadeInOut('leftOut')
+      setTimeout(() => {
+        // 右からフェードイン
+        fadeInOut('rightIn')
+        selectedIndex.value = index
+        selectedApp.value = applications[index]
+      }, 300);
+    } else if (selectedIndex.value! > index) {
+      //右にフェードアウト
+      fadeInOut('rightOut')
+      setTimeout(() => {
+        selectedIndex.value = index
+        selectedApp.value = applications[index]
+        // 左からフェードイン
+        fadeInOut('leftIn')
+      }, 300);
+    }
   }
-  // console.log('changeApp_afterindex', selectedIndex.value)
+}
+
+function fadeInOut(kind: string) {
+
+  switch (kind) {
+    case 'leftOut':
+      anime({
+        targets: '.AppDetail',
+        translateX: [0, window.innerWidth * -1.5],
+        opacity: [1, 0.3],
+        duration: 500,
+        easing: 'easeOutCubic' // 加減速の種類
+      });
+      break;
+    case 'rightIn':
+      anime({
+        targets: '.AppDetail',
+        translateX: [window.innerWidth * 1.5, 0],
+        opacity: [0.3, 1],
+        duration: 500,
+        easing: 'easeOutCubic' // 加減速の種類
+      });
+      break;
+    case 'rightOut':
+      anime({
+        targets: '.AppDetail',
+        translateX: [0, window.innerWidth * 1.5],
+        opacity: [1, 0.3],
+        duration: 500,
+        easing: 'easeOutCubic' // 加減速の種類
+      });
+      break;
+    case 'leftIn':
+      anime({
+        targets: '.AppDetail',
+        translateX: [window.innerWidth * -1.5, 0],
+        opacity: [0.3, 1],
+        duration: 500,
+        easing: 'easeOutCubic' // 加減速の種類
+      });
+      break;
+    default:
+  }
 
 }
 
@@ -71,8 +153,10 @@ const changeApp = (selectType: string, index: number) => {
 
     </div>
 
-    <AppDetail :app="selectedApp" :index="selectedIndex" :show="showApp" v-show="showApp" @close="closeAppDetail"
-      @change="changeApp" />
+    <AppDetail class="AppDetail" :app="selectedApp" :index="selectedIndex" :show="showApp" v-show="showApp"
+      @close="closeAppDetail" @change="changeApp" />
+    <!-- <AppDetail class="AppDetail" :app="selectedApp" :index="selectedIndex" :show="showApp" v-if="showApp"
+      @close="closeAppDetail" @change="changeApp" /> -->
 
   </div>
 </template>
