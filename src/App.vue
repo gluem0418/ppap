@@ -37,7 +37,8 @@ onMounted(() => {
           // scale: [0.5, 1],
           opacity: [0 , 1],
           duration: 800,
-          easing: 'easeOutCubic' // 加減速の種類
+          // easing: 'easeOutCubic' // 加減速の種類
+          easing: 'linear' // 加減速の種類
         });
       } else {
         // entry.target.classList.remove('scaleFlame');
