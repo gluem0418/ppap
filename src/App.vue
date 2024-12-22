@@ -34,7 +34,6 @@ onMounted(() => {
         // entry.target.classList.add('scaleFlame');
         anime({
           targets: entry.target,
-          // scale: [0.5, 1],
           opacity: [0 , 1],
           duration: 800,
           easing: 'easeOutCubic' // 加減速の種類
