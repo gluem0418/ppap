@@ -195,7 +195,8 @@ function fadeInOut(kind: string) {
   /* border: 2px ridge #FFFFE0; */
   border-radius: 48px;
   text-align: center;
-  font-family: "Marvel-Bold";
+  /* font-family: "Marvel-Bold"; */
+  font-family: "Akshar-Light";
   padding: 64px 24px 88px;
   /* padding: 72px 16px 88px; */
   /* padding: 72px 0 88px; */
@@ -204,6 +205,7 @@ function fadeInOut(kind: string) {
 
 .title {
   font-size: 72px;
+  font-family: "Akshar";
   letter-spacing: 0.05em;
   /* FFFFE0 */
   text-shadow: 2px 2px rgba(255, 255, 224, 0.5);

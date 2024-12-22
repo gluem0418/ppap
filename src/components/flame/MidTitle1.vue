@@ -17,7 +17,8 @@ const props = defineProps({
   margin: 0 auto;
   max-width: 1200px;
   font-size: 48px;
-  font-family: "Marvel-Bold";
+  /* font-size: 56px; */
+  font-family: "Akshar";
   display: flex;
   align-items: center;
   color: #FFE98C;

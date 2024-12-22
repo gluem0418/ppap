@@ -14,7 +14,8 @@
   left: -24px;
   bottom: 16px;
   font-size: 18px;
-  font-family: "Marvel-Bold";
+  /* font-family: "Marvel-Bold"; */
+  font-family: "Akshar-Light";
   letter-spacing: .2em;
   writing-mode: vertical-rl;
   text-transform: uppercase;

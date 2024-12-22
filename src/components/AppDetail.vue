@@ -189,7 +189,9 @@ watch(() => props.show, () => {
 
 .title {
   font-size: 72px;
-  font-family: "Marvel-Bold";
+  /* font-family: "Marvel-Bold"; */
+  font-family: "Akshar";
+  /* font-family: "Akshar-Light"; */
   letter-spacing: 0.05em;
   text-shadow: 2px 2px rgba(255, 255, 224, 0.5);
   /* -webkit-text-stroke: 1px #121F30; */
@@ -198,6 +200,9 @@ watch(() => props.show, () => {
 .intro {
   margin-top: 16px;
   line-height: 1.8;
+  /* font-family: "MPLUS1p"; */
+  /* line-height: 1.7; */
+  /* transform: rotate(0.05deg); */
 }
 
 .secDetail {

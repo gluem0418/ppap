@@ -25,7 +25,9 @@ const props = defineProps({
 <style scoped>
 .subTitle {
     margin-bottom: 20px;
+    font-family: "MPLUS2-Medium";
     font-size: 20px;
+    /* font-size: 18px; */
     color:#FFE98C;
 }
 
@@ -37,7 +39,7 @@ const props = defineProps({
 }
 
 .text {
-    /* line-height: 1.8; */
     line-height: 1.7;
+    transform: rotate(0.05deg);
 }
 </style>

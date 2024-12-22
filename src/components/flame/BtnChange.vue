@@ -17,7 +17,7 @@ const props = defineProps({
   /* background: #121F30; */
   border-radius: 10px;
   text-align: center;
-  padding: 7px 30px;
+  padding: 2px 30px;
   /* color: #FFE98C; */
   border: 1px solid #ffffe0;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
@@ -30,16 +30,17 @@ const props = defineProps({
 }
 
 .text {
-  font-family: "Marvel-Bold";
+  /* font-family: "Marvel-Bold"; */
+  font-family: "Akshar-Light";
   font-size: 28px;
 }
 
 @media screen and (max-width: 800px) {
   .flame {
-    padding: 5px 20px;
+    padding: 1px 20px;
   }
   .text {
-    font-family: "Marvel-Bold";
+    /* font-family: "Marvel-Bold"; */
     font-size: 24px;
   }
 }

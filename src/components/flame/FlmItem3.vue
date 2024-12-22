@@ -22,7 +22,8 @@ const props = defineProps({
 }
 
 .text {
-  font-family: "Marvel-Bold";
+  /* font-family: "Marvel-Bold"; */
+  font-family: "Akshar";
   font-size: 40px;
 }
 

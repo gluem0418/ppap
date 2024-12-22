@@ -104,7 +104,9 @@ import imgExp2 from "/img/exp2.jpg"
 .title {
   margin-bottom: 40px;
   font-size: 72px;
-  font-family: "Marvel-Bold";
+  /* font-family: "Marvel-Bold"; */
+  /* font-family: "Akshar-Light"; */
+  font-family: "Akshar";
   letter-spacing: 0.1em;
   text-align: center;
   text-shadow: 2px 2px rgba(255, 255, 224, 0.5);
@@ -125,7 +127,7 @@ import imgExp2 from "/img/exp2.jpg"
 
 .subTitle {
   font-size: 20px;
-  /* font-size: 18px; */
+  font-family: "MPLUS2-Medium";
   color: #FFE98C;
   margin-bottom: 20px;
 }

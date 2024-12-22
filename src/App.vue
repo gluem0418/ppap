@@ -137,7 +137,8 @@ function clickScreen() {
   transform: translate(-50%, -50%);
   white-space: nowrap;
   font-size: 28px;
-  font-family: "Marvel-Bold";
+  /* font-family: "Marvel-Bold"; */
+  font-family: "Akshar-Light";
 }
 
 .scroll_down {

@@ -19,14 +19,21 @@ const props = defineProps({
   /* background: linear-gradient(to bottom, rgba(84, 168, 214, 0.8), rgba(65, 64, 143, 0.8)); */
   border-radius: 10px;
   text-align: center;
-  padding: 4px 10px;
+  padding: 2px 10px;
   cursor: pointer;
   text-decoration: none;
-  font-family: "Marvel-Bold";
+  /* font-family: "Marvel-Bold"; */
+  font-family: "Akshar-Light";
   color: #FFFFE0;
   font-size: 28px;
   user-select: none;
   border: 1px solid rgba(0, 0, 0, 0);
+}
+
+@media screen and (max-width: 800px) {
+  .flame {
+    font-size: 24px;
+  }
 }
 
 @media screen and (min-width: 800px) {
