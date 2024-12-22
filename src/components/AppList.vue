@@ -26,17 +26,29 @@ function clickApp(app: Application, index: number) {
     anime({
       targets: '.AppDetail',
       translateY: [window.innerHeight * -1, 0],
+      // opacity: [0, 1],
       scale: [0, 1],
       duration: 500,
       easing: 'easeOutCubic' // 加減速の種類
     });
   });
-  console.log('clickApp', selectedIndex.value, app.id, showApp.value)
+  // console.log('clickApp', selectedIndex.value, app.id, showApp.value)
 }
 
 function closeAppDetail() {
-  showApp.value = false;
-  document.body.style.overflow = ''; // スクロールを有効に戻す
+  //詳細表示をフェードアウト
+  anime({
+    targets: '.AppDetail',
+    translateY: [0, window.innerHeight],
+    // opacity: [1, 0],
+    scale: [1, 0],
+    duration: 500,
+    easing: 'easeInCubic' // 加減速の種類
+  });
+  setTimeout(() => {
+    showApp.value = false;
+    document.body.style.overflow = ''; // スクロールを有効に戻す
+  }, 500);
 }
 
 const changeApp = (selectType: string, index: number) => {
@@ -93,7 +105,7 @@ function fadeInOut(kind: string) {
         translateX: [0, window.innerWidth * -1.5],
         opacity: [1, 0.3],
         duration: 500,
-        easing: 'easeOutCubic' // 加減速の種類
+        easing: 'easeInCubic' // 加減速の種類
       });
       break;
     case 'rightIn':
@@ -111,7 +123,7 @@ function fadeInOut(kind: string) {
         translateX: [0, window.innerWidth * 1.5],
         opacity: [1, 0.3],
         duration: 500,
-        easing: 'easeOutCubic' // 加減速の種類
+        easing: 'easeInCubic' // 加減速の種類
       });
       break;
     case 'leftIn':

@@ -1,7 +1,7 @@
 [
     {
         "id": "Gluem Portfolio",
-        "introduction": "このWebサイトです。「星の降る島」をイメージした背景の上に、各コンテンツを配置しています。",
+        "introduction": "このWebサイトです。3Dで描画した星空上に各コンテンツを配置しています。",
         "thumbnail": "img/application/PortfolioThum.png",
         "points": [
             {
@@ -39,7 +39,7 @@
             "Figma"
         ],
         "url": "",
-        "githubUrl": ""
+        "githubUrl": "https://github.com/gluem0418/ppap"
     },
     {
         "id": "Seventh Dawn",
@@ -100,7 +100,7 @@
             "Blender"
         ],
         "url": "https://gluem0418.github.io/SeventhDawn/",
-        "githubUrl": ""
+        "githubUrl": "https://github.com/gluem0418/SeventhDawn"
     },
     {
         "id": "Web Detection",

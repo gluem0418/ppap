@@ -274,7 +274,8 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  window.removeEventListener("pointerdown", onPointerDown);
+  const canvas = document.querySelector(".Stars");
+  if (canvas) canvas.removeEventListener("pointerdown", onPointerDown);
 });
 
 

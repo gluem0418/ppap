@@ -64,7 +64,7 @@ watch(() => props.show, () => {
     <div class="appFlame" id="appFlame">
 
       <div class="appTop">
-        <div v-if="selectedApp.id !== Config.appPortfolio">
+        <div v-if="selectedApp.id !== Config.appPortfolio && selectedApp.id !== Config.appDetection">
           <BtnLink class="btnLink1" :inside="'Visit Site'" :link="selectedApp.url" />
         </div>
         <BtnClose class="btnClose" @click="closeDetail" />
@@ -125,7 +125,7 @@ watch(() => props.show, () => {
       </div>
 
       <div class="btnGit"
-        v-if="selectedApp.id == Config.appStarry || selectedApp.id == Config.appWhack || selectedApp.id == Config.appFear">
+        v-if="selectedApp.id !== Config.appDetection">
         <BtnLink :inside="'GitHub'" :link="selectedApp.githubUrl" />
       </div>
 
