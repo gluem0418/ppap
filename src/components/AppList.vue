@@ -242,7 +242,7 @@ function fadeInOut(kind: string) {
 }
 
 .appTitle {
-  margin-top: -5px;
+  margin-top: -6px;
   height: 40px;
   font-size: 24px;
   background: #09111F;
@@ -264,6 +264,7 @@ function fadeInOut(kind: string) {
   }
 
   .appTitle {
+    height: 32px;
     font-size: 20px;
   }
 
