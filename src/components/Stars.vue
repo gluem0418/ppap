@@ -282,54 +282,44 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <!-- <div @click="clickScreen"> -->
-
-  <!-- <div class="tresBg" @click="clickScreen"> -->
-
-  <!-- <TresCanvas window-size touch-action="auto" pointer-events="auto"> -->
   <TresCanvas>
 
     <TresPerspectiveCamera ref="cameraRef" :position="initCameraPosition" />
 
-    <!-- <TresMesh @pointer-down="(event) => console.log('pointer-down')">
-      <TresTorusGeometry :args="[1, 0.5, 16, 32]" />
-      <TresMeshBasicMaterial color="orange" />
-    </TresMesh> -->
-
     <Suspense>
-      <Text3D ref="titleRef" :text="Config.title" font="font/Marvel_Regular.json" :size="1" :position="initTitlePosition"
+      <Text3D ref="titleRef" :text="Config.title" font="font/Akshar_Light.json" :size="1" :position="initTitlePosition"
         :rotation="titleRotation">
-        <MeshWobbleMaterial :color="0xFFFFE0" :speed="0.5" :factor="0.5" />
+        <!-- <MeshWobbleMaterial :color="0x8cf9ff" :speed="0.5" :factor="0.5" :roughness="0.1" /> -->
+        <MeshWobbleMaterial :color="0xFFE98C" :speed="0.5" :factor="0.5" :roughness="0.1" />
+        
       </Text3D>
     </Suspense>
 
     <Suspense>
-      <Text3D :text="Config.mainMenu1" font="font/Marvel_Regular.json" :size="1" :position="AppTitlePosition"
+      <Text3D :text="Config.mainMenu1" font="font/Akshar_Light.json" :size="1" :position="AppTitlePosition"
         :rotation="[0.7, 0, 0.3]">
-        <MeshWobbleMaterial :color="0xFFFFE0" :speed="0.5" :factor="0.5" />
+        <MeshWobbleMaterial :color="0xFFE98C" :speed="0.5" :factor="0.5" :roughness="0.1" />
       </Text3D>
     </Suspense>
 
     <Suspense>
-      <!-- <Text3D :text="Config.mainMenu2" font="font/Marvel_Regular.json" :size="1" :position="AboutTitlePosition"
-        :rotation="[1.6, -2.3, 2]"> -->
-      <Text3D :text="Config.mainMenu2" font="font/Marvel_Regular.json" :size="1" :position="AboutTitlePosition"
+      <Text3D :text="Config.mainMenu2" font="font/Akshar_Light.json" :size="1" :position="AboutTitlePosition"
         :rotation="[1.6, -2.3, 1.9]">
-        <MeshWobbleMaterial :color="0xfbf5e9" :speed="0.5" :factor="0.5" />
+        <MeshWobbleMaterial :color="0xFFE98C" :speed="0.5" :factor="0.5" :roughness="0.1" />
       </Text3D>
     </Suspense>
 
     <TresGroup :visible='starsVisible' ref="starsRef">
       <!-- <primitive v-for="star in stars" :key="star" :position="star.position" :rotation="star.rotation"
         :scale="star.scale" :object="createColoredModel(star.material)" @click="clickStar" @pointer-down="clickStar" /> -->
-      <primitive v-for="star in stars" :key="star" :position="star.position" :rotation="star.rotation" :scale="star.scale"
-        :object="createColoredModel(star.material)" />
+      <primitive v-for="star in stars" :key="star" :position="star.position" :rotation="star.rotation"
+        :scale="star.scale" :object="createColoredModel(star.material)" />
     </TresGroup>
 
-    <!-- </ScrollControls> -->
-
-    <TresAmbientLight :intensity="2" />
-    <TresDirectionalLight :position="[0, boxWidth / 2, boxWidth / 2]" :intensity="4" />
+    <!-- <TresAmbientLight :intensity="2" />
+    <TresDirectionalLight :position="[0, boxWidth / 2, boxWidth / 2]" :intensity="4" /> -->
+    <TresAmbientLight :intensity="3" />
+    <TresDirectionalLight :position="[0, boxWidth / 2, boxWidth / 2]" :intensity="5" />
 
   </TresCanvas>
 
