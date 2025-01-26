@@ -82,7 +82,8 @@ watch(() => props.show, () => {
           <MidTitle1 class="midTitle" :inside="'Points'" :spacing="0.1" />
 
           <!-- Point1 -->
-          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]" :screen="selectedApp.screenShot[0]" />
+          <FlexPoint class="flexPoint" :order="'1'" :point1="selectedApp.points[0]"
+            :screen="selectedApp.screenShot[0]" />
           <!-- Point2 -->
           <FlexPoint class="flexPoint" :point1="selectedApp.points[1]" :screen="selectedApp.screenShot[1]" />
 
@@ -124,8 +125,7 @@ watch(() => props.show, () => {
         </div>
       </div>
 
-      <div class="btnGit"
-        v-if="selectedApp.id !== Config.appDetection">
+      <div class="btnGit" v-if="selectedApp.id !== Config.appDetection">
         <BtnLink :inside="'GitHub'" :link="selectedApp.githubUrl" />
       </div>
 
@@ -149,11 +149,10 @@ watch(() => props.show, () => {
   position: fixed;
   inset: 0;
   height: auto;
-  /* 243B66 */
-  background-image: linear-gradient(rgba(36, 59, 102, 0.7), rgba(36, 59, 102, 0.7)), url('@/assets/img/sky42.jpg');
   /* 090F1A */
-  /* background-image: linear-gradient(rgba(9, 15, 26, 0.5), rgba(9, 15, 26, 0.5)), url('@/assets/img/sky42.jpg'); */
-  /* background-image: linear-gradient(rgba(7, 41, 81, 0.8), rgba(7, 41, 81, 0.8)), url('@/assets/img/sky21.jpg'); */
+  /* background-image: linear-gradient(rgba(9, 15, 26, 0.7), rgba(9, 15, 26, 0.7)), url('@/assets/img/sky21.jpg'); */
+  /* background: linear-gradient(to right bottom, rgba(86, 116, 170, 0.95), rgba(41, 85, 168, 0.95) 45%, rgba(86, 116, 170, 0.95)); */
+  background-image: linear-gradient(to right bottom, rgba(61, 129, 255, 0.8), rgba(41, 85, 168, 0.8) 30%, rgba(41, 85, 168, 0.8) 70%, rgba(61, 129, 255, 0.8)), url('@/assets/img/sky42.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -174,7 +173,8 @@ watch(() => props.show, () => {
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
-  height: 56px;
+  /* height: 56px; */
+  height: 48px;
 }
 
 .btnClose {
@@ -188,32 +188,33 @@ watch(() => props.show, () => {
 }
 
 .title {
-  font-size: 72px;
+  /* font-size: 72px; */
+  font-size: 80px;
   /* font-family: "Marvel-Bold"; */
   font-family: "Akshar";
   /* font-family: "Akshar-Light"; */
-  letter-spacing: 0.05em;
-  text-shadow: 2px 2px rgba(255, 255, 224, 0.5);
-  /* -webkit-text-stroke: 1px #121F30; */
+  letter-spacing: 0.1em;
+  text-shadow: 2px 2px #3D81FF;
+  /* text-shadow: 2px 2px rgba(255, 255, 224, 0.5); */
 }
 
 .intro {
   margin-top: 16px;
   line-height: 1.8;
-  /* font-family: "MPLUS1p"; */
-  /* line-height: 1.7; */
-  /* transform: rotate(0.05deg); */
 }
 
 .secDetail {
-  margin: 56px auto;
+  margin: 48px auto;
+}
+
+.secPoint {
+  margin-bottom:80px;
 }
 
 .secEnvTool {
   display: flex;
   justify-content: center;
   gap: 5%;
-  /* gap: 20px; */
 }
 
 .secEnvToolList {
@@ -224,15 +225,15 @@ watch(() => props.show, () => {
 
 .btnGit {
   max-width: 150px;
-  position:absolute;
-  right:0;
-  bottom:72px;
+  position: absolute;
+  right: 0;
+  bottom: 72px;
 }
 
 
 
 .envToolList {
-  margin: 24px auto;
+  margin: 16px auto;
   width: fit-content;
 }
 
@@ -294,7 +295,7 @@ watch(() => props.show, () => {
   }
 
   .btnGit {
-    bottom:64px;
+    bottom: 64px;
   }
 
   .envToolList {

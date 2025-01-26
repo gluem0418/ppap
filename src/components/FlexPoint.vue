@@ -33,8 +33,9 @@ const props = defineProps({
 .flexPoint {
     display: flex;
     justify-content: center;
-    gap: 20px 2.5%;
-    margin: 48px auto 88px;
+    gap: 20px 2%;
+    /* margin: 40px auto 64px; */
+    margin: 32px auto 64px;
 }
 
 

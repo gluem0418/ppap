@@ -85,12 +85,8 @@ import imgExp2 from "/img/exp2.jpg"
 
 .about {
   height: auto;
-  background: linear-gradient(to left bottom, #3076A3, #243B66 45%, #3076A3);
-  /* background: radial-gradient(rgb(168, 184, 220), rgb(228, 232, 242)); */
-  /* background: #A1C5D7; */
-  /* background: #3076A3; */
-  /* background: #074D76; */
-  /* background: #021D34; */
+  /* background: linear-gradient(to left bottom, #3076A3, #243B66 45%, #3076A3); */
+  background: linear-gradient(to left bottom, #297EA8, #2955A8 35%, #2955A8 60%,#297EA8);
   border-radius: 48px;
   color: #FFFFE0;
   padding: 64px 24px 88px;
@@ -102,22 +98,24 @@ import imgExp2 from "/img/exp2.jpg"
 }
 
 .title {
-  margin-bottom: 40px;
-  font-size: 72px;
+  margin-bottom: 24px;
+  font-size: 80px;
   /* font-family: "Marvel-Bold"; */
   /* font-family: "Akshar-Light"; */
   font-family: "Akshar";
   letter-spacing: 0.1em;
   text-align: center;
-  text-shadow: 2px 2px rgba(255, 255, 224, 0.5);
+  /* text-shadow: 2px 2px rgba(255, 255, 224, 0.5); */
+  text-shadow: 2px 2px #3D81FF;
 }
 
 
 .flexExp1 {
   display: flex;
   justify-content: center;
-  gap: 20px 2.5%;
-  margin: 48px auto 88px;
+  gap: 20px 2%;
+  /* margin: 48px auto 88px; */
+  margin: 32px auto 64px;
 }
 
 .flameExp {
@@ -153,7 +151,7 @@ import imgExp2 from "/img/exp2.jpg"
 .flexExp2 {
   display: flex;
   justify-content: center;
-  gap: 20px 2.5%;
+  gap: 20px 2%;
   flex-direction: row-reverse;
 }
 

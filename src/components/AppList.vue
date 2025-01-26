@@ -180,35 +180,24 @@ function fadeInOut(kind: string) {
 
 .appList {
   height: auto;
-  /* background: linear-gradient(to bottom, #243B66, #3076A3 40%, #243B66); */
-  background: linear-gradient(to bottom, #243B66, #3076A3, #243B66);
-  /* background:#021D34; */
-  /* background: rgba(2, 29, 52, 0.9); */
-  /* background:#BED4EE; */
-  /* background: rgba(7, 41, 81, 0.95); */
-  /* background:#074D76; */
-  /* background: rgba(7, 77, 118, 0.9); */
-  /* background:#A1C5D7; */
-  /* background: rgba(161, 197, 215, 0.9); */
-  /* 3076A3 */
-  /* background: rgba(48, 118, 163, 0.9); */
-  /* border: 2px ridge #FFFFE0; */
+  /* background: linear-gradient(to bottom, #243B66, #3076A3, #243B66); */
+  background: linear-gradient(to bottom, #2955A8, #657DA8, #2955A8);
   border-radius: 48px;
   text-align: center;
   /* font-family: "Marvel-Bold"; */
   font-family: "Akshar-Light";
-  padding: 64px 24px 88px;
+  padding: 56px 24px 80px;
   /* padding: 72px 16px 88px; */
   /* padding: 72px 0 88px; */
 }
 
 
 .title {
-  font-size: 72px;
+  /* font-size: 72px; */
+  font-size: 80px;
   font-family: "Akshar";
   letter-spacing: 0.05em;
-  /* FFFFE0 */
-  text-shadow: 2px 2px rgba(255, 255, 224, 0.5);
+  text-shadow: 2px 2px #3D81FF;
 }
 
 @media screen and (max-width: 800px) {
@@ -218,16 +207,17 @@ function fadeInOut(kind: string) {
 }
 
 .message {
-  padding-top: 48px;
+  padding-top: 32px;
   font-size: 32px;
-  color: #FFE98C;
+  /* color: #FFE98C; */
+  letter-spacing: 0.06em;
 }
 
 .listFlame {
   display: grid;
   max-width: 1000px;
   grid-template-columns: repeat(3, 1fr);
-  margin: 40px auto 0;
+  margin: 20px auto 0;
   gap: 16px;
 }
 
